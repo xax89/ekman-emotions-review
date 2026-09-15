@@ -29,10 +29,29 @@
 html,body{margin:0;padding:0}
 body{font-family:-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
   background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px}
+/* top bar */
+#topbar{position:sticky;top:0;z-index:60;height:56px;background:var(--panel);
+  border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;padding:0 16px}
+#topbar .tb-btn{border:1px solid var(--line);background:var(--bg);border-radius:8px;
+  padding:7px 14px;cursor:pointer;font-size:14px;color:var(--ink);white-space:nowrap}
+#topbar .tb-btn:hover{border-color:var(--accent)}
+#topbar #searchBox{position:relative;flex:1;max-width:520px}
+#topbar #searchBox input{width:100%;padding:8px 12px;border:1px solid var(--line);
+  border-radius:8px;background:var(--bg);color:var(--ink)}
+#searchResults{position:absolute;top:44px;left:0;right:0;background:var(--panel);
+  border:1px solid var(--line);border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.15);
+  max-height:60vh;overflow:auto;z-index:70}
+#searchResults div{padding:8px 12px;border-bottom:1px solid var(--line);cursor:pointer;font-size:13px}
+#searchResults div:hover{background:var(--accent-soft)}
+#topbar .spacer{flex:1}
+@media(max-width:860px){
+  #topbar #searchBox{max-width:none}
+  #topbar .tb-btn.brandbtn{display:none}
+}
 /* layout */
-#layout{display:flex;min-height:100vh}
+#layout{display:flex;min-height:calc(100vh - 56px)}
 #sidebar{width:280px;flex:0 0 280px;background:var(--panel);border-right:1px solid var(--line);
-  position:fixed;top:0;bottom:0;left:0;overflow-y:auto;padding:16px 0;transition:transform .25s;z-index:40}
+  position:fixed;top:56px;bottom:0;left:0;overflow-y:auto;padding:12px 0;transition:transform .25s;z-index:40}
 #main{margin-left:280px;flex:1;padding:28px 34px;max-width:960px}
 @media(max-width:860px){
   #sidebar{transform:translateX(-100%)}
@@ -76,8 +95,9 @@ details.sec[open] summary::before{content:"▾ "}
 /* method card */
 .card{border:1px solid var(--line);border-radius:12px;margin:14px 0;background:var(--card);box-shadow:var(--shadow);overflow:hidden}
 .card.dim{opacity:.55;text-decoration:line-through}
-.card-top{display:flex}
-.card-name{flex:0 0 34%;padding:14px 16px;font-weight:700;border-right:1px solid var(--line);background:var(--accent-soft)}
+.card-top{display:flex;align-items:stretch}
+.card-name{flex:0 0 34%;align-self:flex-start;padding:12px 14px;font-weight:700;
+  border:1px solid var(--accent);border-radius:8px;background:var(--accent-soft);margin:14px 0 0 14px}
 .card-body{flex:1;padding:14px 16px}
 .card-formula{font-weight:600;margin-bottom:6px}
 .card-ex{font-size:14px;color:var(--muted);border-top:1px dashed var(--line);margin-top:10px;padding-top:8px}
@@ -145,32 +165,22 @@ svg{width:100%;height:auto;display:block;background:var(--panel);
 </style>
 </head>
 <body>
+<div id="topbar">
+  <button id="menuBtn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+  <button class="tb-btn brandbtn" onclick="go('home')">首書目頁</button>
+  <div id="searchBox"><input id="searchInput" placeholder="搜尋章節／例題／術語…" oninput="doSearch(this.value)"><div id="searchResults"></div></div>
+  <span class="spacer"></span>
+  <button class="tb-btn" id="markBtn" onclick="toggleMark()">畫記：關</button>
+  <button class="tb-btn" id="darkBtn" onclick="toggleDark()">深色：關</button>
+</div>
 <div id="layout">
   <nav id="sidebar">
-    <div class="brand">
-      <h1>心理學家的面相術<br>解讀情緒的密碼</h1>
-      <small>Paul Ekman《Emotions Revealed》互動複習</small>
-    </div>
     <button class="nav-btn" onclick="go('home')">首書目頁</button>
-    <div id="searchBox"><input id="searchInput" placeholder="搜尋章節／例題／術語…" oninput="doSearch(this.value)"></div>
-    <div id="searchResults"></div>
-    <div class="tool-row">
-      <button onclick="go('mistakes')">錯題本</button>
-      <button onclick="go('glossary')">術語總表</button>
-    </div>
-    <div class="tool-row">
-      <button id="markBtn" onclick="toggleMark()">畫記：關</button>
-      <button onclick="toggleDark()">深色：關</button>
-    </div>
-    <div class="tool-row">
-      <button onclick="exportJSON()">匯出 JSON</button>
-      <button onclick="document.getElementById('imp').click()">匯入 JSON</button>
-      <input type="file" id="imp" accept=".json" style="display:none" onchange="importJSON(event)">
-    </div>
+    <button class="nav-btn" onclick="go('mistakes')">錯題本</button>
+    <button class="nav-btn" onclick="go('glossary')">術語總表</button>
     <ul class="toc" id="tocList"></ul>
   </nav>
   <main id="main">
-    <button id="menuBtn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ 目錄</button>
     <div id="content"></div>
   </main>
 </div>
@@ -849,15 +859,16 @@ function setTerm(tk,field,val){
   S.terms[tk]=S.terms[tk]||{};S.terms[tk][field]=val;persist();
   if(field==='star')render();
 }
-function toggleMark(){S.mark=!S.mark;persist();document.getElementById('markBtn').textContent='畫記：'+(S.mark?'開':'關');
+function toggleMark(){S.mark=!S.mark;persist();
+  document.getElementById('markBtn').textContent='畫記：'+(S.mark?'開':'關');
   if(S.mark){document.querySelectorAll('[data-p]').forEach(el=>el.style.cursor='pointer')}
   else{document.querySelectorAll('[data-p]').forEach(el=>el.style.cursor='')}
 }
-function toggleDark(){S.dark=!S.dark;persist();applyTheme();document.getElementById('darkBtn')}
+function toggleDark(){S.dark=!S.dark;persist();applyTheme();}
 function applyTheme(){
   document.documentElement.setAttribute('data-theme',S.dark?'dark':'light');
-  document.getElementById('markBtn');
-  document.querySelectorAll('.tool-row button').forEach(b=>{});
+  const mb=document.getElementById('markBtn');if(mb)mb.textContent='畫記：'+(S.mark?'開':'關');
+  const db=document.getElementById('darkBtn');if(db)db.textContent='深色：'+(S.dark?'開':'關');
 }
 
 /* ============ 錯題本 ============ */
@@ -970,7 +981,6 @@ function svgFor(id){
 /* ============ 啟動 ============ */
 window.addEventListener('hashchange',render);
 applyTheme();
-if(S.dark)document.querySelector('.tool-row button[onclick*=toggleDark]')&&(document.querySelector('.tool-row button[onclick*=toggleDark]').textContent='深色：開');
 render();
 </script>
 </body>
