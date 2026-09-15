@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>心理學家的面相術：解讀情緒的密碼 — 互動複習</title>
+<style>
+:root{
+  --bg:#f7f5f0; --panel:#ffffff; --ink:#2b2b2b; --muted:#6b6b6b;
+  --line:#e3ddd2; --accent:#2e7d4f; --accent-soft:#e6f2ea;
+  --name:#6a3d9a; --name-soft:#f0e8f8;
+  --exam:#b3261e; --exam-soft:#fdeceb;
+  --good:#1e7d34; --good-bg:#e2f4e6;
+  --bad:#c0392b; --bad-bg:#fbe4e1;
+  --star:#d49a1f; --card:#fffdf8;
+  --shadow:0 1px 3px rgba(0,0,0,.08);
+}
+[data-theme="dark"]{
+  --bg:#1e2023; --panel:#2a2d31; --ink:#e8e6e1; --muted:#a8a59e;
+  --line:#3a3d42; --accent:#5cbf86; --accent-soft:#22332a;
+  --name:#b48dd9; --name-soft:#2e2638;
+  --exam:#e5736b; --exam-soft:#3a2422;
+  --good:#6fd08a; --good-bg:#1f3324;
+  --bad:#ef7d70; --bad-bg:#3a2422;
+  --star:#e0b44a; --card:#26292d;
+  --shadow:0 1px 3px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px}
+/* layout */
+#layout{display:flex;min-height:100vh}
+#sidebar{width:280px;flex:0 0 280px;background:var(--panel);border-right:1px solid var(--line);
+  position:fixed;top:0;bottom:0;left:0;overflow-y:auto;padding:16px 0;transition:transform .25s;z-index:40}
+#main{margin-left:280px;flex:1;padding:28px 34px;max-width:960px}
+@media(max-width:860px){
+  #sidebar{transform:translateX(-100%)}
+  #sidebar.open{transform:translateX(0)}
+  #main{margin-left:0;padding:18px}
+  #menuBtn{display:inline-block !important}
+}
+#menuBtn{display:none;background:var(--panel);border:1px solid var(--line);border-radius:8px;
+  padding:6px 12px;cursor:pointer;font-size:16px;margin-bottom:10px}
+/* sidebar */
+.brand{padding:6px 18px 12px;border-bottom:1px solid var(--line)}
+.brand h1{font-size:15px;margin:0 0 2px;line-height:1.4}
+.brand small{color:var(--muted);font-size:12px}
+.nav-btn{display:block;width:calc(100% - 24px);margin:8px 12px;padding:8px 10px;border:1px solid var(--line);
+  background:var(--bg);border-radius:8px;cursor:pointer;text-align:left;font-size:14px;color:var(--ink)}
+.nav-btn:hover{border-color:var(--accent)}
+.toc{list-style:none;margin:8px 0;padding:0}
+.toc a{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 18px;
+  color:var(--ink);text-decoration:none;font-size:14px;border-left:3px solid transparent}
+.toc a:hover{background:var(--accent-soft)}
+.toc a.active{border-left-color:var(--accent);background:var(--accent-soft);font-weight:600}
+.pct{font-size:11px;color:var(--muted);white-space:nowrap}
+.tool-row{display:flex;gap:8px;padding:8px 12px}
+.tool-row button{flex:1;font-size:12px;padding:6px;border:1px solid var(--line);background:var(--bg);
+  border-radius:6px;cursor:pointer;color:var(--ink)}
+/* content blocks */
+h2.chap{font-size:24px;border-bottom:2px solid var(--accent);padding-bottom:8px;margin-top:0}
+h3{font-size:18px;margin-top:28px}
+.lead{color:var(--muted)}
+ul.pts li{margin-bottom:6px}
+details.sec{border:1px solid var(--line);border-radius:10px;margin:12px 0;background:var(--panel)}
+details.sec summary{cursor:pointer;padding:12px 16px;font-weight:600;list-style:none}
+details.sec summary::-webkit-details-marker{display:none}
+details.sec summary::before{content:"▸ ";color:var(--accent)}
+details.sec[open] summary::before{content:"▾ "}
+.sec-body{padding:4px 18px 14px}
+.sec-body p{margin:10px 0}
+/* terms inline */
+.t{color:var(--accent);font-weight:700;cursor:pointer;border-bottom:1px dashed var(--accent)}
+.n{color:var(--name);font-weight:700;cursor:pointer;border-bottom:1px dashed var(--name)}
+/* method card */
+.card{border:1px solid var(--line);border-radius:12px;margin:14px 0;background:var(--card);box-shadow:var(--shadow);overflow:hidden}
+.card.dim{opacity:.55;text-decoration:line-through}
+.card-top{display:flex}
+.card-name{flex:0 0 34%;padding:14px 16px;font-weight:700;border-right:1px solid var(--line);background:var(--accent-soft)}
+.card-body{flex:1;padding:14px 16px}
+.card-formula{font-weight:600;margin-bottom:6px}
+.card-ex{font-size:14px;color:var(--muted);border-top:1px dashed var(--line);margin-top:10px;padding-top:8px}
+.card-foot{display:flex;align-items:center;gap:10px;padding:8px 16px;border-top:1px solid var(--line);font-size:13px}
+/* table */
+table.cmp{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;background:var(--panel)}
+table.cmp th,table.cmp td;border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.cmp th{background:var(--accent-soft);width:33%}
+/* exam callout */
+.exambox{background:var(--exam-soft);border-left:4px solid var(--exam);border-radius:8px;padding:12px 16px;margin:16px 0}
+.exambox h4{margin:0 0 6px;color:var(--exam)}
+/* quiz */
+.quiz{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:12px 0;background:var(--panel)}
+.quiz .q{font-weight:600;margin-bottom:8px}
+.quiz .opts{display:flex;flex-direction:column;gap:6px}
+.quiz .opt{border:1px solid var(--line);border-radius:8px;padding:8px 12px;cursor:pointer;background:var(--bg)}
+.quiz .opt.correct{background:var(--good-bg);border-color:var(--good);color:var(--good);font-weight:600}
+.quiz .opt.wrong{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+.quiz .opts.locked .opt{cursor:default}
+.quiz .exp{display:none;margin-top:8px;font-size:14px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.quiz .exp.show{display:block}
+.quiz .flags{display:flex;gap:14px;margin-top:10px;font-size:13px}
+.quiz .flags button{background:none;border:none;cursor:pointer;color:var(--muted);font-size:14px}
+.quiz .redo{font-size:12px}
+/* term table */
+.termtbl{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0;background:var(--panel)}
+.termtbl th,.termtbl td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.termtbl th{background:var(--accent-soft)}
+/* progress bar */
+.pbar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin:8px 0}
+.pbar > div{height:100%;background:var(--accent);transition:width .3s}
+/* home grid */
+.chap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:16px}
+.chap-card{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--panel);cursor:pointer}
+.chap-card:hover{border-color:var(--accent)}
+.chap-card h4{margin:0 0 6px}
+.chap-card .meta{font-size:12px;color:var(--muted)}
+/* modal */
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;z-index:100}
+#modal.show{display:flex}
+#modalBox{background:var(--panel);border-radius:14px;max-width:440px;width:90%;padding:22px;box-shadow:0 10px 40px rgba(0,0,0,.3)}
+#modalBox h3{margin-top:0}
+#modalBox .close{float:right;cursor:pointer;color:var(--muted)}
+/* highlight */
+.marked{background:#fff3b0}
+[data-theme="dark"] .marked{background:#5a4d1e}
+/* search */
+#searchBox{padding:8px 14px}
+#searchBox input{width:100%;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+#searchResults{padding:0 14px 10px;font-size:13px}
+#searchResults div{padding:5px 8px;border-bottom:1px solid var(--line);cursor:pointer}
+#searchResults div:hover{background:var(--accent-soft)}
+/* misc */
+.notearea{width:100%;min-height:48px;margin-top:6px;border:1px dashed var(--line);border-radius:8px;padding:6px;background:var(--bg);color:var(--ink)}
+.small{font-size:12px;color:var(--muted)}
+.row-between{display:flex;justify-content:space-between;align-items:center}
+.tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:10px;background:var(--accent-soft);color:var(--accent);margin-left:6px}
+svg{width:100%;height:auto;display:block;background:var(--panel);
+  border:1px solid var(--line);border-radius:10px;margin:8px 0}
+.brand small{color:var(--muted);font-size:11px;line-height:1.5;display:block;margin-top:2px}
+@media(max-width:860px){
+  .card-top{flex-direction:column}
+  .card-name{flex:none;border-right:none;border-bottom:1px solid var(--line)}
+}
+</style>
+</head>
+<body>
+<div id="layout">
+  <nav id="sidebar">
+    <div class="brand">
+      <h1>心理學家的面相術<br>解讀情緒的密碼</h1>
+      <small>Paul Ekman《Emotions Revealed》互動複習</small>
+    </div>
+    <button class="nav-btn" onclick="go('home')">首書目頁</button>
+    <div id="searchBox"><input id="searchInput" placeholder="搜尋章節／例題／術語…" oninput="doSearch(this.value)"></div>
+    <div id="searchResults"></div>
+    <div class="tool-row">
+      <button onclick="go('mistakes')">錯題本</button>
+      <button onclick="go('glossary')">術語總表</button>
+    </div>
+    <div class="tool-row">
+      <button id="markBtn" onclick="toggleMark()">畫記：關</button>
+      <button onclick="toggleDark()">深色：關</button>
+    </div>
+    <div class="tool-row">
+      <button onclick="exportJSON()">匯出 JSON</button>
+      <button onclick="document.getElementById('imp').click()">匯入 JSON</button>
+      <input type="file" id="imp" accept=".json" style="display:none" onchange="importJSON(event)">
+    </div>
+    <ul class="toc" id="tocList"></ul>
+  </nav>
+  <main id="main">
+    <button id="menuBtn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ 目錄</button>
+    <div id="content"></div>
+  </main>
+</div>
+<div id="modal"><div id="modalBox"></div></div>
+
+<script>
+/* ============ 資料 ============ */
+const BOOK = {
+  title:"心理學家的面相術：解讀情緒的密碼",
+  chapters:[
+  { id:1, title:"第一章　跨越文化的情緒", page:"書頁 001",
+    points:[
+      "情緒的臉部表情具有<span class='t' data-k='universal'>跨文化共通性</span>：不同文化的人對同一表情所辨識出的情緒有高度共識。",
+      "達爾文主張表情是與生俱來、普遍共通的；米德、博懷斯特爾等文化人類學家則主張表情是社交學習的產物、各文化不同。",
+      "作者最初站在「文化學習」立場，研究結果卻與預期相反，反而支持達爾文。",
+      "<span class='t' data-k='displayrules'>表露的規則</span>（display rules）是社交學習而來、有文化差異，會壓抑或掩飾真實情緒的表達——這解釋了為何公開場合上表情看起來有文化差異。",
+      "符號性的姿勢（如點頭）確實有文化差異；但情緒的臉部表情本身是普世共通的。",
+      "新幾內亞<span class='n' data-k='fore'>福爾人（Fore）</span>等與世隔絕、未受媒體影響的文化，仍能正確辨識白種人照片的情緒，強力支持共通性。",
+    ],
+    sections:[
+      {title:"1.1　研究緣起：從手到臉", paras:[
+        "作者 1950 年代末先研究<span class='n' data-k='handmove'>手部動作</span>的分類，用以分辨憂鬱病人屬於精神官能症還是精神病。1965 年因兩個機緣轉向臉部表情：一是意外獲得研究跨文化非口語行為的經費，二是結識主張「表情與生俱來」的<span class='n' data-k='tomkins'>席爾旺·湯金斯（Silvan Tomkins）</span>。",
+        "作者原本相信表情和姿勢都是社交學習而有文化差異，連<span class='n' data-k='mead'>瑪格麗特·米德（Margaret Mead）</span>等前輩都如此主張。真正的問題於是變成：<span class='t' data-k='question'>表情是普世共通，還是像語言一樣各文化不同？</span>"
+      ]},
+      {title:"1.2　五種文化的照片實驗", paras:[
+        "作者向智利、阿根廷、巴西、日本、美國五種文化的人展示臉部表情照片，請他們判斷各表達何種情緒。結果不同文化的人對大部分情緒都有共識。<span class='n' data-k='izard'>卡羅爾·伊扎德（Carroll Izard）</span>獨立做相同實驗，得到一致結果。",
+        "這個發現與當時主流（文化人類學）相反，作者強調：行為科學中，違反研究者預期、且被獨立團隊重複驗證的結果更可信。"
+      ]},
+      {title:"1.3　表露的規則解決矛盾", paras:[
+        "為何人類學家觀察到表情有文化差異？作者提出<span class='t' data-k='displayrules'>表露的規則</span>：它們在社交中學習、常有文化差異，規定「可以向誰、在何時、如何表現某種情緒」。例如公開比賽中輸家不表露難過；父母告誡「不要得意忘形」。",
+        "實證：日本人和美國人獨自觀看噁心影片時表情相同；但有科學家在場時，日本人更常用微笑掩飾負面表情。獨處時表現與生俱來的表情，公開場合則受規則控制。"
+      ]},
+      {title:"1.4　新幾內亞的關鍵證據", paras:[
+        "為排除「受試者從電影電視學到西方表情」的漏洞，作者前往<span class='n' data-k='gajdusek'>葛吉謝克（Carleton Gajdusek）</span>研究過、與世隔絕的新幾內亞高地。透過記錄片觀察，當地人並無任何「我們看不懂的新奇表情」，且在只有臉部特寫、不見社交脈絡時，湯金斯仍能正確解讀其表情。",
+        "1967 年作者親赴東南高地研究<span class='n' data-k='fore'>福爾人（Fore）</span>：他們沒看過電影電視、很少接觸外人，卻能正確把照片對應到情緒故事，且不覺得福爾人與美國人的照片有何不同。這排除了媒體學習的解釋。"
+      ]},
+    ],
+    cards:[
+      {name:"跨文化共通性實驗法", formula:"各文化受試者 → 判斷相同表情照片 → 計算「正確辨識共識率」",
+       detail:"控制文化變因，比較不同文化對同一臉部表情的情緒判斷是否一致。一致 → 傾向普世共通。",
+       example:"五國受試者看同一張「驚訝」臉，若多數都答「驚訝」，即支持共通性。"},
+      {name:"區分「表情」與「表露規則」", formula:"與生俱來的表情（跨文化一致） ╳ 文化習得的規則（壓抑／掩飾）",
+       detail:"獨處 vs 公開場合對比：獨處時露出真實表情，公開時受規則控制，兩者不矛盾。",
+       example:"日本人獨自看噁心影片時與美國人表情相同；有旁人時才用微笑掩飾。"}
+    ],
+    tables:[
+      {title:"普世表情 vs 文化特有表現", headers:["類別","性質","例"], rows:[
+        ["基本情緒的臉部表情","與生俱來、跨文化共通","憤怒、害怕、嫌惡、悲傷、驚訝等的特定肌肉組合"],
+        ["表露的規則","社交學習、有文化差異","何時可表現、對誰表現、要否掩飾"],
+        ["符號性手勢／姿勢","文化特有","點頭、手勢等象徵性動作各文化不同"]
+      ]}
+    ],
+    svg:"flow1",
+    exam:[
+      {q:"作者最初研究的對象是什麼？",opts:["臉部表情","手部動作","聲音語調","姿勢"],a:1,ex:"作者 1950 年代末先研究手部動作分類，用以分辨病人病況，後來才轉向臉部表情。"},
+      {q:"「表露的規則（display rules）」是什麼性質？",opts:["與生俱來、跨文化一致","社交學習而來、常有文化差異","完全不受文化影響","只適用於兒童"],a:1,ex:"表露的規則在社交中學習，規定可向誰、何時、如何表現情緒，因此有文化差異。"},
+      {q:"為何獨處時與有旁人時，日本人看噁心影片的表情不同？",opts:["生理反應不同","表露的規則在公開場合壓抑／掩飾真實表情","影片內容不同","性別差異"],a:1,ex:"獨處時表現與生俱來的表情；公開場合受表露規則控制，日本人更常用微笑掩飾負面表情。"},
+      {q:"新幾內亞福爾人研究最重要的價值是？",opts:["他們發明了新表情","排除「從電影電視學來西方表情」的反對意見","證明表情完全隨文化改變","證明照片無法被文盲看懂"],a:1,ex:"福爾人與世隔絕、未受媒體影響，仍能正確辨識照片情緒，排除了媒體學習的解釋。"},
+      {q:"下列何者具有文化差異？",opts:["基本情緒的臉部肌肉組合","符號性的點頭等姿勢","天生失明者的表情","憤怒時的眉毛緊皺"],a:1,ex:"情緒的臉部表情是普世共通；符號性姿勢（如點頭）才是文化特有。"},
+      {q:"達爾文與米德對表情起源的主張分別是？",opts:["達爾文主張文化習得、米德主張與生俱來","兩人都主張與生俱來","達爾文主張與生俱來普遍共通、米德等主張社交學習","兩人都主張文化習得"],a:2,ex:"達爾文認為表情與生俱來；米德、博懷斯特爾等主流人類學家認為表情是社交學習的產物。"},
+    ],
+    terms:[
+      {en:"universal facial expression",zh:"跨文化共通的臉部表情",def:"不同文化的人都能辨識的基本情緒面部表達。"},
+      {en:"display rules",zh:"表露的規則",def:"社交習得、有文化差異的規則，決定何時、向誰、如何表達情緒。"},
+      {en:"Silvan Tomkins",zh:"席爾旺·湯金斯",def:"情緒理論學者，主張臉部表情與生俱來、不同種族共通。"},
+      {en:"Fore",zh:"福爾人",def:"新幾內亞高地與世隔絕的族群，作者用以驗證表情共通性。"},
+      {en:"Carroll Izard",zh:"卡羅爾·伊扎德",def:"獨立重做跨文化表情研究、獲得一致結果的心理學家。"},
+    ]
+  },
+  { id:2, title:"第二章　情緒的產生", page:"書頁 013",
+    points:[
+      "情緒的誘因同時受<span class='t' data-k='automatic'>個人經驗</span>與<span class='t' data-k='ancestral'>祖先經歷</span>影響，情緒反映「自古以來的智慧」。",
+      "情緒在幾毫秒內啟動，快到有意識的自我來不及參與；由<span class='t' data-k='autoappr'>自動評估群</span>（autoappraisers）隨時監測周遭。",
+      "情緒啟動後，生理反應（心跳、血液流向、表情）自動發生，無法由意志選擇；強烈情緒過後約需 10–15 分鐘才平息，且無法縮短。",
+      "三種不當情緒反應：①正確情緒、錯誤強度；②正確情緒、錯誤表現方式；③根本感受了錯誤的情緒（最難改變）。",
+      "情緒誘因分兩類：<b>共通誘因</b>（幾乎人人如此，如快速接近的威脅）與<b>個人獨特誘因</b>（因經驗而異，如怕老鼠）。",
+      "<span class='n' data-k='lazarus'>理查·拉撒路</span>的「相關的核心主題」：每種情緒對應一個與生存福祉有關的核心主題（如害怕＝威脅、哀傷＝失落）。",
+    ],
+    sections:[
+      {title:"2.1　情緒啟動有多快", paras:[
+        "開車時一輛車突然逼近，你來不及思考就已經轉方向、心跳加速、臉上浮現害怕表情。情緒在幾毫秒內接管行為、言語與思想，這在演化上是為了在生死關頭快速反應。",
+        "正因為太快，事後往往說不清「當時為什麼這樣反應」——這不是你的記憶不好，而是啟動過程根本不在意識之內。"
+      ]},
+      {title:"2.2　自動評估群", paras:[
+        "大腦有一群隨時監測世界的機制，檢查是否發生影響我們福祉與生存的事，作者稱為<span class='t' data-k='autoappr'>自動評估群（autoappraisers）</span>。它們可能同時有許多個，視覺可能是主要輸入，但聽、觸、嗅、味都可能參與。",
+        "情緒最核心的產生途徑是：察覺到某件重要事件正在發生或即將發生。另外還有其他產生途徑（如回憶、想像），但本書聚焦此核心途徑。"
+      ]},
+      {title:"2.3　共通誘因與個人誘因", paras:[
+        "有些誘因幾乎引發人人相同的情緒：黑暗中冒出持棍的威脅者會讓幾乎所有人害怕。有些則高度個人化：作者妻子怕老鼠、作者不怕；有人慢條斯理、有人一觸即發。",
+        "跨文化研究（<span class='n' data-k='boucher'>包契爾</span>對馬來西亞人與美國人、<span class='n' data-k='scherer'>席瑞爾（Klaus Scherer）</span>）發現：誘因的「主題」共通（如失落引發哀傷），但「失落什麼」則隨文化與個人而不同。"
+      ]},
+    ],
+    cards:[
+      {name:"情緒啟動流程", formula:"重要事件 → 自動評估群（毫秒級、無意識） → 情緒啟動 → 生理＋表情＋行動準備",
+       detail:"評估過程無法被有意識自我觀察；情緒先於理性判斷。",
+       example:"險些被撞 → 未思考前已感到害怕、踩煞車、心跳加速。"},
+      {name:"三種不當情緒反應", formula:"①情緒對但強度錯 ②情緒對但表達方式錯 ③情緒根本認知錯誤",
+       detail:"前兩種改變表達即可；第三種（事後發現「當時根本沒什麼好怕」）最難改。",
+       example:"擔心合理但嚇壞自己＝①；正當生氣卻用冷漠表現＝②；為小事暴怒到事後不解＝③。"},
+      {name:"情緒平息時間", formula:"強烈情緒高峰後 ≈ 10–15 分鐘才逐漸平息（無法意志縮短）",
+       detail:"這段時間是生理自主神經反應消退所需，提醒自己別在期間做重大決定。",
+       example:"與人激烈爭執後，強烈怒氣約十幾分鐘才會自然回落。"}
+    ],
+    tables:[
+      {title:"共通情緒誘因 vs 個人／文化誘因", headers:["面向","共通誘因","個人／文化誘因"], rows:[
+        ["來源","演化儲存的主題輪廓","後天經驗附加"],
+        ["例子","快速接近的威脅→害怕；重要失落→哀傷","怕老鼠、怕某種聲音；因文化而哀傷的對象不同"],
+        ["穩定性","幾乎人人如此","因人、因文化而異"]
+      ]}
+    ],
+    svg:"flow2",
+    exam:[
+      {q:"情緒啟動的時間尺度通常是？",opts:["數秒","幾毫秒","數分鐘","隨意識控制"],a:1,ex:"情緒在幾毫秒內啟動，快到有意識的自我來不及參與。"},
+      {q:"作者稱隨時監測環境、無意識評估重要事件的機制為？",opts:["前額葉皮質","自動評估群","工作記憶","鏡像神經"],a:1,ex:"即 autoappraisers（自動評估機制／群）。"},
+      {q:"強烈情緒高峰後，通常多久才會平息？",opts:["幾秒","10–15 分鐘","一小時","半天"],a:1,ex:"生理自主神經反應約需 10–15 分鐘消退，無法用意志縮短。"},
+      {q:"下列哪種不當情緒反應「最難改變」？",opts:["正確情緒但強度過度","正確情緒但表達方式不當","事後發現當時根本沒什麼好怕","輕微的情緒波動"],a:2,ex:"第三種——認知到錯誤的情緒，涉及自動評估本身，最難改。"},
+      {q:"「失去摯愛的對象」屬於害怕或哀傷的哪一類誘因？",opts:["個人獨特誘因","共通的核心主題誘因","文化特有手勢","隨機因素"],a:1,ex:"失落是引發哀傷的共通核心主題；失落的具體對象才因人而異。"},
+      {q:"為什麼事後常說不清自己當時為何那樣反應？",opts:["記憶力差","情緒啟動過程在有意識覺察之外","當時根本沒情緒","別人誤導"],a:1,ex:"自動評估與情緒啟動快於意識，過程無法被自我觀察。"},
+    ],
+    terms:[
+      {en:"autoappraisers",zh:"自動評估群",def:"無意識地隨時監測環境、辨識與生存福祉有關事件的機制。"},
+      {en:"automatic appraisal",zh:"自動評估",def:"在毫秒內完成、無法被意覺察的情緒前評估過程。"},
+      {en:"core relational themes",zh:"相關的核心主題",def:"Lazarus 提出：每種情緒對應一個與人際／生存有關的核心意義（威脅→害怕、失落→悲傷）。"},
+      {en:"Richard Lazarus",zh:"理查·拉撒路",def:"提出情緒核心主題理論的心理學家。"},
+    ]
+  },
+  { id:3, title:"第三章　改變情緒反應", page:"書頁 029",
+    points:[
+      "要改變情緒反應，第一步是辨認「是哪個情緒誘因」觸發了事後懊悔的行為。",
+      "區分兩種誘因：<b>容易改變</b>的（可減輕或消除）與<b>很難改變</b>的（演化而來的共通主題）。",
+      "改變的對象不是壓抑情緒本身，而是<b>自動評估群對誘因的敏感度</b>。",
+      "透過了解情緒誘因如何形成，能提高改變情緒產生的成功率，但未必每次都成功。",
+    ],
+    sections:[
+      {title:"3.1　先辨認，再改變", paras:[
+        "改變的起點是回頭檢視：哪個事件、哪種解讀，觸發了事後讓你後悔的情緒反應？沒有辨認出誘因，就無從改變。",
+        "接著判斷這個誘因是屬於後天學來、可被新經驗覆蓋的，還是屬於演化深層的共通主題——後者通常只能減輕強度，難以完全消除。"
+      ]},
+      {title:"3.2　改變敏感度，而非壓抑", paras:[
+        "試圖直接「不要生氣」通常無效；可行的方向是讓自動評估群對某一類線索變得較不敏感。",
+        "作者以飛機遇上氣流為例：受過訓練的飛行員能因事先預警而不害怕，但無預警時仍會短暫害怕——說明改變有限但可練習。"
+      ]},
+    ],
+    cards:[
+      {name:"改變情緒誘因三步驟", formula:"①辨認觸發事件 → ②判斷該誘因可改／難改 → ③透過新經驗調整自動評估敏感度",
+       detail:"不追求「完全消除情緒」，而是減輕不當強度、避免衝動行為。",
+       example:"發現每次被插隊就暴怒→辨認出「被忽視」是誘因→練習把插隊解讀為對方的問題，降低反應強度。"}
+    ],
+    tables:[
+      {title:"可改變 vs 難改變的誘因", headers:["面向","可改變","難改變"], rows:[
+        ["性質","後天學來、與個人經驗有關","演化而來的共通主題"],
+        ["對策","新經驗重新連結、改變解讀","接納、降低強度、避免強化"],
+        ["例子","怕某種特定動物","對快速接近威脅的本能害怕"]
+      ]}
+    ],
+    svg:"flow3",
+    exam:[
+      {q:"改變情緒反應的第一步是？",opts:["壓抑情緒","辨認是哪個誘因觸發了事後懊悔的行為","立刻轉移注意力","服用藥物"],a:1,ex:"先辨認誘因，才能判斷能否改變、如何改變。"},
+      {q:"作者主張改變的對象主要是？",opts:["情緒本身的存在","自動評估群對誘因的敏感度","臉部肌肉","記憶內容"],a:1,ex:"改變不是消除情緒，而是調整自動評估對特定線索的敏感度。"},
+      {q:"演化而來的共通主題型誘因，通常？",opts:["可以完全消除","只能減輕強度、難以根除","比後天誘因更容易改變","不需要任何處理"],a:1,ex:"深層共通主題（如對威脅的本能害怕）很難根除，多只能減輕強度。"},
+      {q:"飛行員遇到氣流仍會短暫害怕，說明？",opts:["訓練完全無效","改變情緒反應有限但可練習","人不該搭飛機","情緒無法被任何經驗影響"],a:1,ex:"事先預警可降低害怕，但無預警時本能仍會啟動——改變是有限度的。"},
+      {q:"下列何者較可能屬於「容易改變」的誘因？",opts:["對高處的本能懼怕","小時候被某狗咬過而怕狗","對突然巨響的驚嚇","對窒息的本能恐懼"],a:1,ex:"後天特定事件連結的誘因，可被新經驗重新覆蓋。"},
+      {q:"關於改變情緒，作者的態度是？",opts:["保證一定成功","了解誘因形成能提高成功率，但未必每次成功","完全無能為力","只能靠意志力壓抑"],a:1,ex:"作者務實地說：了解機制能提高成功率，但不能保證每次成功。"},
+    ],
+    terms:[
+      {en:"emotional trigger",zh:"情緒誘因",def:"引發某種情緒的特定事件或解讀線索。"},
+      {en:"sensitivity change",zh:"敏感度改變",def:"調整自動評估群對特定誘因的反應強度。"},
+    ]
+  },
+  { id:4, title:"第四章　情緒行為", page:"書頁 039",
+    points:[
+      "情緒不只在體內，會表現為<b>臉部表情、聲音、身體姿勢與行動傾向</b>。",
+      "人常「後知後覺」：直到有人抗議或事後反省，才發現自己早已捲入情緒。",
+      "要控制情緒性行為，必須先<b>察覺情緒正在發生</b>——觀察自己的身體感覺與細微表情。",
+      "情緒會準備一套行動傾向：害怕準備逃、憤怒準備攻擊、嫌惡準備排斥。",
+    ],
+    sections:[
+      {title:"4.1　情緒如何變成行為", paras:[
+        "情緒改變自主神經系統（心跳、呼吸、出汗），並釋出信號改變表情、聲音與姿勢。這些改變自動發生，為特定行動做準備。",
+        "如果完全不察覺自己何時進入情緒，就沒有控制的機會；我們常毫無察覺，直到別人指出或事後反省。"
+      ]},
+      {title:"4.2　培養覺察", paras:[
+        "作者建議辨認自己的身體感覺：緊繃、心跳加快、胃部不適等，是情緒升起的早期信號。及早察覺，才有機會選擇如何反應，而非被情緒駕駛。"
+      ]},
+    ],
+    cards:[
+      {name:"察覺情緒的信號清單", formula:"臉部細微表情 ＋ 聲音變化 ＋ 身體感覺（心跳／肌肉／呼吸）",
+       detail:"在情緒剛升起、尚未爆發時辨識它，才有選擇回應方式的空間。",
+       example:"感到下顎緊繃、聲音變大時，察覺自己正在生氣，而非立刻反擊。"}
+    ],
+    tables:[
+      {title:"情緒 vs 準備的行動傾向", headers:["情緒","準備的行動傾向"], rows:[
+        ["害怕","逃離／保護自己"],
+        ["憤怒","攻擊／對抗"],
+        ["嫌惡","排斥／嘔吐／遠離"],
+        ["哀傷","退縮／尋求連結"],
+        ["驚訝","暫停注意力／接收新資訊"]
+      ]}
+    ],
+    svg:"flow4",
+    exam:[
+      {q:"要控制情緒性行為，最先決定性的一步是？",opts:["壓抑表情","察覺情緒正在發生","立刻離開現場","寫下來"],a:1,ex:"不察覺就沒有控制的機會；先辨認早期身體與表情信號。"},
+      {q:"情緒改變心跳、呼吸，是透過？",opts:["隨意動作神經","自主神經系統","消化系統","免疫系統"],a:1,ex:"情緒改變自主神經系統，調節心律、呼吸、出汗等。"},
+      {q:"憤怒的行動傾向通常是？",opts:["逃離","攻擊／對抗","嘔吐","退縮"],a:1,ex:"憤怒準備對抗；害怕才是逃離。"},
+      {q:"為什麼人常「事後才發現自己在情緒中」？",opts:["情緒啟動在有意識察覺之外、且無外顯徵兆時難自察","記憶力差","別人都不說","情緒太短"],a:0,ex:"情緒自動運作，若不主動觀察身體信號，往往事後才察覺。"},
+      {q:"下列何者是「情緒升起的早期身體信號」？",opts:["放鬆肩膀","心跳加快、肌肉緊繃","視力變好","食慾增加"],a:1,ex:"心跳加快、肌肉緊繃、呼吸改變都是可學習辨認的早期信號。"},
+      {q:"驚訝的行動傾向是？",opts:["攻擊","暫停並把注意力轉向新奇事物","嘔吐","睡著"],a:1,ex:"驚訝短暫地中斷當下行為，讓注意力接收新資訊。"},
+    ],
+    terms:[
+      {en:"action tendency",zh:"行動傾向",def:"情緒引發的準備好要採取的行動模式（逃、攻、逃離等）。"},
+      {en:"autonomic nervous system",zh:"自主神經系統",def:"調節心跳、呼吸、出汗等非隨意生理反應的系統。"},
+    ]
+  },
+  { id:5, title:"第五章　哀傷與悲痛", page:"書頁 059",
+    points:[
+      "<span class='t' data-k='grief'>哀傷（sorrow）</span>與<span class='t' data-k='mourning'>悲痛／哀悼（grief）</span>是不同的狀態：哀傷是情緒感受，悲痛是面對重大失落的歷程。",
+      "核心誘因是<b>重要對象的失落</b>：失去摯愛、強烈依附的人。",
+      "哀傷與精神疾病（憂鬱症）有關連但不相同；過度、持久的哀傷可能進入病態。",
+      "作者早年錄影的憂鬱病人研究，二十五年後以新工具重新分析而有重要發現。",
+    ],
+    sections:[
+      {title:"5.1　失落作為核心主題", paras:[
+        "幾乎每種文化中，失落都是引發哀傷的重要誘因；差別只在「失落什麼」。哀傷讓人退縮、尋求他人連結。",
+        "悲痛則伴隨重大喪親，是一個需要時間走過的過程，不應被視為單一時刻的情緒。"
+      ]},
+      {title:"5.2　與憂鬱的關係", paras:[
+        "短暫哀傷是適應性的；若哀傷過度強烈、長期不消退、損及日常功能，則可能與憂鬱症等精神疾病重叠。作者提醒兩者不可混為一談。"
+      ]},
+    ],
+    cards:[
+      {name:"區分哀傷與悲痛", formula:"哀傷＝情緒感受（可短暫） ；悲痛＝面對重大失落的適應歷程（需時間）",
+       detail:"哀傷是「感到難過」；悲痛是走過喪失的整個過程。",
+       example:"錯過一趟旅程而悶悶不樂＝哀傷；失去親人後漫長的適應＝悲痛。"}
+    ],
+    tables:[
+      {title:"哀傷 vs 憂鬱症", headers:["面向","哀傷","憂鬱症"], rows:[
+        ["性質","對失落的適應性情緒","可能超出失落、持續且損及功能"],
+        ["誘因","明確的失落事件","可能無明確原因或過度延長"],
+        ["恢復","隨時間緩解","需專業協助，不易自行緩解"]
+      ]}
+    ],
+    svg:"flow5",
+    exam:[
+      {q:"引發哀傷的核心主題是？",opts:["威脅","失落","新奇事物","美味"],a:1,ex:"失去重要對象（摯愛、依附的人）是哀傷的共通核心主題。"},
+      {q:"哀傷與悲痛（哀悼）的差別較接近？",opts:["兩者完全相同","哀傷是情緒感受、悲痛是走過重大失落的歷程","悲痛比較短","哀傷一定是病態"],a:1,ex:"哀傷是感受；悲痛是面對喪親的適應過程。"},
+      {q:"關於哀傷與憂鬱症，何者正確？",opts:["兩者完全一樣","哀傷過度持久、損及功能才可能與疾病重疊","哀傷永遠不需處理","憂鬱症一定來自喪親"],a:1,ex:"短暫哀傷是適應性的；過度且持久才需考量病態。"},
+      {q:"跨文化研究中，引發哀傷的共通點是？",opts:["都為同一件事","主題都是失落，但失落的具體內容隨文化／個人而異","都不哀傷","只有現代人才哀傷"],a:1,ex:"主題（失落）共通；失落什麼則有文化與個人差異。"},
+      {q:"哀傷的行動傾向較接近？",opts:["攻擊","退縮並尋求連結","嘔吐","跳躍"],a:1,ex:"哀傷時人趨於退縮、尋求依附與安慰。"},
+      {q:"作者對憂鬱病人早年錄影的發現方式是？",opts:["當下立即分析","二十五年後發明測量工具後重新觀看舊影片","訪談家屬","頭部造影"],a:1,ex:"當時缺少測量工具，多年後以新工具重新分析舊紀錄而有發現。"},
+    ],
+    terms:[
+      {en:"sorrow",zh:"哀傷",def:"面對失落的適應性情緒感受。"},
+      {en:"grief / mourning",zh:"悲痛／哀悼",def:"面對重大喪失的適應過程，需要時間走過。"},
+      {en:"depression",zh:"憂鬱症",def:"可能過度、持久、損及功能的情緒疾病，與短暫哀傷不同。"},
+    ]
+  },
+  { id:6, title:"第六章　生氣", page:"書頁 079",
+    points:[
+      "生氣（憤怒）的核心誘因：<b>被阻撓、被冒犯、被不公平對待、被傷害的威脅</b>。",
+      "生氣準備<b>對抗／攻擊</b>；以牙還牙的衝動是其特徵。",
+      "<span class='t' data-k='hate'>暴力、恨、妒忌</span>被作者放在生氣的脈絡下討論。",
+      "生氣可能適應（保護邊界），也可能破壞（過度反應、關係破裂）。",
+    ],
+    sections:[
+      {title:"6.1　何時會生氣", paras:[
+        "目標被阻、感到被冒犯或被不公平對待、尊嚴受損，都會引發生氣。生氣讓身體準備對抗：血液湧向手部與腿部肌肉、聲音變大、眉頭緊皺。",
+        "生氣本有適應功能：劃清界線、制止侵犯；但強度過度或對象錯誤時，會造成事後懊悔的破壞性後果。"
+      ]},
+      {title:"6.2　恨、暴力與妒忌", paras:[
+        "恨是持續性、針對特定對象的敵意，比短暫憤怒更難消退；妒忌則混合了威脅感與被剝奪感，常伴隨強烈佔有與焦慮。這些都置於生氣的主軸上理解。"
+      ]},
+    ],
+    cards:[
+      {name:"辨識自己生氣的身體信號", formula:"下顎／拳頭緊繃 ＋ 聲音提高 ＋ 熱潮／心跳加快 ＋ 想反擊",
+       detail:"在爆發前偵測這些信號，才能選擇建設性回應而非即時發作。",
+       example:"被插隊時發現自己握拳、聲音變大，先停 10–15 分鐘再回應。"}
+    ],
+    tables:[
+      {title:"憤怒 vs 其他負面情緒", headers:["情緒","核心誘因","行動傾向"], rows:[
+        ["生氣／憤怒","被阻撓、被冒犯、不公平","對抗、攻擊"],
+        ["害怕","威脅、傷害風險","逃離、保護"],
+        ["嫌惡","污染、噁心、道德違犯","排斥、嘔吐、遠離"]
+      ]}
+    ],
+    svg:"flow6",
+    exam:[
+      {q:"生氣（憤怒）的核心誘因較不包括？",opts:["目標被阻","被不公平對待","新鮮驚奇","尊嚴受損"],a:2,ex:"新鮮驚奇引發的是驚訝，不是生氣。"},
+      {q:"生氣準備的行動傾向是？",opts:["逃離","對抗／攻擊","嘔吐","退縮"],a:1,ex:"憤怒讓血液湧向手腳肌肉，準備對抗。"},
+      {q:"「以牙還牙」的衝動屬於哪種情緒的特徵？",opts:["哀傷","生氣","嫌惡","驚訝"],a:1,ex:"對抗、報復衝動是生氣的典型。"},
+      {q:"作者把暴力、恨與妒忌放在哪個脈絡討論？",opts:["愉快的情緒","生氣","害怕","哀傷"],a:1,ex:"本書把它們置於生氣的章節主軸下。"},
+      {q:"下列何者是生氣的適應性功能？",opts:["破壞所有關係","劃清界線、制止侵犯","讓人無法行動","削弱肌肉力量"],a:1,ex:"生氣本可保護邊界；問題出在強度過度或對象錯誤。"},
+      {q:"想避免事後懊悔的暴怒反應，作者的建議較接近？",opts:["當下立刻反擊","先察覺生氣的身體信號、等待生理峰值過去","壓抑到生病","轉移到無關的人"],a:1,ex:"察覺＋等待 10–15 分鐘峰值消退，再選擇回應方式。"},
+    ],
+    terms:[
+      {en:"anger",zh:"生氣／憤怒",def:"面對阻撓、冒犯或不公平時，準備對抗的情緒。"},
+      {en:"hate",zh:"恨",def:"持續指向特定對象的強烈敵意。"},
+      {en:"jealousy",zh:"妒忌",def:"混合威脅感、被剝奪感與佔有焦慮的情緒。"},
+    ]
+  },
+  { id:7, title:"第七章　驚訝與害怕", page:"書頁 105",
+    points:[
+      "<span class='t' data-k='surprise'>驚訝（surprise）</span>是最<b>短暫</b>的情緒：通常只持續幾秒，功能是中斷當下行為、把注意力導向新奇事物。",
+      "<span class='t' data-k='fear'>害怕（fear）</span>由威脅觸發，準備逃離或保護；表情特徵為眉毛上揚聚攏、眼睛睜大、嘴唇向後拉向耳朵。",
+      "恐懼的核心主題是<b>傷害的威脅</b>；共通誘因如快速接近、失去支撐、巨大聲響。",
+      "恐懼症（phobia）是把共通誘因與特定無害對象（蛇、高處、社交）過度連結。",
+      "驚訝若伴隨威脅，會快速轉化為害怕。",
+    ],
+    sections:[
+      {title:"7.1　短暫的驚訝", paras:[
+        "驚訝是所有情緒中最短的：眉心上揚、眼睛睜大、嘴微張，只為了多看、多聽。一旦釐清是無害還是危險，驚訝便迅速轉為放鬆或害怕。",
+        "正因極短，若不仔細觀察，人常錯過自己或別人臉上的驚訝。"
+      ]},
+      {title:"7.2　害怕的機制", paras:[
+        "害怕在毫秒內啟動：血液湧向腿部大肌肉、準備逃跑；呼吸暫停或急促。作者強調這是演化而來、保護生存的設計。",
+        "恐懼症是自動評估群把原本無害的對象（蛇、蜘蛛、電梯、社交場合）與「傷害威脅」過度連結，即使理智知道安全，身體仍自動反應。"
+      ]},
+    ],
+    cards:[
+      {name:"害怕的身體反應鏈", formula:"威脅偵測 → 眉心上揚＋眼睛睜大＋嘴唇後拉 → 心跳加快 → 血液湧向腿部 → 準備逃離",
+       detail:"即使不需動作（如看影片），這些反應仍自動發生，因為它們是演化留下的求生配備。",
+       example:"突然聽到巨響：先睜大眼睛、屏住呼吸，確認危險後才決定要逃還是笑。"}
+    ],
+    tables:[
+      {title:"驚訝 vs 害怕", headers:["面向","驚訝","害怕"], rows:[
+        ["持續時間","最短，約數秒","可較久，並伴隨生理激發"],
+        ["核心","新奇、出乎意料","威脅、傷害風險"],
+        ["行動傾向","暫停、注意新事物","逃離、保護"],
+        ["臉部特徵","眉心上揚、眼睜大、嘴微張","眉緊皺聚攏、眼睜大、唇後拉"]
+      ]}
+    ],
+    svg:"flow7",
+    exam:[
+      {q:"通常持續時間最短的情緒是？",opts:["憤怒","哀傷","驚訝","嫌惡"],a:2,ex:"驚訝通常只維持數秒，隨即轉為其他情緒。"},
+      {q:"驚訝的主要功能是？",opts:["準備攻擊","中斷當下行為、把注意力導向新奇事物","準備逃跑","表達排斥"],a:1,ex:"驚訝暫停手邊事，讓人多看多聽以釐清狀況。"},
+      {q:"害怕時血液主要流向何處，以準備行動？",opts:["頭部","腿部大肌肉","手指","腹部"],a:1,ex:"血液湧向腿部大肌肉，為逃跑做準備。"},
+      {q:"恐懼症最符合下列哪種解釋？",opts:["故意裝出來","自動評估把無害對象與傷害威脅過度連結","因為太理智","與過去經驗完全無關"],a:1,ex:"即使理智知道安全，自動評估仍觸發害怕反應。"},
+      {q:"驚訝接著可能轉為哪種情緒（若發現有威脅）？",opts:["愉快","害怕","嫌惡","悲傷"],a:1,ex:"驚訝之後一旦判斷是威脅，就快速轉為害怕。"},
+      {q:"下列何者是害怕的典型臉部特徵？",opts:["嘴角下撇、緊抿","眉毛緊皺聚攏、眼睛睜大、嘴唇向後拉向耳朵","眼睛瞇起、上唇上提","輕鬆微笑"],a:1,ex:"這是害怕的標準表情組合；上唇上提是嫌惡。"},
+    ],
+    terms:[
+      {en:"surprise",zh:"驚訝",def:"由新奇或出乎意料引發、最短暫的情緒。"},
+      {en:"fear",zh:"害怕／恐懼",def:"由威脅觸發、準備逃離或保護的情緒。"},
+      {en:"phobia",zh:"恐懼症",def:"把無害對象與傷害威脅過度連結、雖明知不當仍自動反應。"},
+    ]
+  },
+  { id:8, title:"第八章　嫌惡與輕蔑", page:"書頁 125",
+    points:[
+      "<span class='t' data-k='disgust'>嫌惡（disgust）</span>最初與<b>味道、污染物、可能有害的食物</b>有關，後延伸到道德、社會層面。",
+      "嫌惡的臉部特徵：鼻子緊皺、上唇上提、眼睛下壓，有排斥、嘔吐的傾向。",
+      "<span class='t' data-k='contempt'>輕蔑（contempt）</span>是「高對低」的优越感表情：單側嘴角緊抿上揚。",
+      "兩者都具排斥性，但輕蔑帶有<b>位階與貶低</b>，嫌惡帶有<b>污染與不潔</b>。",
+    ],
+    sections:[
+      {title:"8.1　從味覺到道德的嫌惡", paras:[
+        "嫌惡的起源可能保護祖先避免吃下腐壞、有毒的東西。後來同一情緒被用於道德判斷：某些行為被體驗為「骯髒、噁心」。上唇上提、鼻子緊皺，是演化自嘔吐準備的動作。"
+      ]},
+      {title:"8.2　輕蔑：位階的表情", paras:[
+        "輕蔑與嫌惡不同：它不是「不潔」而是「我優於你」。單側嘴角緊抿，常出現在評判、貶低他人的脈絡中。輕蔑對關係的破壞力往往很強，因為它貶低對方這個人。"
+      ]},
+    ],
+    cards:[
+      {name:"分辨嫌惡與輕蔑", formula:"嫌惡＝「這很噁心／不潔」（鼻皺、上唇上提）；輕蔑＝「我比你強」（單側嘴角上揚）",
+       detail:"兩者都排斥，但核心對象不同：嫌惡針對事物／行為的污染，輕蔑針對人的位階。",
+       example:"看到骯髒東西而鼻皺＝嫌惡；斜眼看人、單側嘴角上扬＝輕蔑。"}
+    ],
+    tables:[
+      {title:"嫌惡 vs 輕蔑", headers:["面向","嫌惡","輕蔑"], rows:[
+        ["核心意義","污染、不潔、噁心","優越、貶低對方"],
+        ["原始來源","避免有害食物","社會位階"],
+        ["臉部特徵","鼻緊皺、上唇上提","單側嘴角緊抿上揚"],
+        ["行動傾向","排斥、嘔吐、遠離","藐視、不把對方放在眼裡"]
+      ]}
+    ],
+    svg:"flow8",
+    exam:[
+      {q:"嫌惡情緒最初最可能與什麼有關？",opts:["社會位階","避免吃下有害／腐壞的食物","準備逃跑","尋求依附"],a:1,ex:"嫌惡可能起源於味覺／污染保護，後延伸到道德判斷。"},
+      {q:"嫌惡的典型臉部特徵是？",opts:["眼睛睜大","鼻子緊皺、上唇上提","單側嘴角上揚","眉心上揚"],a:1,ex:"鼻皺、上唇上提源自嘔吐準備；單側嘴角是輕蔑。"},
+      {q:"輕蔑的核心是？",opts:["害怕被傷害","自認優於對方的位階感","失去重要他人","新鮮驚奇"],a:1,ex:"輕蔑是「我比你強」的貶低，單側嘴角緊抿。"},
+      {q:"下列何者較接近輕蔑的表情？",opts:["雙側嘴角上揚微笑","單側嘴角緊抿上揚","鼻子緊皺","眼睛閉緊"],a:1,ex:"單側嘴角是輕蔑的招牌。"},
+      {q:"為何說嫌惡後來延伸到道德？",opts:["它從不會延伸","人會把某些行為體驗為「骯髒、噁心」","道德與味覺無關","只有食物會引發嫌惡"],a:1,ex:"同一情緒被用於道德判斷，把某些行為感受為不潔。"},
+      {q:"兩者都具排斥性，主要差別在？",opts:["沒有差別","嫌惡針對不潔污染、輕蔑針對位階貶低","嫌惡比較溫和","輕蔑只在兒童身上"],a:1,ex:"核心對象不同：不潔 vs 優越。"},
+    ],
+    terms:[
+      {en:"disgust",zh:"嫌惡",def:"由污染、不潔或道德違犯引發、準備排斥嘔吐的情緒。"},
+      {en:"contempt",zh:"輕蔑",def:"自認優於對方的位階性貶低表情，單側嘴角上揚。"},
+    ]
+  },
+  { id:9, title:"第九章　愉快的情緒", page:"書頁 139",
+    points:[
+      "本書把愉快的情緒（包含<b>喜悅、滿足、驕傲、愛</b>等）放在最後討論。",
+      "真正的微笑（<span class='t' data-k='smile'>杜興尼微笑 Duchenne smile</span>）牽動眼周肌肉，刻意擠出的假笑只動嘴角。",
+      "愉快情緒擴展注意力與社會連結，與負面情緒的「收斂、準備行動」相反。",
+      "作者在本章也討論<b>愛</b>。",
+    ],
+    sections:[
+      {title:"9.1　微笑真偽", paras:[
+        "可刻意控制的嘴角微笑，與真正愉悅時連帶眼周（輪匝肌）收縮的微笑不同。後者很難隨意假造，是辨識真實情緒的線索。"
+      ]},
+      {title:"9.2　正面情緒的功能", paras:[
+        "與負面情緒窄化注意力、準備特定行動不同，愉快情緒擴展注意力、促進社會連結與創造性思考。作者也指出各種「愉快」並非同質：歡樂、滿足、驕傲、愛各有不同。"
+      ]},
+    ],
+    cards:[
+      {name:"真笑 vs 假笑", formula:"真實微笑（杜興尼）＝嘴角上揚 ＋ 眼周肌肉收縮；假笑＝只有嘴角、眼周不動",
+       detail:"眼周肌肉難隨意控制，是判斷真實愉快的關鍵。",
+       example:"社交禮貌性假笑只動嘴；聽到好消息時眼角出現紋路的才是真笑。"}
+    ],
+    tables:[
+      {title:"負面情緒 vs 愉快情緒", headers:["面向","負面情緒","愉快情緒"], rows:[
+        ["注意力","窄化、聚焦威脅","擴展、連結"],
+        ["行動","準備特定反應（逃、攻）","促進探索與連結"],
+        ["時間","快速、強烈","可較開放、彈性"]
+      ]}
+    ],
+    svg:"flow9",
+    exam:[
+      {q:"真正愉悅的微笑（杜興尼微笑）的關鍵特徵是？",opts:["只有嘴角上揚","同時收縮眼周肌肉","用力閉眼","眉毛下垂"],a:1,ex:"眼周肌肉難隨意控制，是真笑的標記。"},
+      {q:"愉快情緒對注意力的影響是？",opts:["窄化聚焦","擴展、促進連結與探索","完全停止思考","準備逃跑"],a:1,ex:"正面情緒擴展注意力，與負面情緒的收斂相反。"},
+      {q:"下列何者作者在愉快情緒章節中也討論？",opts:["恨","愛","暴力","妒忌"],a:1,ex:"作者把愛放在愉快情緒的脈絡下。"},
+      {q:"社交場合「禮貌性假笑」通常？",opts:["眼周明顯收縮","只有嘴角動作、眼周不參與","讓人無法察覺","一定代表真誠"],a:1,ex:"假笑只動嘴角，缺少眼周收縮。"},
+      {q:"與負面情緒相比，愉快情緒的行動傾向較接近？",opts:["固定的戰或逃","較彈性、促進社會連結","毫無準備","只為生存"],a:1,ex:"愉快情緒促進連結、探索與創造。"},
+      {q:"辨識真實微笑的實用意義是？",opts:["判斷對方是否真的感到愉悅","可以假裝一切","完全無用","只用於兒童"],a:0,ex:"真笑很難假造，是讀取對方真實感受的可靠線索之一。"},
+    ],
+    terms:[
+      {en:"Duchenne smile",zh:"杜興尼微笑",def:"牽動眼周肌肉、真實愉悅的微笑；假笑只動嘴角。"},
+      {en:"positive emotions",zh:"愉快情緒",def:"喜悅、滿足、驕傲、愛等擴展性的正向情緒。"},
+    ]
+  },
+  { id:10, title:"結論", page:"書頁 157",
+    points:[
+      "情緒對生活品質至關重要：它能保護我們，也可能造成破壞。",
+      "情緒反應快於意識、受演化與個人經驗雙重塑造。",
+      "了解情緒的機制（誘因、表達、信號），能幫助人在情緒升起時有能力選擇如何回應。",
+      "未來研究仍需進一步解讀大腦如何啟動情緒。",
+    ],
+    sections:[
+      {title:"全書回顧", paras:[
+        "從跨文化共通的表情，到自動評估的誘因、改變反應的方法、各別情緒的主題與信號，本書的目標是讓讀者更了解自己與他人的情緒，從而改善生活。"
+      ]},
+    ],
+    cards:[], tables:[], svg:"flow10",
+    exam:[
+      {q:"本書最核心的實用目標是？",opts:["完全消滅情緒","了解情緒機制，在情緒升起時有能力選擇如何回應","只研究臉部肌肉","避免所有壓力"],a:1,ex:"不是消除情緒，而是提升覺察與回應的選擇空間。"},
+      {q:"作者認為情緒對生活的整體態度是？",opts:["只有壞處","至關重要，既能保護也可能破壞","與生活品質無關","應被完全壓抑"],a:1,ex:"情緒既能挽救生活，也能造成破壞。"},
+      {q:"情緒反應與意識的時間關係是？",opts:["意識先於情緒","情緒快於有意識的自我判斷","兩者同時","情緒慢於思考"],a:1,ex:"情緒在幾毫秒內啟動，先於意識。"},
+    ],
+    terms:[]
+  },
+  { id:11, title:"附錄　臉部表情測驗", page:"書頁 163",
+    points:[
+      "附錄提供一套測驗：看書中照片，判斷各個細微表情傳達何種情緒。",
+      "建議<b>讀完前先測一次、讀完後再測一次</b>，比較是否變好。",
+      "書中照片即隨附的 14 張人臉表情圖（見資料夾）。",
+    ],
+    sections:[
+      {title:"使用方式", paras:[
+        "先不看本書結論，逐張判斷每張臉屬於何種情緒；讀完全書後再做一次，檢驗自己辨識細微表情的能力是否提升。這正是本書主張「情緒信號可以學習」的實作。"
+      ]},
+    ],
+    cards:[], tables:[], svg:"flow11",
+    exam:[
+      {q:"附錄測驗建議的做法是？",opts:["只做一次","讀前測一次、讀後再測一次比較","隨便看看","不需要做"],a:1,ex:"前後對照才能看出辨識力的進步。"},
+      {q:"這個測驗最主要想測量？",opts:["智商","辨識細微臉部表情的能力","記憶力","字彙量"],a:1,ex:"核心是讀取細微情緒信號的能力。"},
+      {q:"測驗用的素材是？",opts:["文字題","書中 14 張人臉表情照片","音頻","繪圖"],a:1,ex:"附錄為人臉表情照片。"},
+    ],
+    terms:[]
+  }
+]};
+
+/* ============ 狀態 ============ */
+const KEY='ekman_review_v1';
+function loadState(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}}
+function saveState(s){localStorage.setItem(KEY,JSON.stringify(s))}
+let S=loadState();
+S.cards=S.cards||{};        // cardKey -> true(學會)
+S.qdone=S.qdone||{};        // qKey -> {done, star, correct, marked}
+S.terms=S.terms||{};        // termKey -> {learned, star, note}
+S.hl=S.hl||[];              // highlighted paragraph keys
+S.dark=!!S.dark;
+S.mark=false;
+function persist(){saveState(S)}
+
+/* ============ 工具 ============ */
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function chapIdFromHash(){const h=location.hash||'#/home';const m=h.match(/chapter\/(\d+)/);return m?+m[1]:null}
+
+/* 收集全文（供搜尋） */
+function allSearchItems(){
+  const items=[];
+  BOOK.chapters.forEach(c=>{
+    items.push({type:'章節',text:c.title,go:`#/chapter/${c.id}`});
+    c.points.forEach(p=>items.push({type:'重點',text:stripHtml(p),go:`#/chapter/${c.id}`}));
+    c.exam.forEach((q,i)=>items.push({type:'例題',text:`Q:${q.q}`,go:`#/chapter/${c.id}`,qk:`q${c.id}_${i}`}));
+    c.terms.forEach(t=>items.push({type:'術語',text:`${t.zh} ${t.en}`,go:`#/chapter/${c.id}`,tk:`t${c.id}_${t.en}`}));
+  });
+  items.push({type:'頁面',text:'錯題本',go:'#/mistakes'});
+  items.push({type:'頁面',text:'術語總表',go:'#/glossary'});
+  return items;
+}
+function stripHtml(s){return s.replace(/<[^>]+>/g,'')}
+
+/* ============ 渲染側欄 ============ */
+function renderTOC(){
+  const el=document.getElementById('tocList');
+  let html='';
+  BOOK.chapters.forEach(c=>{
+    const pct=chapPercent(c);
+    html+=`<a href="#/chapter/${c.id}" class="${chapIdFromHash()===c.id?'active':''}">
+      <span>${c.title}</span><span class="pct">${pct}%</span></a>`;
+  });
+  el.innerHTML=html;
+}
+function chapPercent(c){
+  // 方法卡完成率 + 例題完成率 平均
+  const cards=c.cards.length||1;
+  const cd=c.cards.filter((_,i)=>S.cards[`c${c.id}_${i}`]).length;
+  const qs=c.exam.length||1;
+  const qd=c.exam.filter((_,i)=>S.qdone[`q${c.id}_${i}`]&&S.qdone[`q${c.id}_${i}`].done).length;
+  return Math.round(((cd/cards)+(qd/qs))/2*100);
+}
+
+/* ============ 主內容 ============ */
+function render(){
+  renderTOC();
+  const cid=chapIdFromHash();
+  const main=document.getElementById('content');
+  if(location.hash==='#/mistakes'){main.innerHTML=renderMistakes();bindMistakes();return}
+  if(location.hash==='#/glossary'){main.innerHTML=renderGlossary();return}
+  if(cid==null){main.innerHTML=renderHome();bindHome();return}
+  const c=BOOK.chapters.find(x=>x.id===cid);
+  main.innerHTML=renderChapter(c);
+  bindChapter(c);
+}
+
+function renderHome(){
+  let cards='';
+  BOOK.chapters.forEach(c=>{
+    const pct=chapPercent(c);
+    const qd=c.exam.filter((_,i)=>S.qdone[`q${c.id}_${i}`]&&S.qdone[`q${c.id}_${i}`].done).length;
+    cards+=`<div class="chap-card" onclick="location.hash='#/chapter/${c.id}'">
+      <h4>${c.title}</h4>
+      <div class="pbar"><div style="width:${pct}%"></div></div>
+      <div class="meta">完成 ${pct}% ｜ 例題已做 ${qd}/${c.exam.length}</div></div>`;
+  });
+  return `<h2 class="chap">${BOOK.title}</h2>
+  <p class="lead">單檔互動複習。點任一章開始；左欄可搜尋、看錯題本、術語總表。進度自動存在本瀏覽器。</p>
+  <div class="exambox"><h4>考試／觀念總提醒</h4>
+    <div>情緒表達<b>跨文化共通</b>但受<b>表露規則</b>調節；情緒由<b>自動評估</b>毫秒啟動；改變重點是調整誘因敏感度，而非壓抑情緒。</div></div>
+  <div class="chap-grid">${cards}</div>`;
+}
+function bindHome(){}
+
+function renderChapter(c){
+  const pct=chapPercent(c);
+  const qd=c.exam.filter((_,i)=>S.qdone[`q${c.id}_${i}`]&&S.qdone[`q${c.id}_${i}`].done).length;
+  let h=`<h2 class="chap">${c.title}<span class="tag">${c.page}</span></h2>
+  <div class="row-between"><span class="small">本章總完成 ${pct}% ｜ 例題已做 ${qd}/${c.exam.length}</span>
+  <button class="nav-btn" style="display:inline-block;width:auto;margin:0" onclick="location.hash='#/home'">回首頁</button></div>
+  <div class="pbar"><div style="width:${pct}%"></div></div>
+
+  <h3>本章重點</h3><ul class="pts">${c.points.map(p=>`<li data-p="${c.id}_${uuid(p)}">${p}</li>`).join('')}</ul>
+  <div class="exambox"><h4>考試重點</h4><div>掌握「普世表情 vs 表露規則」「自動評估毫秒啟動」「各情緒核心主題與行動傾向」「真笑杜興尼特徵」。</div></div>
+  <h3>小節</h3>`;
+  c.sections.forEach(s=>{
+    h+=`<details class="sec"><summary>${s.title}</summary><div class="sec-body">`;
+    s.paras.forEach((p,i)=>h+=`<p data-p="${c.id}_${uuid(s.title+i+p)}">${p}</p>`);
+    h+=`</div></details>`;
+  });
+  if(c.cards.length){
+    h+=`<h3>方法卡</h3>`;
+    c.cards.forEach((card,i)=>{
+      const k=`c${c.id}_${i}`;const done=S.cards[k];
+      h+=`<div class="card ${done?'dim':''}">
+        <div class="card-top"><div class="card-name">${card.name}</div>
+        <div class="card-body"><div class="card-formula">${card.formula}</div><div>${card.detail}</div>
+        <div class="card-ex">例：${card.example}</div></div></div>
+        <div class="card-foot"><input type="checkbox" id="${k}" ${done?'checked':''} onchange="toggleCard('${k}',this.checked)">
+        <label for="${k}">學會</label></div></div>`;
+    });
+  }
+  c.tables.forEach(t=>{
+    h+=`<h3>${t.title}</h3><table class="cmp"><tr>${t.headers.map(x=>`<th>${x}</th>`).join('')}</tr>`;
+    t.rows.forEach(r=>h+=`<tr>${r.map(x=>`<td>${x}</td>`).join('')}</tr>`);
+    h+=`</table>`;
+  });
+  if(c.svg)h+=`<h3>示意圖</h3>${svgFor(c.svg)}`;
+  h+=`<h3>例題（答題式）</h3>`;
+  c.exam.forEach((q,i)=>{
+    const k=`q${c.id}_${i}`;const st=S.qdone[k]||{};
+    h+=`<div class="quiz" id="quiz_${k}"><div class="q">${i+1}. ${q.q}</div>
+    <div class="opts" data-qk="${k}">`;
+    q.opts.forEach((o,oi)=>{
+      let cls='opt';
+      if(st.done){ if(oi===q.a)cls+=' correct'; else if(oi===st.picked)cls+=' wrong'; }
+      h+=`<div class="${cls}" data-oi="${oi}" onclick="answer(this,'${k}')">${String.fromCharCode(65+oi)}. ${o}</div>`;
+    });
+    h+=`</div><div class="exp ${st.done?'show':''}" id="exp_${k}">解析：${q.expl}（正確答案：${String.fromCharCode(65+q.a)}）</div>
+    <div class="flags">
+      <button onclick="flagQ('${k}','done',this)">${st.done?'☑ 做過':'☐ 做過'}</button>
+      <button onclick="flagQ('${k}','star',this)">${st.star?'★ 收藏':'☆ 收藏'}</button>
+      ${st.done&&!st.correct?'<span class="small" style="color:var(--bad)">（已自動收入錯題本）</span>':''}
+      <button class="redo" onclick="redoQ('${k}')">重做</button>
+    </div></div>`;
+  });
+  if(c.terms.length){
+    h+=`<h3>本章術語</h3><table class="termtbl"><tr><th>術語</th><th>外文</th><th>解釋</th><th>學會</th><th>重點</th><th>筆記</th></tr>`;
+    c.terms.forEach((t,i)=>{
+      const tk=`t${c.id}_${t.en}`;const tt=S.terms[tk]||{};
+      h+=`<tr><td><b>${t.zh}</b></td><td class="small">${t.en}</td><td>${t.def}</td>
+      <td><input type="checkbox" ${tt.learned?'checked':''} onchange="setTerm('${tk}','learned',this.checked)"></td>
+      <td><button onclick="setTerm('${tk}','star',!(S.terms['${tk}']||{}).star,this)">${tt.star?'★':'☆'}</button></td>
+      <td><input class="notearea" style="min-height:30px" value="${esc(tt.note||'')}" onchange="setTerm('${tk}','note',this.value)"></td></tr>`;
+    });
+    h+=`</table>`;
+  }
+  return h;
+}
+function bindChapter(c){
+  // inline term click -> modal
+  document.querySelectorAll('.t,.n').forEach(el=>{
+    el.onclick=()=>{
+      const k=el.dataset.k;
+      const term=BOOK.chapters.flatMap(x=>x.terms).find(t=>t.en===k);
+      showModal(term?`<h3>${term.zh} <small class="small">${term.en}</small></h3><p>${term.def}</p>`:`<h3>${el.textContent}</h3><p class="small">（詳見本章術語表）</p>`);
+    };
+  });
+  // highlight mode
+  document.querySelectorAll('[data-p]').forEach(el=>{
+    el.onclick=(e)=>{
+      if(!S.mark)return;
+      e.preventDefault();
+      const p=el.dataset.p;
+      const i=S.hl.indexOf(p);
+      if(i>=0){S.hl.splice(i,1);el.classList.remove('marked')}
+      else{S.hl.push(p);el.classList.add('marked')}
+      persist();
+    };
+    if(S.hl.includes(el.dataset.p))el.classList.add('marked');
+  });
+}
+
+function uuid(s){let h=0;for(let i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))>>>0}return h.toString(36)}
+
+/* ============ 互動 ============ */
+function toggleCard(k,v){S.cards[k]=v;persist();render()}
+function answer(el,k){
+  const box=document.getElementById('quiz_'+k);
+  if(box.querySelector('.opts.locked'))return;
+  const cid=+k.match(/q(\d+)_/)[1];const qi=+k.split('_')[1];
+  const c=BOOK.chapters.find(x=>x.id===cid);const q=c.exam[qi];
+  const picked=+el.dataset.oi;
+  box.querySelector('.opts').classList.add('locked');
+  q.opts.forEach((o,oi)=>{
+    const oe=box.querySelector(`.opt[data-oi="${oi}"]`);
+    if(oi===q.a)oe.classList.add('correct');
+    else if(oi===picked)oe.classList.add('wrong');
+  });
+  document.getElementById('exp_'+k).classList.add('show');
+  S.qdone[k]={done:true,star:(S.qdone[k]||{}).star||false,correct:picked===q.a,picked:picked};
+  persist();renderTOC();
+  // refresh flags row
+  box.querySelector('.flags').innerHTML=
+    `<button onclick="flagQ('${k}','done',this)">☑ 做過</button>`+
+    `<button onclick="flagQ('${k}','star',this)">${S.qdone[k].star?'★ 收藏':'☆ 收藏'}</button>`+
+    `<span class="small" style="color:var(--bad)">答錯已收入錯題本</span>`+
+    `<button class="redo" onclick="redoQ('${k}')">重做</button>`;
+}
+function flagQ(k,field,btn){
+  S.qdone[k]=S.qdone[k]||{done:false,star:false,correct:false};
+  S.qdone[k][field]=!S.qdone[k][field];
+  if(field==='done'&&!S.qdone[k].done)delete S.qdone[k];
+  persist();render();
+}
+function redoQ(k){delete S.qdone[k];persist();render()}
+function setTerm(tk,field,val){
+  S.terms[tk]=S.terms[tk]||{};S.terms[tk][field]=val;persist();
+  if(field==='star')render();
+}
+function toggleMark(){S.mark=!S.mark;persist();document.getElementById('markBtn').textContent='畫記：'+(S.mark?'開':'關');
+  if(S.mark){document.querySelectorAll('[data-p]').forEach(el=>el.style.cursor='pointer')}
+  else{document.querySelectorAll('[data-p]').forEach(el=>el.style.cursor='')}
+}
+function toggleDark(){S.dark=!S.dark;persist();applyTheme();document.getElementById('darkBtn')}
+function applyTheme(){
+  document.documentElement.setAttribute('data-theme',S.dark?'dark':'light');
+  document.getElementById('markBtn');
+  document.querySelectorAll('.tool-row button').forEach(b=>{});
+}
+
+/* ============ 錯題本 ============ */
+function renderMistakes(){
+  let items=[];
+  BOOK.chapters.forEach(c=>c.exam.forEach((q,i)=>{
+    const k=`q${c.id}_${i}`;const st=S.qdone[k];
+    if(st&&st.done&&!st.correct&&!st.fixed)items.push({c,q,k,st});
+  }));
+  let h=`<h2 class="chap">錯題本</h2><p class="lead">答錯的題目自動收錄於此；標記「已訂正」後移出。</p>`;
+  if(!items.length)h+=`<p class="small">目前沒有錯題。</p>`;
+  items.forEach(({c,q,k})=>{
+    h+=`<div class="quiz"><div class="q">【${c.title}】${q.q}</div>
+    <div class="opts locked">${q.opts.map((o,oi)=>{
+      let cls='opt';if(oi===q.a)cls+=' correct';
+      return `<div class="${cls}">${String.fromCharCode(65+oi)}. ${o}</div>`;}).join('')}</div>
+    <div class="exp show">解析：${q.expl}</div>
+    <div class="flags"><button onclick="fixQ('${k}')">☑ 標記已訂正</button>
+    <button onclick="location.hash='#/chapter/${c.id}'" style="font-size:13px">回到本章</button></div></div>`;
+  });
+  return h;
+}
+function fixQ(k){S.qdone[k].fixed=true;persist();render()}
+function bindMistakes(){}
+
+/* ============ 術語總表 ============ */
+function renderGlossary(){
+  let rows=[];
+  BOOK.chapters.forEach(c=>c.terms.forEach(t=>{
+    const tk=`t${c.id}_${t.en}`;const tt=S.terms[tk]||{};
+    rows.push({chap:c.title,zh:t.zh,en:t.en,def:t.def,tk,tt});
+  }));
+  let h=`<h2 class="chap">術語總表</h2>
+  <p class="lead">全書術語。可依「已學會／重點」篩選；筆記與打勾自動儲存。</p>
+  <div class="tool-row"><button onclick="filterGloss('all')">全部</button>
+  <button onclick="filterGloss('learned')">已學會</button>
+  <button onclick="filterGloss('star')">★ 重點</button></div>
+  <table class="termtbl" id="glossTable"><tr><th>所屬章</th><th>術語</th><th>外文</th><th>解釋</th><th>學會</th><th>重點</th></tr>`;
+  rows.forEach(r=>{
+    h+=`<tr data-learned="${r.tt.learned?1:0}" data-star="${r.tt.star?1:0}">
+    <td class="small">${r.chap}</td><td><b>${r.zh}</b></td><td class="small">${r.en}</td><td>${r.def}</td>
+    <td><input type="checkbox" ${r.tt.learned?'checked':''} onchange="setTerm('${r.tk}','learned',this.checked)"></td>
+    <td><button onclick="setTerm('${r.tk}','star',true)">${r.tt.star?'★':'☆'}</button></td></tr>`;
+  });
+  h+=`</table>`;
+  return h;
+}
+function filterGloss(mode){
+  document.querySelectorAll('#glossTable tr[data-learned]').forEach(tr=>{
+    if(mode==='all')tr.style.display='';
+    else if(mode==='learned')tr.style.display=tr.dataset.learned==='1'?'':'none';
+    else tr.style.display=tr.dataset.star==='1'?'':'none';
+  });
+}
+
+/* ============ 搜尋 ============ */
+function doSearch(q){
+  const box=document.getElementById('searchResults');
+  q=q.trim();
+  if(!q){box.innerHTML='';return}
+  const items=allSearchItems().filter(it=>it.text.toLowerCase().includes(q.toLowerCase())).slice(0,12);
+  box.innerHTML=items.map(it=>`<div onclick="jumpResult('${it.go}',this)">【${it.type}】${it.text.slice(0,40)}</div>`).join('')
+    ||'<div class="small">無結果</div>';
+}
+function jumpResult(go,el){location.hash=go;document.getElementById('searchResults').innerHTML='';document.getElementById('searchInput').value='';
+  document.getElementById('sidebar').classList.remove('open');}
+
+/* ============ JSON 進出 ============ */
+function exportJSON(){
+  const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ekman_review_progress.json';a.click();
+}
+function importJSON(ev){
+  const f=ev.target.files[0];if(!f)return;
+  const r=new FileReader();r.onload=()=>{try{S=JSON.parse(r.result);persist();render()}catch(e){alert('檔案格式錯誤')}};
+  r.readAsText(f);
+}
+
+/* ============ 彈窗 ============ */
+function showModal(html){
+  document.getElementById('modalBox').innerHTML=`<span class="close" onclick="closeModal()">關閉 ×</span>${html}`;
+  document.getElementById('modal').classList.add('show');
+}
+function closeModal(){document.getElementById('modal').classList.remove('show')}
+document.getElementById('modal').onclick=e=>{if(e.target.id==='modal')closeModal()};
+function go(h){location.hash=h;document.getElementById('sidebar').classList.remove('open')}
+
+/* ============ 內聯 SVG 示意圖 ============ */
+function svgFor(id){
+  const W=560,H=220,bg='var(--line)',fc='var(--accent)',txt='var(--ink)';
+  function box(x,y,w,h,label,fill){return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="8" fill="${fill||'var(--panel)'}" stroke="${bg}"/><text x="${x+w/2}" y="${y+h/2+5}" text-anchor="middle" font-size="13" fill="${txt}">${label}</text>`}
+  function arrow(x1,y1,x2,y2){return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${fc}" stroke-width="2" marker-end="url(#a)"/>`}
+  const defs=`<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="${fc}"/></marker></defs>`;
+  const flows={
+    flow1:()=>`<svg viewBox="0 0 ${W} ${H}" role="img">${defs}${box(20,90,120,50,'五國照片實驗')}${box(200,40,140,50,'跨文化共識？')}${box(200,140,140,50,'表露的規則')}${box(400,90,140,50,'表情普世共通')}${arrow(140,115,200,65)}${arrow(140,115,200,165)}${arrow(340,65,400,110)}</svg>`,
+    flow2:()=>`<svg viewBox="0 0 ${W} ${H}" role="img">${defs}${box(20,90,120,50,'重要事件')}${box(180,90,140,50,'自動評估群\n(毫秒,無意識)')}${box(340,40,180,40,'情緒啟動')}${box(340,140,180,40,'生理+表情+行動')}${arrow(140,115,180,115)}${arrow(320,105,340,60)}${arrow(320,125,340,160)}</svg>`,
+    flow3:()=>`<svg viewBox="0 0 ${W} ${H}" role="img">${defs}${box(20,90,140,50,'①辨認誘因')}${box(200,90,150,50,'②可改/難改?')}${box(390,60,150,40,'調整敏感度')}${box(390,130,150,40,'接納/減強度')}${arrow(160,115,200,115)}${arrow(350,105,390,80)}${arrow(350,125,390,150)}</svg>`,
+    flow4:()=>`<svg viewBox="0 0 ${W} ${H}" role="img">${defs}${box(20,90,120,50,'察覺信號')}${box(180,40,150,40,'臉/聲音')}${box(180,140,150,40,'身體感覺')}${box(370,90,160,50,'選擇回應而非被駕駛')}${arrow(140,100,180,60)}${arrow(140,120,180,160)}${arrow(330,60,370,105)}${arrow(330,160,370,115)}</svg>`,
+    flow5:()=>`<svg viewBox="0 0 ${W} ${H}" role="img">${defs}${box(40,90,160,50,'重要失落')}${box(250,40,150,40,'哀傷(感受)')}${box(250,140,150,40,'悲痛(適應過程)')}${box(440,90,110,50,'隨時間緩解')}${arrow(200,100,250,60)}${arrow(200,120,250,160)}${arrow(400,60,440,105)}${arrow(400,160,440,115)}</svg>`,
+    flow6:()=>`<svg viewBox="0 0 ${W} ${H}" role="img">${defs}${box(20,90,150,50,'被阻/被冒犯')}${box(210,90,140,50,'身體準備對抗')}${box(390,90,150,50,'攻擊或克制')}${arrow(170,115,210,115)}${arrow(350,115,390,115)}</svg>`,
+    flow7:()=>`<svg viewBox="0 0 ${W} ${H}" role="img">${defs}${box(20,90,120,50,'新異刺激')}${box(180,40,140,40,'驚訝(數秒)')}${box(180,140,140,40,'判斷威脅?')}${box(360,140,170,40,'害怕→準備逃離')}${box(360,40,170,40,'放鬆')}${arrow(140,100,180,60)}${arrow(140,120,180,160)}${arrow(320,60,360,60)}${arrow(320,160,360,160)}</svg>`,
+    flow8:()=>`<svg viewBox="0 0 ${W} ${H}" role="img">${defs}${box(20,40,150,40,'污染/不潔')}${box(20,150,150,40,'位階優越感')}${box(220,40,140,40,'嫌惡:排斥/嘔吐')}${box(220,150,140,40,'輕蔑:貶低')}${arrow(170,60,220,60)}${arrow(170,170,220,170)}</svg>`,
+    flow9:()=>`<svg viewBox="0 0 ${W} ${H}" role="img">${defs}${box(20,90,150,50,'愉悅事件')}${box(210,40,140,40,'真笑(眼周參與)')}${box(210,150,140,40,'擴展注意/連結')}${arrow(160,100,210,60)}${arrow(160,120,210,170)}</svg>`,
+    flow10:()=>`<svg viewBox="0 0 ${W} ${H}" role="img">${defs}${box(160,90,240,50,'了解情緒機制 → 覺察 → 選擇回應方式', 'var(--accent-soft)')}</svg>`,
+    flow11:()=>`<svg viewBox="0 0 ${W} ${H}" role="img">${defs}${box(40,90,180,50,'讀前測一次')}${box(270,90,180,50,'讀後再測一次')}${arrow(220,115,270,115)}</svg>`,
+  };
+  return flows[id]?flows[id]():'<p class="small">（圖略）</p>';
+}
+
+/* ============ 啟動 ============ */
+window.addEventListener('hashchange',render);
+applyTheme();
+if(S.dark)document.querySelector('.tool-row button[onclick*=toggleDark]')&&(document.querySelector('.tool-row button[onclick*=toggleDark]').textContent='深色：開');
+render();
+</script>
+</body>
+</html>
