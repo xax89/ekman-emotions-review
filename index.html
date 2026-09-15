@@ -33,8 +33,10 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei"
 #topbar{position:sticky;top:0;z-index:60;height:56px;background:var(--panel);
   border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;padding:0 16px}
 #topbar .tb-btn{border:1px solid var(--line);background:var(--bg);border-radius:8px;
-  padding:7px 14px;cursor:pointer;font-size:14px;color:var(--ink);white-space:nowrap}
+  cursor:pointer;color:var(--ink);white-space:nowrap;display:inline-flex;align-items:center;justify-content:center}
+#topbar .tb-btn.ico{width:38px;height:38px;font-size:18px;padding:0}
 #topbar .tb-btn:hover{border-color:var(--accent)}
+#topbar .tb-btn.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 #topbar #searchBox{position:relative;flex:1;max-width:520px}
 #topbar #searchBox input{width:100%;padding:8px 12px;border:1px solid var(--line);
   border-radius:8px;background:var(--bg);color:var(--ink)}
@@ -166,18 +168,17 @@ svg{width:100%;height:auto;display:block;background:var(--panel);
 </head>
 <body>
 <div id="topbar">
-  <button id="menuBtn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
-  <button class="tb-btn brandbtn" onclick="go('home')">首書目頁</button>
+  <button id="menuBtn" class="tb-btn ico" title="目錄" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+  <button class="tb-btn ico" title="首頁（書目總覽）" onclick="go('home')">⌂</button>
   <div id="searchBox"><input id="searchInput" placeholder="搜尋章節／例題／術語…" oninput="doSearch(this.value)"><div id="searchResults"></div></div>
   <span class="spacer"></span>
-  <button class="tb-btn" id="markBtn" onclick="toggleMark()">畫記：關</button>
-  <button class="tb-btn" id="darkBtn" onclick="toggleDark()">深色：關</button>
+  <button class="tb-btn ico" id="markBtn" title="畫記模式" onclick="toggleMark()">✎</button>
+  <button class="tb-btn ico" id="darkBtn" title="深色模式" onclick="toggleDark()">◐</button>
 </div>
 <div id="layout">
   <nav id="sidebar">
-    <button class="nav-btn" onclick="go('home')">首書目頁</button>
-    <button class="nav-btn" onclick="go('mistakes')">錯題本</button>
-    <button class="nav-btn" onclick="go('glossary')">術語總表</button>
+    <button class="nav-btn" title="答錯自動收入此處" onclick="go('mistakes')">✗ 錯題本</button>
+    <button class="nav-btn" title="全書術語總表" onclick="go('glossary')">Aa 術語總表</button>
     <ul class="toc" id="tocList"></ul>
   </nav>
   <main id="main">
@@ -738,7 +739,7 @@ function renderChapter(c){
   const qd=c.exam.filter((_,i)=>S.qdone[`q${c.id}_${i}`]&&S.qdone[`q${c.id}_${i}`].done).length;
   let h=`<h2 class="chap">${c.title}<span class="tag">${c.page}</span></h2>
   <div class="row-between"><span class="small">本章總完成 ${pct}% ｜ 例題已做 ${qd}/${c.exam.length}</span>
-  <button class="nav-btn" style="display:inline-block;width:auto;margin:0" onclick="location.hash='#/home'">回首頁</button></div>
+  <button class="tb-btn ico" title="回首頁" onclick="location.hash='#/home'">⌂</button></div>
   <div class="pbar"><div style="width:${pct}%"></div></div>
 
   <h3>本章重點</h3><ul class="pts">${c.points.map(p=>`<li data-p="${c.id}_${uuid(p)}">${p}</li>`).join('')}</ul>
@@ -859,16 +860,15 @@ function setTerm(tk,field,val){
   S.terms[tk]=S.terms[tk]||{};S.terms[tk][field]=val;persist();
   if(field==='star')render();
 }
-function toggleMark(){S.mark=!S.mark;persist();
-  document.getElementById('markBtn').textContent='畫記：'+(S.mark?'開':'關');
+function toggleMark(){S.mark=!S.mark;persist();applyTheme();
   if(S.mark){document.querySelectorAll('[data-p]').forEach(el=>el.style.cursor='pointer')}
   else{document.querySelectorAll('[data-p]').forEach(el=>el.style.cursor='')}
 }
 function toggleDark(){S.dark=!S.dark;persist();applyTheme();}
 function applyTheme(){
   document.documentElement.setAttribute('data-theme',S.dark?'dark':'light');
-  const mb=document.getElementById('markBtn');if(mb)mb.textContent='畫記：'+(S.mark?'開':'關');
-  const db=document.getElementById('darkBtn');if(db)db.textContent='深色：'+(S.dark?'開':'關');
+  const mb=document.getElementById('markBtn');if(mb)mb.classList.toggle('on',!!S.mark);
+  const db=document.getElementById('darkBtn');if(db)db.classList.toggle('on',!!S.dark);
 }
 
 /* ============ 錯題本 ============ */
