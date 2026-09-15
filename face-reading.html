@@ -178,7 +178,7 @@ svg{width:100%;height:auto;display:block;background:var(--panel);
 <body>
 <div id="topbar">
   <button id="menuBtn" class="tb-btn ico" title="目錄" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
-  <button class="tb-btn ico" title="首頁（書目總覽）" onclick="go('home')">⌂</button>
+  <button class="tb-btn ico" title="回書架首頁（識謊・讀心）" onclick="location.href='index.html'">⌂</button>
   <div id="searchBox"><input id="searchInput" placeholder="搜尋章節／例題／術語…" oninput="doSearch(this.value)"><div id="searchResults"></div></div>
   <span class="spacer"></span>
   <button class="tb-btn ico" id="markBtn" title="畫記模式" onclick="toggleMark()">✎</button>
@@ -186,6 +186,7 @@ svg{width:100%;height:auto;display:block;background:var(--panel);
 </div>
 <div id="layout">
   <nav id="sidebar">
+    <button class="nav-btn" onclick="go('home')">≡ 本書總覽</button>
     <button class="nav-btn" title="答錯自動收入此處" onclick="go('mistakes')">✗ 錯題本</button>
     <button class="nav-btn" title="全書術語總表" onclick="go('glossary')">Aa 術語總表</button>
     <ul class="toc" id="tocList"></ul>
@@ -759,7 +760,7 @@ function renderChapter(c){
   const qd=c.exam.filter((_,i)=>S.qdone[`q${c.id}_${i}`]&&S.qdone[`q${c.id}_${i}`].done).length;
   let h=`<h2 class="chap">${c.title}<span class="tag">${c.page}</span></h2>
   <div class="row-between"><span class="small">本章總完成 ${pct}% ｜ 例題已做 ${qd}/${c.exam.length}</span>
-  <button class="tb-btn ico" title="回首頁" onclick="location.hash='#/home'">⌂</button></div>
+  <button class="tb-btn ico" title="回書架首頁" onclick="location.href='index.html'">⌂</button></div>
   <div class="pbar"><div style="width:${pct}%"></div></div>
 
   <h3>本章重點</h3><ul class="pts">${c.points.map(p=>`<li data-p="${c.id}_${uuid(p)}">${p}</li>`).join('')}</ul>
