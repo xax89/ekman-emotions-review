@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>说谎：揭穿商业、政治与婚姻中的骗局 — 互动复习</title>
+<style>
+/* ===== CSS Reset & Variables ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f8f9fa;--surface:#ffffff;--text:#1a1a2e;--text2:#555;
+  --border:#dee2e6;--primary:#3a6ea5;--primary-light:#e3edf7;
+  --term:#2e7d32;--term-bg:#e8f5e9;
+  --name:#7b1fa2;--name-bg:#f3e5f5;
+  --exam:#c62828;--exam-bg:#ffebee;
+  --correct:#2e7d32;--correct-bg:#e8f5e9;
+  --wrong:#c62828;--wrong-bg:#ffebee;
+  --accent:#ff8f00;--sidebar-w:280px;
+  --radius:8px;--shadow:0 1px 3px rgba(0,0,0,.1);
+}
+[data-theme="dark"]{
+  --bg:#12121a;--surface:#1e1e2e;--text:#e0e0e8;--text2:#9999aa;
+  --border:#333344;--primary:#6a9fd8;--primary-light:#2a3a52;
+  --term:#66bb6a;--term-bg:#1b3320;
+  --name:#ce93d8;--name-bg:#2d1b3d;
+  --exam:#ef5350;--exam-bg:#3d1b1b;
+  --correct:#66bb6a;--correct-bg:#1b3320;
+  --wrong:#ef5350;--wrong-bg:#3d1b1b;
+  --shadow:0 1px 3px rgba(0,0,0,.4);
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;transition:background .3s,color .3s}
+a{color:var(--primary);text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;font-size:inherit}
+input,select{font-family:inherit;font-size:inherit}
+
+/* ===== Layout ===== */
+.app{display:flex;min-height:100vh}
+.sidebar{width:var(--sidebar-w);background:var(--surface);border-right:1px solid var(--border);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:100;transition:transform .3s;padding:16px}
+.main{flex:1;margin-left:var(--sidebar-w);padding:24px 32px;max-width:900px}
+
+/* ===== Sidebar ===== */
+.sidebar-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.sidebar-header h2{font-size:1rem;color:var(--primary)}
+.sidebar-controls{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.sidebar-controls button{padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius);font-size:.8rem;background:var(--bg)}
+.sidebar-controls button:hover{background:var(--primary-light)}
+.search-box{width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;background:var(--bg);color:var(--text)}
+.nav-list{list-style:none}
+.nav-item{padding:8px 10px;border-radius:var(--radius);cursor:pointer;font-size:.88rem;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.nav-item:hover{background:var(--primary-light)}
+.nav-item.active{background:var(--primary);color:#fff}
+.nav-item .pct{font-size:.72rem;opacity:.7;white-space:nowrap}
+.nav-section{font-size:.75rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin:12px 0 4px;padding-left:10px}
+
+/* ===== Top Bar ===== */
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.topbar h1{font-size:1.4rem}
+.topbar-btns{display:flex;gap:8px}
+.topbar-btns button{padding:6px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:.85rem;background:var(--surface)}
+.topbar-btns button:hover{background:var(--primary-light)}
+.menu-toggle{display:none}
+
+/* ===== Home / Book Cover ===== */
+.home-hero{text-align:center;padding:40px 20px}
+.home-hero h1{font-size:1.8rem;margin-bottom:8px}
+.home-hero .author{color:var(--text2);margin-bottom:24px}
+.home-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:24px 0}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center}
+.stat-card .num{font-size:1.6rem;font-weight:700;color:var(--primary)}
+.stat-card .label{font-size:.78rem;color:var(--text2)}
+.chapter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:20px}
+.ch-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:border-color .2s}
+.ch-card:hover{border-color:var(--primary)}
+.ch-card h3{font-size:.95rem;margin-bottom:8px}
+.ch-card .meta{font-size:.78rem;color:var(--text2)}
+.ch-card .bar{height:4px;background:var(--border);border-radius:2px;margin-top:8px;overflow:hidden}
+.ch-card .bar-fill{height:100%;background:var(--primary);border-radius:2px;transition:width .3s}
+
+/* ===== Chapter Content ===== */
+.chapter-head{margin-bottom:24px}
+.chapter-head h2{font-size:1.5rem;margin-bottom:4px}
+.chapter-head .sub{color:var(--text2);font-size:.88rem}
+.progress-row{display:flex;align-items:center;gap:12px;margin:12px 0}
+.progress-row .bar{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.progress-row .bar-fill{height:100%;background:var(--primary)}
+.progress-row .pct-text{font-size:.8rem;color:var(--text2)}
+
+.section{margin-bottom:28px}
+.section h3{font-size:1.1rem;margin-bottom:12px;padding-bottom:4px;border-bottom:2px solid var(--primary)}
+.subsection{margin-bottom:16px}
+.sub-head{cursor:pointer;padding:8px 12px;background:var(--primary-light);border-radius:var(--radius);font-weight:600;font-size:.92rem;display:flex;justify-content:space-between;align-items:center}
+.sub-body{padding:12px 8px;display:none}
+.sub-body.open{display:block}
+.sub-body p{margin-bottom:10px;text-indent:2em}
+
+/* ===== Terminology highlighting ===== */
+.term{color:var(--term);font-weight:700;cursor:pointer;border-bottom:1px dashed var(--term)}
+.pname{color:var(--name);font-weight:700;cursor:pointer;border-bottom:1px dashed var(--name)}
+
+/* ===== Key Points ===== */
+.key-points{list-style:none;padding-left:0}
+.key-points li{padding:8px 12px;margin-bottom:6px;background:var(--surface);border-left:3px solid var(--primary);border-radius:0 var(--radius) var(--radius) 0;font-size:.92rem}
+
+/* ===== Method Cards ===== */
+.method-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
+.method-card.done{opacity:.5;text-decoration:line-through}
+.method-head{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--primary-light);font-weight:600}
+.method-head input[type=checkbox]{width:18px;height:18px;cursor:pointer}
+.method-body{padding:12px 14px;font-size:.9rem}
+.method-body .formula{background:var(--bg);padding:8px 12px;border-radius:4px;margin:8px 0;font-family:monospace;font-size:.88rem}
+.method-body .example{border-top:1px dashed var(--border);margin-top:8px;padding-top:8px;color:var(--text2);font-size:.85rem}
+
+/* ===== Comparison Table ===== */
+.cmp-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:12px 0;table-layout:fixed}
+.cmp-table th,.cmp-table td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+.cmp-table th{background:var(--primary-light);font-weight:600}
+
+/* ===== Exam Tip ===== */
+.exam-tip{background:var(--exam-bg);border-left:4px solid var(--exam);border-radius:0 var(--radius) var(--radius) 0;padding:12px 16px;margin:12px 0}
+.exam-tip h4{color:var(--exam);font-size:.9rem;margin-bottom:6px}
+.exam-tip p{font-size:.88rem}
+
+/* ===== Quiz ===== */
+.quiz-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;padding:16px}
+.quiz-q{font-weight:600;margin-bottom:10px;font-size:.92rem}
+.quiz-opts{list-style:none}
+.quiz-opt{padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:6px;cursor:pointer;font-size:.88rem;transition:background .2s}
+.quiz-opt:hover{background:var(--primary-light)}
+.quiz-opt.correct{background:var(--correct-bg);border-color:var(--correct);color:var(--correct);font-weight:600}
+.quiz-opt.wrong{background:var(--wrong-bg);border-color:var(--wrong);color:var(--wrong)}
+.quiz-opt.disabled{pointer-events:none;opacity:.7}
+.quiz-feedback{margin-top:8px;font-size:.85rem;padding:8px 12px;border-radius:var(--radius);display:none}
+.quiz-feedback.show{display:block}
+.quiz-feedback.ok{background:var(--correct-bg);color:var(--correct)}
+.quiz-feedback.bad{background:var(--wrong-bg);color:var(--wrong)}
+.quiz-actions{display:flex;gap:8px;margin-top:8px;font-size:.8rem}
+.quiz-actions button{padding:4px 10px;border:1px solid var(--border);border-radius:4px}
+
+/* ===== Term List (chapter end) ===== */
+.term-list{list-style:none}
+.term-item{padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:6px;font-size:.88rem;display:flex;align-items:flex-start;gap:8px}
+.term-item input[type=checkbox]{margin-top:4px}
+.term-item .term-en{font-weight:700;color:var(--term)}
+.term-item .term-cn{color:var(--text)}
+.term-item .term-def{color:var(--text2);font-size:.82rem;margin-top:2px}
+.term-item.learned{opacity:.5}
+.term-item.learned .term-en{text-decoration:line-through}
+
+/* ===== Modal ===== */
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.show{display:flex}
+.modal{background:var(--surface);border-radius:var(--radius);max-width:500px;width:100%;padding:24px;max-height:80vh;overflow-y:auto}
+.modal h3{margin-bottom:12px;color:var(--primary)}
+.modal .close-btn{float:right;cursor:pointer;font-size:1.2rem}
+
+/* ===== Wrong Answer Book ===== */
+.wrong-item{padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;font-size:.88rem}
+.wrong-item .q{font-weight:600;margin-bottom:4px}
+.wrong-item .a{color:var(--correct);font-size:.84rem}
+.wrong-item .actions{margin-top:6px}
+.wrong-item button{padding:3px 8px;font-size:.78rem;border:1px solid var(--border);border-radius:4px;margin-right:6px}
+
+/* ===== Mark Mode ===== */
+body.mark-mode .markable{cursor:crosshair}
+body.mark-mode .markable:hover{outline:2px dashed var(--accent)}
+.highlight{background:var(--accent) !important;color:#000 !important}
+
+/* ===== Mobile ===== */
+.menu-toggle{display:none;position:fixed;top:12px;left:12px;z-index:150;padding:8px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);font-size:1.1rem}
+@media(max-width:900px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0;padding:60px 16px 24px}
+  .menu-toggle{display:block}
+}
+
+/* ===== Misc ===== */
+.empty-msg{text-align:center;color:var(--text2);padding:40px;font-size:.9rem}
+.back-top{position:fixed;bottom:20px;right:20px;padding:8px 14px;background:var(--primary);color:#fff;border-radius:var(--radius);cursor:pointer;font-size:.85rem;display:none;z-index:50}
+.back-top.show{display:block}
+.svg-diagram{width:100%;max-width:500px;margin:12px auto;display:block}
+.note-input{width:100%;padding:6px;margin-top:6px;border:1px solid var(--border);border-radius:4px;font-size:.82rem;background:var(--bg);color:var(--text)}
+</style>
+</head>
+<body>
+<button class="menu-toggle" onclick="toggleSidebar()">&#9776;</button>
+<div class="app">
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>复习导航</h2>
+      <button onclick="toggleTheme()" title="切换深色模式">&#9681;</button>
+    </div>
+    <div style="margin-bottom:12px"><a href="./index.html" style="color:var(--primary);text-decoration:none;font-size:.85rem">&#8592; 所有书籍</a></div>
+    <div class="sidebar-controls">
+      <button onclick="showHome()">首页</button>
+      <button onclick="showWrongBook()">错题本</button>
+      <button onclick="showTerms()">术语表</button>
+    </div>
+    <input class="search-box" id="searchBox" placeholder="搜索章节、术语、题目..." oninput="doSearch(this.value)">
+    <ul class="nav-list" id="navList"></ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main" id="main">
+    <!-- Content rendered by JS -->
+  </main>
+</div>
+
+<!-- Modal for term cards -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<!-- Back to top -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ===== DATA =====
+const BOOK = {
+  title: "说谎：揭穿商业、政治与婚姻中的骗局",
+  subtitle: "Telling Lies: Clues to Deceit in the Marketplace, Politics, and Marriage",
+  author: "Paul Ekman 著 / 邓伯宸、徐国强 译",
+  pub: "生活·读书·新知三联书店 2006"
+};
+
+const CHAPTERS = [
+{
+  id:1, title:"导言", pages:"p15–22",
+  keyPoints:[
+    "说谎研究起源于临床实务：精神科医生担心住院病人说谎表示「没事」而出院后自杀",
+    "核心问题：即使心绪极度不宁，人们是否还能神色自若地说谎？能否从非口语行为中辨识？",
+    "Ekman 从精神病患访谈录像中发现说谎线索——面部表情普世相同，手势则因文化而异",
+    "张伯伦与希特勒的案例说明：高风险谎言可造成国家级灾难，抓谎能力关乎生死存亡"
+  ],
+  sections:[
+    {title:"研究起源", body:"Ekman 最初研究面部表情的跨文化普遍性，被学员问及能否从病人的非口语行为判断说谎。临床困境在于：病人说「我没事」但医生无法确定他是否在说谎，放他出院可能危及生命。Ekman 调出旧访谈录像带，发现许多片段中其实透露着说谎的迹象。"},
+    {title:"张伯伦的教训", body:"1938年张伯伦相信希特勒的「言出必践」，结果换来第二次世界大战。这个案例说明：面对老练说谎者（如政治人物），即使是国家领导人也会被骗，而且被骗的代价极为惨重。"}
+  ],
+  methods:[
+    {name:"临床困境模型", formula:"病人自述「无自杀倾向」 vs 医生观察到的危险信号\n→ 必须判断：哪些非口语行为可靠？", example:"护士学生实验：观看血腥影片却伪装平静，声调变高、手势变少、出现耸肩失误。"}
+  ],
+  comparisons:[
+    {cols:["维度","临床情境","政治/商业情境"],rows:[
+      [" stakes（代价）","病人自杀→生命危险","战争/商业损失","高风险"],
+      ["说谎者","精神患者","老练政客","长期练习"],
+      ["观察者","医生","谈判者","信息不对称"]
+    ]}
+  ],
+  examTips:[
+    "本书核心问题不是「谎言长什么样」，而是「情绪如何泄露」——谎言本身没有外在表征，只有破绽和线索"
+  ],
+  terms:[
+    {en:"Leakage", cn:"破绽", def:"说谎者无意间泄露真实情绪的行为"},
+    {en:"Deception Clue", cn:"说谎线索", def:"不泄露实情，但暴露正在说谎的行为"},
+    {en:"Nonverbal Behavior", cn:"非口语行为", def:"面部表情、手势、姿态、声调等语言之外的信号"}
+  ],
+  quiz:[
+    {q:"Ekman 开始研究说谎的最初动机是什么？",opts:["政府委托的间谍研究","临床医生担心病人说谎表示「没事」而出院后自杀","为法庭做测谎鉴定","纯粹学术好奇"],a:1,exp:"Ekman 在指导治疗医师时被问及能否从病人非口语行为判断说谎，这触发了研究。"},
+    {q:"本书的核心研究对象是什么？",opts:["谎言的法律定义","说谎者的情绪泄露与行为线索","测谎仪的电路原理","政治宣传的效果"],a:1,exp:"本书关注的是说谎者无法控制的情绪信号，而非谎言本身的内容。"},
+    {q:"张伯伦与希特勒案例的主要教训是什么？",opts:["希特勒是优秀演员","即使是国家领导人也会被老练说谎者欺骗，代价惨重","英国人不了解德国文化","政治家不应出国访问"],a:1,exp:"张伯伦相信希特勒的承诺，结果换来战争。这说明面对高风险谎言，抓谎能力至关重要。"},
+    {q:"面部表情与手势的跨文化差异是什么？",opts:["两者都因文化而异","面部表情普世相同，手势因文化而异","手势普世相同，面部表情因文化而异","两者都普世相同"],a:1,exp:"Ekman 的跨文化研究发现面部表情具有普遍性，但手势/emblems 因文化不同。"},
+    {q:"为什么早期的访谈录像带对研究有用？",opts:["画面质量极佳","原本用于诊断病情，但事后发现其中包含说谎案例","都是专业演员演出","录制时长正好"],a:1,exp:"这些录像带本来用于诊断精神疾病类型，Ekman 转用它们来寻找说谎线索。"},
+    {q:"说谎研究与一般沟通研究的根本区别是？",opts:["说谎研究更难","研究对象是否有意隐瞒信息","说谎者都更聪明","沟通不需要观察"],a:1,exp:"关键区别在于说谎者有目的地误导，这使得行为线索的解读更加复杂。"}
+  ]
+},
+{
+  id:2, title:"谎言、破绽与说谎线索", pages:"p23–40",
+  keyPoints:[
+    "说谎定义：存心误导别人的有意行为，事先未透露目的",
+    "两种说谎方式：隐瞒真相（concealment）vs 捏造事实（falsification）",
+    "破绽（leakage）泄露真实情绪；说谎线索（deception clue）只暴露在说谎",
+    "人们不愿承认「说谎」，常用「隐瞒」「误导」代替——尼克松只承认隐瞒真相"
+  ],
+  sections:[
+    {title:"说谎的定义", body:"说谎是存心误导别人的有意行为，事先未透露其目的，且对方没有被要求协助进行误导。无心提供错误信息不算说谎（如妄想症患者自称是历史人物）。"},
+    {title:"隐瞒 vs 捏造", body:"隐瞒是不让对方知道真实信息；捏造是把虚假信息当作真实信息说出来。尼克松只承认自己「隐瞒真相」，拒绝承认「说谎」——这反映了人们对 lie 一词的道德反感。"},
+    {title:"破绽与说谎线索的区别", body:"破绽（leakage）：说谎者无意间泄露了真实情绪或信息。说谎线索（deception clue）：行为本身不泄露实情，但暴露了「这个人在说谎」这件事。前者泄露「是什么」，后者泄露「有没有」。"}
+  ],
+  methods:[
+    {name:"两种说谎方式", formula:"隐瞒（Concealment）：隐藏真实信息\n捏造（Falsification）：提供虚假信息", example:"隐瞒：知道自己曾有前科但不主动说\n捏造：说自己从未被解雇"},
+    {name:"破绽 vs 说谎线索", formula:"破绽 = 泄露真实情绪内容\n说谎线索 = 只暴露「在说谎」这个事实", example:"破绽：说到悲伤事件时眼眶泛红\n说谎线索：回答前异常长的停顿"}
+  ],
+  comparisons:[
+    {cols:["维度","隐瞒 Concealment","捏造 Falsification"],rows:[
+      ["行为","隐藏真实信息","提供虚假信息"],
+      ["难度","较易（只需不主动说）","较难（需记住并维持虚构）"],
+      ["线索来源","沉默、回避、信息缺失","言辞不一致、口误、过度细节"],
+      ["典型案例","隐瞒前科","捏造学历"]
+    ]}
+  ],
+  examTips:[
+    "破绽和说谎线索的区别是考试高频考点：破绽泄露内容，说谎线索只暴露行为本身",
+    "尼克松只承认「隐瞒」不承认「说谎」——这反映了 lie 的道德重量"
+  ],
+  terms:[
+    {en:"Lie", cn:"谎言/说谎", def:"存心误导别人的有意行为，事先未透露目的"},
+    {en:"Concealment", cn:"隐瞒", def:"不让对方知道真实信息"},
+    {en:"Falsification", cn:"捏造", def:"把虚假信息当作真实信息说出"},
+    {en:"Leakage", cn:"破绽", def:"无意间泄露真实情绪或信息"},
+    {en:"Deception Clue", cn:"说谎线索", def:"不泄露实情但暴露正在说谎的行为"}
+  ],
+  quiz:[
+    {q:"根据 Ekman 的定义，以下哪种情况算说谎？",opts:["记错日期说错","存心误导且事先未透露目的","被胁迫说出半真半假的话","妄想症患者自称是历史人物"],a:1,exp:"说谎必须是有意误导且事先未透露目的。记错不是故意的，妄想症患者真心相信自己说的。"},
+    {q:"隐瞒与捏造的区别是？",opts:["隐瞒比捏造更不道德","隐瞒是隐藏真实信息，捏造是提供虚假信息","两者完全相同","只在法庭上有区别"],a:1,exp:"隐瞒=不提供真实信息；捏造=主动提供虚假信息。"},
+    {q:"破绽（leakage）与说谎线索（deception clue）的关键区别？",opts:["破绽比说谎线索严重","破绽泄露真实情绪内容，说谎线索只暴露在说谎","两者完全相同","说谎线索只在书面语中出现"],a:1,exp:"破绽告诉观察者「真实情绪是什么」；说谎线索只告诉观察者「这个人在说谎」。"},
+    {q:"尼克松为什么只承认「隐瞒真相」而不承认「说谎」？",opts:["他确实没有说谎","lie 在现代用法中有严重道德含义，人们倾向用委婉说法","他的律师禁止他说 lie","水门事件中没有人说谎"],a:1,exp:"正如《牛津英语辞典》所述，lie 在现代用法中表示道德上的严重谴责，日常多用 falsehood/untruth 代替。"},
+    {q:"以下哪项是「捏造」而非「隐瞒」？",opts:["不提自己曾被解雇","声称自己毕业于从未上过的大学","沉默不回答问题","转移话题"],a:1,exp:"捏造是主动提供虚假信息（虚假学历）；隐瞒是不提供真实信息。"},
+    {q:"无心提供错误信息算说谎吗？",opts:["算，只要信息错误","不算，因为不是存心误导","算，如果造成损失","看信息的重要性"],a:1,exp:"说谎的定义要求「存心误导」。无心之失（如记错）不算说谎。"},
+    {q:"说谎线索与破绽哪个更容易被抓谎者利用？",opts:["破绽，因为直接知道真相","两者一样","说谎线索，因为它独立于内容","都不可靠"],a:0,exp:"破绽直接告诉抓谎者真实情绪，因此信息量最大，但也最难捕捉。"}
+  ]
+},
+{
+  id:3, title:"谎言何以穿帮", pages:"p41–74",
+  keyPoints:[
+    "谎言穿帮两大原因：想法（认知负担）和情绪（难以控制的生理反应）",
+    "三种最难摆脱的情绪：担心被抓（fear）、罪恶感（guilt）、说谎的快感（duping delight）",
+    "即使精心准备说辞，也无法预知所有问题和突发状况",
+    "情绪越强，越难掩饰——情绪越强烈，泄露越明显"
+  ],
+  sections:[
+    {title:"想法导致穿帮", body:"说谎者必须记住说辞、注意不露出破绽、预测对方问题、维持前后一致。认知负荷极高。小说家契诃夫《求婚》中的例子：妻子在电话中编谎言，丈夫当场听到语气不对，谎言立即穿帮。即使事前准备充分，突发状况也会使说辞不攻自破。"},
+    {title:"情绪导致穿帮", body:"三种情绪使说谎者最难控制：①担心被抓的恐惧——越怕被抓，声调越高、语速越快；②罪恶感——欺骗信任自己的人时产生；③说谎的快感（duping delight）——成功骗过他人时不自觉的愉悦，往往以微表情泄露。情绪越强烈，越难掩饰。"}
+  ],
+  methods:[
+    {name:"情绪泄露三因素", formula:"1. 担心被抓 (Fear of being caught)\n2. 罪恶感 (Guilt about lying)\n3. 说谎的快感 (Duping delight)", example:"骗子成功骗过经验丰富的警察后，脸上闪过一丝得意的微笑——这就是 duping delight。"},
+    {name:"认知负荷模型", formula:"说谎者必须同时：\n- 记住说辞\n- 监控自己的表情\n- 预测对方问题\n- 维持前后一致\n→ 认知超载时出现口误、停顿、打结", example:"水门案中布查德在大陪审团面前，因为无法记住所有说辞而出现多处不一致。"}
+  ],
+  comparisons:[
+    {cols:["情绪","触发条件","行为线索"],rows:[
+      ["担心被抓"," stakes 高、对方权威","声调升高、语速加快、停顿"],
+      ["罪恶感","欺骗信任自己的人","回避眼神、声调降低、身体后退"],
+      ["说谎的快感","成功骗过聪明对手","微表情微笑、眉毛上扬、过度自信"]
+    ]}
+  ],
+  examTips:[
+    "三种情绪的名称和对应线索是必考：fear / guilt / duping delight",
+    "情绪越强烈 → 越难控制 → 泄露越多。这不是线性关系而是指数级"
+  ],
+  terms:[
+    {en:"Duping Delight", cn:"说谎的快感", def:"成功骗过他人时不自觉的愉悦，常以微表情泄露"},
+    {en:"Fear of Caught", cn:"担心被抓", def:"害怕谎言被揭穿的恐惧情绪"},
+    {en:"Guilt", cn:"罪恶感", def:"欺骗信任自己的人时产生的道德情绪"},
+    {en:"Cognitive Load", cn:"认知负荷", def:"说谎者需同时处理多项认知任务，超载时出现失误"}
+  ],
+  quiz:[
+    {q:"以下哪项不是本书提到的三种最难控制的情绪？",opts:["担心被抓","罪恶感","说谎的快感","厌恶"],a:3,exp:"三种情绪是：fear of being caught、guilt、duping delight。厌恶不在其中。"},
+    {q:"说谎的快感（duping delight）是什么？",opts:["说谎后感到放松","成功骗过他人时不自觉的愉悦","被揭穿后的愤怒","对说谎者的厌恶"],a:1,exp:"duping delight 是欺骗成功时产生的愉悦感，往往以一闪而过的得意微表情泄露。"},
+    {q:"为什么情绪越强烈越难掩饰？",opts:["情绪强时大脑更活跃","强烈情绪触发不随意肌反应，意识无法控制","情绪强时说谎者更聪明","与情绪强度无关"],a:1,exp:"强烈情绪激活自主神经系统和不随意肌，这些反应不受意识控制，因此越强烈越难掩盖。"},
+    {q:"认知负荷导致的典型穿帮行为是？",opts:["微笑","口误、停顿打结、言辞不一致","眼神明亮","音量变大"],a:1,exp:"认知超载时工作记忆出错，表现为口误（弗洛伊德式口误）、停顿、言辞前后矛盾。"},
+    {q:"契诃夫《求婚》的例子说明什么？",opts:["俄罗斯人很会说谎","即使事先准备，语气和情境不搭也会穿帮","电话中不能说谎","丈夫总是偷听"],a:1,exp:"妻子在电话中编造说辞，但语气与情境不符，丈夫当场识破。"},
+    {q:"罪恶感在哪种情境下最强？",opts:["欺骗陌生人","欺骗信任自己的人","欺骗敌人","欺骗机器"],a:1,exp:"欺骗信任自己的人（如家人、好友）时罪恶感最强，因为背叛了信任。"},
+    {q:"以下哪种情况最可能出现 duping delight？",opts:["欺骗小孩子","骗过经验丰富的谈判对手后","第一次说谎","被揭穿时"],a:1,exp:"当说谎者成功骗过自认为比自己聪明的人时，最容易产生 duping delight。"},
+    {q:"说谎者无法预知哪些情况？",opts:["对方的长相","对方会问什么问题、会有什么突发状况","房间大小","时间"],a:1,exp:"即使准备充分，说谎者也无法预测所有问题和突发情况，认知负荷不可控。"}
+  ]
+},
+{
+  id:4, title:"言辞、声音、身体行为与谎言", pages:"p75–112",
+  keyPoints:[
+    "谎言本身没有外在表征——任何姿势表情都不能「证明」说谎",
+    "人们最依赖的言辞和表情恰恰是最不可靠的线索来源",
+    "说谎者首先控制别人最可能注意的部位（脸、言辞），反而忽略声音和身体",
+    "声音线索：声调升高、语速加快、停顿增加、音调变化；身体线索：手势减少、耸肩、肢体失误"
+  ],
+  sections:[
+    {title:"为什么没有「说谎的样子」", body:"如果说谎有某种明显特征，就没有人会说谎了。真相是：任何姿势、表情或肌肉颤动都不足以明确证明说谎。抓谎者能依赖的只有「破绽」和「说谎线索」——情绪在言辞、声音和身体上的泄露痕迹。"},
+    {title:"言辞线索", body:"口误（slip of the tongue）、停顿、说话打结、言辞闪烁、过度细节、过度概括。口误可能泄露真实想法。但言辞本身最容易被说谎者控制，因此可靠性最低。"},
+    {title:"声音线索", body:"声调升高（生气或害怕）、语速加快（激动）、语速放慢（悲伤）、停顿增加、音调变化、吞頻增加、呼吸变浅变快。声音不受意识直接控制，因此比言辞更可靠。"},
+    {title:"身体线索", body:"手势减少（手部被抑制）、肢体动作失误（如竖中指）、耸肩（不确定性）、姿势僵硬。身体比面部更难控制，因为说谎者通常不注意身体。"}
+  ],
+  methods:[
+    {name:"线索可靠性排序", formula:"最可靠 ←————————→ 最不可靠\n身体动作 > 声音 > 面部表情 > 言辞\n（越靠左越难刻意控制）", example:"人们以为最会「读脸」，其实面部表情最容易伪装。身体动作和声音反而更诚实。"},
+    {name:"声音线索解读", formula:"声调升高 → 生气或害怕\n语速加快 → 激动/生气/害怕\n语速放慢 → 悲伤/烦恼\n停顿增加 → 紧张/在编造", example:"应聘者被问到离职原因时，声调突然升高、语速加快——可能在编造。"}
+  ],
+  comparisons:[
+    {cols:["线索类型","可控程度","可靠性","典型泄露"],rows:[
+      ["言辞","最高（可逐字控制）","最低","口误、过度细节"],
+      ["面部表情","高（可刻意微笑）","低-中","微表情、不对称表情"],
+      ["声音","中（半自主）","中","声调、语速、停顿"],
+      ["身体动作","低（最易被忽略）","最高","手势减少、耸肩、失误"]
+    ]}
+  ],
+  examTips:[
+    "线索可靠性排序是高频考点：身体 > 声音 > 表情 > 言辞",
+    "口误（slip）不是证明说谎，而是泄露真实情绪的线索"
+  ],
+  terms:[
+    {en:"Slip of the Tongue", cn:"口误", def:"说话时无意间说出真实想法"},
+    {en:"Illustrators", cn:"说明性手势", def:"辅助语言表达的手部动作，说谎时减少"},
+    {en:"Emblem", cn:"肢体符号", def:"有明确含义的文化手势（如竖中指），失误时泄露情绪"},
+    {en:"Adaptor", cn:"调节动作", def:"自我安抚动作（摸鼻子、整理衣服），紧张时增加"}
+  ],
+  quiz:[
+    {q:"根据本书，以下哪项是最可靠的说谎线索？",opts:["言辞内容","面部表情","声调变化","眼神接触"],a:2,exp:"声音（声调、语速）比言辞和面部表情更难刻意控制，因此更可靠。"},
+    {q:"人们最常依赖但最不可靠的线索是？",opts:["身体动作","声音","言辞和面部表情","呼吸"],a:2,exp:"大多数人专注于听内容和看脸，但这两者恰恰最容易伪装。"},
+    {q:"声调升高通常表明什么情绪？",opts:["悲伤","生气或害怕","厌恶","惊讶"],a:1,exp:"声调升高与生气、害怕等高唤醒情绪相关。悲伤则表现为语速放慢、音调降低。"},
+    {q:"说谎时手势为什么会减少？",opts:["说谎者手冷","认知负荷占用了用于手势的注意力","手被绑住","文化差异"],a:1,exp:"说谎需要大量认知资源来维持说辞，说明性手势（illustrators）因注意力被占用而减少。"},
+    {q:"肢体符号（emblem）失误是什么？",opts:["说话时说错字","无意间做出有明确含义的手势（如竖中指）","走路绊倒","握笔姿势错误"],a:1,exp:"emblem 失误是无意间做出有明确文化含义的手势，如对教授竖中指——泄露真实情绪。"},
+    {q:"为什么谎言本身没有外在表征？",opts:["因为谎言太复杂","如果有明显特征就没人会说谎","因为测谎仪不精确","因为每个人都说谎"],a:1,exp:"如果说谎有一个固定的「样子」，人们一眼就能识别，那就没有人能成功说谎了。"},
+    {q:"说谎者最不注意控制哪个部位？",opts:["脸","声音","身体（手和姿势）","言辞"],a:2,exp:"说谎者专注于控制面部和言辞（别人最注意的地方），反而忽略身体动作。"},
+    {q:"过度详细的陈述可能是什么线索？",opts:["诚实","在编造（为了使谎言可信而加入过多细节）","记忆力好","准备充分"],a:1,exp:"真实记忆通常是概要式的；过度细节反而可能是预先编造的痕迹。"}
+  ]
+},
+{
+  id:5, title:"说谎的表情线索", pages:"p113–145",
+  keyPoints:[
+    "面部同时包含两种表情：想表现的（假）和想隐藏的（真）",
+    "真表情是无意识的（锥体外神经系统控制），假表情是有意识的（锥体神经系统控制）",
+    "微表情：不到1/5秒的真实情绪泄露，转瞬即逝",
+    "不随意肌：前额、眼周等部位的肌肉无法刻意控制，是测谎的黄金线索"
+  ],
+  sections:[
+    {title:"真表情 vs 假表情", body:"真表情是无意识的面部动作，未经思索或刻意做作；假表情是有意识控制的面部动作，以阻止真实情绪泄露。研究大脑不同部位受损的患者发现：有意识表情由锥体神经系统控制，无意识表情由锥体外神经系统控制——这是两个不同的脑回路。"},
+    {title:"微表情", body:"微表情（microexpression）是完整情绪性表情压缩到不到1/5秒，快到难以察觉。Ekman 在精神患者玛丽的访谈录像中首次发现：她表面微笑，但慢放时能看到脸上掠过极度忧郁的神情。"},
+    {title:"不随意肌", body:"面部某些肌肉无法刻意控制：①前额内侧角（悲伤/痛苦时扬起）；②眼轮匝肌（Duchenne 笑时眼周皱纹，假笑做不到）；③眉毛和眼皮的特定组合。不到15%的人能随意做出悲伤表情的额头动作。"},
+    {title:"假笑的识别", body:"Duchenne 笑（真笑）包含眼周肌肉收缩（眼角皱纹）；假笑只动嘴部。假笑不对称、出现和消失都太突然、持续时间过长。"}
+  ],
+  methods:[
+    {name:"真表情 vs 假表情神经机制", formula:"有意识表情 → 锥体神经系统 (Pyramidal)\n无意识表情 → 锥体外神经系统 (Extrapyramidal)\n→ 中风患者能自发笑但不能按指令笑", example:"锥体束受损的病人：按命令做不出微笑，但听到笑话会自发笑——证明两个系统独立。"},
+    {name:"Duchenne 笑识别", formula:"真笑 (Duchenne)：眼轮匝肌收缩 + 嘴角上扬\n假笑：仅嘴角上扬，眼周不动\n→ 看眼角是否有皱纹", example:"推销人员的标准微笑——嘴在笑但眼睛不笑，这就是假笑。"}
+  ],
+  comparisons:[
+    {cols:["维度","真表情","假表情"],rows:[
+      ["控制脑区","锥体外神经系统","锥体神经系统"],
+      ["出现方式","自发、无意识","刻意、有意识"],
+      ["眼周动作","有（Duchenne 收缩）","无"],
+      ["对称性","对称","常不对称"],
+      ["起止方式","自然渐变","突然开始和结束"],
+      ["持续时间","自然（1-4秒）","过长或过短"]
+    ]}
+  ],
+  examTips:[
+    "Duchenne 笑是必考：眼周肌肉（眼轮匝肌）是否收缩是真假笑的关键",
+    "微表情持续不到1/5秒，需要慢放才能看到",
+    "锥体 vs 锥体外神经系统的区别——中风患者的案例是经典证据"
+  ],
+  terms:[
+    {en:"Microexpression", cn:"微表情", def:"不到1/5秒的完整情绪性表情，转瞬即逝"},
+    {en:"Duchenne Smile", cn:"杜兴微笑/真笑", def:"眼轮匝肌参与的真实微笑，眼角出现皱纹"},
+    {en:"Pyramidal System", cn:"锥体神经系统", def:"控制有意识的面部动作"},
+    {en:"Extrapyramidal System", cn:"锥体外神经系统", def:"控制自发、无意识的表情"},
+    {en:"Reliable Muscles", cn:"可靠肌肉/不随意肌", def:"无法刻意控制的面部肌肉，如前额内侧角"}
+  ],
+  quiz:[
+    {q:"真表情和假表情分别由哪个神经系统控制？",opts:["都由锥体神经系统","都由锥体外神经系统","真表情→锥体外，假表情→锥体","真表情→锥体，假表情→锥体外"],a:2,exp:"有意识（假）表情由锥体神经系统控制；自发（真）表情由锥体外神经系统控制。"},
+    {q:"微表情持续多长时间？",opts:["约1秒","不到1/5秒","约10秒","与正常表情相同"],a:1,exp:"微表情压缩到不到1/5秒（约1/25秒），快到肉眼通常无法察觉。"},
+    {q:"Duchenne 笑的关键特征是什么？",opts:["嘴角张大","眼轮匝肌收缩，眼角出现皱纹","露出牙齿","声音配合"],a:1,exp:"Duchenne 笑（真笑）的标志是眼周肌肉收缩产生眼角皱纹，假笑做不到这一点。"},
+    {q:"中风患者「能自发笑但不能按指令笑」证明了什么？",opts:["中风影响面部肌肉","有意识和无意识表情由不同脑系统控制","患者不愿意笑","笑是后天习得的"],a:1,exp:"锥体束受损的病人不能按指令做表情（锥体系统坏了），但仍能自发笑（锥体外系统完好）。"},
+    {q:"假笑通常缺少什么？",opts:["嘴角上扬","眼周肌肉收缩（眼角皱纹）","牙齿","声音"],a:1,exp:"假笑只动嘴部肌肉，眼轮匝肌不参与，因此眼角没有皱纹。"},
+    {q:"Ekman 在精神患者玛丽的录像中发现了什么？",opts:["她在说谎时身体颤抖","她表面微笑但慢放时看到忧郁微表情","她从不眨眼","她说话声音很大"],a:1,exp:"玛丽表面上微笑着说自己没事，但慢放时发现脸上掠过极度忧郁的神情——这是微表情。"},
+    {q:"以下哪块肌肉是「不随意肌」的典型例子？",opts:["嘴角肌肉","前额内侧角（悲伤时扬起）","眉毛外部","下巴肌肉"],a:1,exp:"前额内侧角在悲伤时的动作，不到15%的人能随意做出，因此是可靠的泄露源。"},
+    {q:"假表情的典型特征不包括？",opts:["不对称","突然开始和结束","眼周有自然皱纹","持续时间过长或过短"],a:2,exp:"眼周有自然皱纹是真表情的特征。假表情的眼周是平的。"}
+  ]
+},
+{
+  id:6, title:"陷阱与预防措施", pages:"p146–169",
+  keyPoints:[
+    "抓谎两大陷阱：误真为谎（false alarm）和误谎为真（miss）",
+    "大多数人在大多数时候都不擅长识别谎言——正确率仅略高于随机猜测",
+    "预防第一步：精确解读行为信号，不靠直觉",
+    "预防第二步：考虑误判的后果，不确定时不下结论"
+  ],
+  sections:[
+    {title:"两种错误", body:"误真为谎（false positive）：冤枉诚实的人。误谎为真（false negative）：放过说谎者。两种错误都不可避免，但后果不同。对孩子来说，被冤枉会严重破坏信任；对成人来说，误判可能导致失业、牢狱。"},
+    {title:"大多数人不擅长抓谎", body:"研究显示大多数人识别谎言的正确率仅略高于掷硬币。人们过于自信，以为自己判断正确，实际上大错特错。少数擅长抓谎的人并非来自传统职业训练。"},
+    {title:"预防措施", body:"①了解哪些线索可靠、哪些不可靠；②不依赖直觉；③考虑 stakes（代价）——误判后果越严重，判断越要谨慎；④收集多来源信息交叉验证；⑤知道自己的认知偏差。"}
+  ],
+  methods:[
+    {name:"两阶段判断模型", formula:"阶段1：发现异常线索 → 不直接下结论\n阶段2：结合背景信息交叉验证\n→ 不确定时标记为「存疑」而非「说谎」", example:"面试中注意到候选人停顿→不要直接判说谎，先看是否有其他线索（声调、身体）配合。"}
+  ],
+  comparisons:[
+    {cols:["错误类型","定义","后果严重度","典型场景"],rows:[
+      ["误真为谎 (False Alarm)","冤枉诚实的人","破坏信任、名誉损失","父母怀疑孩子偷钱"],
+      ["误谎为真 (Miss)","放过说谎者","安全漏洞、经济损失","面试官放过骗子"],
+      ["正确接受","正确识别说谎","无","—"],
+      ["正确拒绝","正确判断诚实","无","—"]
+    ]}
+  ],
+  examTips:[
+    "两种错误的名称和后果对比是必考",
+    "大多数人的抓谎正确率仅略高于随机猜测——不要过度自信"
+  ],
+  terms:[
+    {en:"False Positive", cn:"误真为谎/错判", def:"将诚实者误判为说谎者"},
+    {en:"False Negative", cn:"误谎为真/漏判", def:"将说谎者误判为诚实者"},
+    {en:"Base Rate", cn:"基本比例", def:"人群中说谎者的实际比例，影响判断准确率"}
+  ],
+  quiz:[
+    {q:"误真为谎（false positive）是什么？",opts:["放过说谎者","冤枉诚实的人","仪器故障","说谎者被抓"],a:1,exp:"false positive = 警报误响 = 诚实者被误认为说谎者。"},
+    {q:"研究显示大多数人识别谎言的准确率如何？",opts:["约90%","约75%","仅略高于随机猜测（50%）","约60%但不稳定"],a:2,exp:"多数研究发现普通人抓谎正确率仅50%左右，和掷硬币差不多。"},
+    {q:"以下哪项不是本书建议的预防措施？",opts:["了解可靠的线索来源","不依赖直觉","根据单一明显线索直接下结论","考虑误判后果"],a:2,exp:"单一线索不足以判断说谎，必须多来源交叉验证。"},
+    {q:"误真为谎对孩子的伤害主要是？",opts:["打他一顿","破坏信任关系，事后难以补救","没有伤害","让他学会说谎"],a:1,exp:"被冤枉的孩子即使事后洗清，信任关系已经受损，这种伤害往往不可逆。"},
+    {q:"为什么抓谎者不能仅靠直觉？",opts:["直觉总是错的","直觉容易受偏差影响，且不知道判断依据就无法纠错","直觉太费时间","直觉只对专家有效"],a:1,exp:"知道判断依据才能学习改进；靠直觉则无法从错误中学习。"},
+    {q:"两种错误中，哪种在高风险情境下更需要警惕？",opts:["误谎为真","误真为谎","两者相同","看情况"],a:3,exp:"取决于 stakes：法庭上误真为谎（冤枉无辜）严重；安全领域误谎为真（放过间谍）严重。"},
+    {q:"Ekman 认为少数擅长抓谎的人是怎么练成的？",opts:["特殊职业训练","天生或经过特殊历练，来源尚不清楚","读本书","学习微表情"],a:1,exp:"Ekman 发现确实有少数人准确率很高，但他不确定这种能力是天生还是后天习得。"}
+  ]
+},
+{
+  id:7, title:"测谎仪", pages:"p170–209",
+  keyPoints:[
+    "测谎仪测量的是情绪的生理反应（心率、血压、呼吸、皮电），不是「谎言」本身",
+    "基本比例谬误：当人群中说谎者比例很低时，即使准确率高也会产生大量误判",
+    "测谎仪结果不能单独作为定罪证据，只能作为调查辅助",
+    "测谎仪对害怕被抓的人有效，但对反社会人格（无畏症）无效"
+  ],
+  sections:[
+    {title:"测谎仪原理", body:"测谎仪（polygraph）同时记录：心率、血压、呼吸率、皮电反应（GSR）。原理是：说谎时的情绪（害怕被抓、紧张）会引发生理反应。但测谎仪测量的是「情绪唤醒」，不是「谎言」——无辜者也可能因紧张而反应强烈。"},
+    {title:"基本比例谬误", body:"假设测谎准确率90%，但1000人中只有5%（50人）是说谎者。结果：45个说谎者被正确识别，但95个诚实者被误判。平均每抓到2个真说谎者，就有1个诚实者被冤枉。这就是为什么在低比例人群中测谎仪不可靠。"},
+    {title:"测谎仪的局限", body:"①对无畏症患者（反社会人格、精神病态者）无效——他们不怕被抓；②反测谎手段（药物、运动、心理控制）；③不同情绪的生理反应相似，无法区分害怕、愤怒、内疚。"}
+  ],
+  methods:[
+    {name:"基本比例谬误计算", formula:"准确率90% + 说谎者比例5% (1000人)\n→ 正确识别说谎者: 45人\n→ 误判诚实者: 95人\n→ 被判定说谎的140人中，68%是冤枉的！", example:"公司1000名员工测谎，90%准确率，5%有问题。结果抓到45个真问题，但冤枉95个无辜员工。"},
+    {name:"测谎仪测量的四指标", formula:"1. 心率 (Heart Rate)\n2. 血压 (Blood Pressure)\n3. 呼吸率 (Respiration)\n4. 皮电反应 (GSR/EDA)", example:"皮电反应由汗腺活动引起，是最难以意识控制的指标。"}
+  ],
+  comparisons:[
+    {cols:["说谎者比例","准确率90%时的误判情况"],rows:[
+      ["20% (200人说谎)","抓到180人，冤枉80人——误判较少"],
+      ["5% (50人说谎)","抓到45人，冤枉95人——2/3被冤枉"],
+      ["1% (10人说谎)","抓到9人，冤枉~990人——几乎全是冤枉"]
+    ]}
+  ],
+  examTips:[
+    "基本比例谬误（base rate fallacy）是必考计算题",
+    "测谎仪测的是情绪唤醒，不是谎言本身——这是核心概念",
+    "无畏症/反社会人格者不怕测谎仪"
+  ],
+  terms:[
+    {en:"Polygraph", cn:"测谎仪", def:"同时记录心率、血压、呼吸、皮电的生理记录仪"},
+    {en:"Base Rate Fallacy", cn:"基本比例谬误", def:"忽略人群中说谎者比例，高估测谎准确率"},
+    {en:"GSR/EDA", cn:"皮电反应", def:"皮肤电导率，反映汗腺活动和情绪唤醒"},
+    {en:"Fearlessness", cn:"无畏症", def:"反社会人格者缺乏对惩罚的恐惧，使测谎仪失效"}
+  ],
+  quiz:[
+    {q:"测谎仪直接测量的是什么？",opts:["谎言内容","情绪的生理反应","脑电波","声音频率"],a:1,exp:"测谎仪记录心率、血压、呼吸、皮电——这些是情绪唤醒的生理指标，不是谎言本身。"},
+    {q:"1000人中5%说谎，测谎准确率90%，会误判多少诚实者？",opts:["约5人","约95人","约500人","0人"],a:1,exp:"950个诚实者中10%误判=95人。而真正说谎者只抓到45人。被判定说谎的140人中，95人是无辜的！"},
+    {q:"基本比例谬误说明什么？",opts:["测谎仪完全没用","当说谎者比例低时，高准确率也会产生大量误判","准确率不重要","只在法庭上有用"],a:1,exp:"这就是为什么在大规模筛查（如所有员工测谎）中，测谎仪的结果极不可靠。"},
+    {q:"测谎仪对哪类人效果最差？",opts:["紧张的普通人","无畏症/反社会人格者","受过教育的人","女性"],a:1,exp:"反社会人格者不害怕被抓，因此不产生测谎仪依赖的恐惧反应。"},
+    {q:"测谎仪无法区分以下哪种情绪？",opts:["害怕 vs 愤怒 vs 内疚（生理反应相似）","快乐 vs 悲伤","爱 vs 恨","惊讶 vs 厌恶"],a:0,exp:"测谎仪只测量「唤醒程度」，无法区分唤醒是因为害怕、愤怒还是内疚。"},
+    {q:"为什么测谎结果不能单独作为定罪证据？",opts:["因为测谎仪太贵","因为它测量的是情绪而非事实，且误判率不可忽视","因为机器不稳定","因为律师反对"],a:1,exp:"测谎仪结果只是情绪信号，不能证明事实本身，且存在已知的高误判率。"},
+    {q:"GSR（皮电反应）反映的是什么？",opts:["血液流动","汗腺活动（情绪唤醒）","肌肉张力","脑电波"],a:1,exp:"皮电反应测量皮肤电导率变化，由汗腺活动引起，难以意识控制。"},
+    {q:"图8和图9（人形图）说明什么？",opts:["测谎仪的物理结构","说谎者比例从20%降到5%时，误判人数大幅增加","人体解剖","犯罪统计"],a:1,exp:"图8/9展示了基本比例谬误：比例越低，误判（误真为谎）的比例越高。"}
+  ]
+},
+{
+  id:8, title:"抓谎实务案例", pages:"p210–251",
+  keyPoints:[
+    "结合行为线索与测谎仪纸带可以提高准确率——行为线索提供情绪属性信息",
+    "面部测量（慢镜头分析肌肉运动）是最有前景的新方法",
+    "案例：精神病患者玛丽、刑警审讯、外交谈判中的说谎分析",
+    "行为线索能告诉抓谎者情绪的「性质」（害怕/愤怒/愉悦），这是测谎纸带做不到的"
+  ],
+  sections:[
+    {title:"行为线索+测谎仪结合", body:"测谎纸带只能告诉我们「有情绪唤醒」，但行为线索（面部表情、声音、身体）能告诉我们「是什么情绪」。两者结合可以提高判断准确率。"},
+    {title:"面部测量的前景", body:"Ekman 的团队通过逐帧分析面部肌肉运动（FACS），发现了肉眼无法察觉的信号——如快乐微笑中混入的厌恶表情。慢镜头和重复播放是关键。"},
+    {title:"实务案例", body:"本章分析了多个真实案例：精神患者的说谎、刑警审讯中的情绪反应、外交谈判中的欺骗。共同点是：单一线索不够，必须综合言辞、声音、表情、身体多来源判断。"}
+  ],
+  methods:[
+    {name:"综合判断流程", formula:"1. 观察言辞一致性\n2. 听声音变化（声调、语速）\n3. 看面部表情（是否自然、有无微表情）\n4. 注意身体动作（手势、姿势）\n5. 多来源交叉验证", example:"面试中：候选人停顿→声调升高→假笑→手势减少。四个线索一致指向紧张/在说谎。"}
+  ],
+  comparisons:[
+    {cols:["信息来源","提供什么信息","局限"],rows:[
+      ["测谎纸带","有无情绪唤醒","无法区分情绪性质"],
+      ["面部表情","情绪性质+真假表情","可被伪装"],
+      ["声音","情绪唤醒+部分性质","半可控"],
+      ["身体动作","情绪性质（较难伪装）","信号微弱"]
+    ]}
+  ],
+  examTips:[
+    "行为线索的独特价值：区分情绪性质（害怕/愤怒/内疚/愉悦）",
+    "单一来源不可靠，必须多来源交叉验证"
+  ],
+  terms:[
+    {en:"FACS", cn:"面部动作编码系统", def:"Ekman 开发的面部肌肉运动逐帧分析系统"},
+    {en:"Cross-validation", cn:"交叉验证", def:"多来源信息互相印证后才下结论"}
+  ],
+  quiz:[
+    {q:"行为线索比测谎纸带多提供了什么信息？",opts:["情绪唤醒程度","情绪的性质（害怕/愤怒/愉悦）","心率数据","说谎者的身份"],a:1,exp:"测谎纸带只知道「有情绪」，面部和声音能区分「是什么情绪」。"},
+    {q:"Ekman 认为最有前景的新方法是什么？",opts:["AI测谎","面部肌肉逐帧测量（慢镜头）","药物测试","脑成像"],a:1,exp:"通过慢镜头分析面部肌肉运动，发现肉眼不可见的表情泄露。"},
+    {q:"为什么单一行为线索不足以判断说谎？",opts:["线索太微弱","任何单一行为都可能有其他解释，需交叉验证","单一线索太贵","法律不允许"],a:1,exp:"停顿可能是因为思考，声调升高可能是感冒——必须多个线索一致才可信。"},
+    {q:"在快乐微笑中发现厌恶表情说明了什么？",opts:["相机故障","即使表面表情快乐，真实情绪可能通过细微肌肉运动泄露","厌恶比快乐强","不可能"],a:1,exp:"面部测量发现看似快乐的微笑中，眼周或嘴部混入了厌恶的微表情。"},
+    {q:"审讯中说谎者出现多次吞咽意味着什么？",opts:["口渴","自主神经系统唤醒（紧张/害怕）","说谎的明确证据","文化习惯"],a:1,exp:"吞咽增加是交感神经唤醒的表现，但不能单独证明说谎。"},
+    {q:"训练抓谎者的效果如何？",opts:["完全准确","准确率提高但不完美，训练后优于未经训练者","没有效果","只有天才有效"],a:1,exp:"训练能显著提高准确率，但达不到仪器测量级别的完美。"},
+    {q:"本章的核心方法论是什么？",opts:["相信直觉","多来源行为线索+测谎数据交叉验证","只看眼睛","只听声音"],a:1,exp:"Ekman 主张综合多种信号源，互相印证后再下判断。"}
+  ]
+},
+{
+  id:9, title:"20世纪90年代的抓谎", pages:"p252–269",
+  keyPoints:[
+    "张伯伦案例的更深教训：某些受害者「心甘情愿」被误导——知道真相太痛苦",
+    "天生的「表演家」善于说谎，但这不是基因决定的，而是技能",
+    "抓谎者必须警惕自己「想相信」的心理倾向",
+    "丘吉尔即使比张伯伦更警惕，也未能完全识破希特勒"
+  ],
+  sections:[
+    {title:"心甘情愿的受害者", body:"张伯伦并非完全被骗——他潜意识里想相信希特勒，因为承认被骗意味着自己对德政策的彻底失败。批评的忠言被束之高阁，不利信息视而不见。这不仅限于国家元首，日常人际关系中也常见：宁愿相信谎言，因为知道真相太痛苦。"},
+    {title:"表演家型说谎者", body:"有些人天生擅长说谎，享受观众的欣赏。但 Ekman 强调：这不一定是基因优势，更多是练习和自信。关键是：他们之所以不被抓，更多因为抓谎者不想抓，而不是他们多高明。"}
+  ],
+  methods:[
+    {name:"认知偏误检查", formula:"问自己：我想相信这个人吗？\n→ 如果答案是「想」，提高警惕\n→ 检查是否忽略了反面证据", example:"面试官很喜欢候选人→潜意识里想相信他的简历，自动忽略了不一致的细节。"}
+  ],
+  examTips:[
+    "「心甘情愿的受害者」概念——知道真相太痛苦时，人会主动选择相信谎言",
+    "抓谎失败不仅是因为说谎者高明，也因为抓谎者自己的心理偏误"
+  ],
+  terms:[
+    {en:"Willing Victim", cn:"心甘情愿的受害者", def:"潜意识里选择相信谎言的人"},
+    {en:"Confirmation Bias", cn:"确认偏误", def:"倾向于寻找支持自己已有信念的证据"}
+  ],
+  quiz:[
+    {q:"张伯伦「心甘情愿」被骗的含义是？",opts:["他被下药了","他潜意识里想相信希特勒，因为承认被骗意味着政策失败","他是间谍","他太老了"],a:1,exp:"承认被骗等于承认自己整个对德政策失败，这种心理痛苦使他选择相信谎言。"},
+    {q:"抓谎失败的常见心理原因是？",opts:["视力不好","抓谎者自己想相信对方","说谎者声音太小","房间太暗"],a:1,exp:"确认偏误和「想相信」的心理使抓谎者自动忽略反面证据。"},
+    {q:"丘吉尔比张伯伦更警惕希特勒，结果如何？",opts:["完全阻止了战争","仍然未能完全识破希特勒的意图","比张伯伦更早投降","没有差别"],a:1,exp:"即使是丘吉尔，也未能完全识破希特勒的长期计划——说明抓谎之难。"},
+    {q:"确认偏误在抓谎中如何起作用？",opts:["让人更客观","让人只注意支持「他说真话」的证据，忽略矛盾信号","让人更快做决定","让人更信任机器"],a:1,exp:"一旦你倾向于相信某人，就会自动寻找支持证据，过滤掉矛盾信号。"},
+    {q:"Ekman 认为「表演家」型说谎者的优势来自？",opts:["基因突变","练习、自信和抓谎者的心理偏误","长得好看","声音好听"],a:1,exp:"他们之所以不被抓，更多是因为抓谎者不想抓，而非他们技术完美。"}
+  ]
+},
+{
+  id:10, title:"公共领域的谎言", pages:"p270–292",
+  keyPoints:[
+    "公共领域的谎言（政治、外交）stakes 极高，误判后果严重",
+    "诺斯（Oliver North）案例：为了「更高目标」而说谎，说谎者自认为正当",
+    "说谎的道德性争论：有时说谎在道德上可辩护（如保护生命）",
+    "当所有人都认为规则失效时，社会无法运作——信任是社会基础"
+  ],
+  sections:[
+    {title:"诺斯案例", body:"伊朗门事件中，诺斯中校承认欺骗国会，理由是「生命与谎言的轻重上必须有所权衡」。这提出了一个永恒的道德问题：为了更高目标而说谎是否正当？"},
+    {title:"说谎的道德光谱", body:"从「为了保护生命而说谎」（几乎所有人同意）到「为了私利而说谎」（所有人谴责），中间有大量灰色地带。关键不在于说谎本身，而在于动机和后果。"},
+    {title:"社会信任的基础", body:"当国家领导人的话不再有人相信，社会就无法运作。正如《独立宣言》的前提：诚实是治理的基础。"}
+  ],
+  examTips:[
+    "诺斯案例体现了「为更高目标说谎」的道德争议",
+    "公共领域说谎的 stakes 远高于私人领域"
+  ],
+  terms:[
+    {en:"National Security", cn:"国家安全", def:"常被用作说谎正当化的理由"},
+    {en:"Ollie North", cn:"诺斯中校", def:"伊朗门事件核心人物，为秘密行动欺骗国会"}
+  ],
+  quiz:[
+    {q:"诺斯中校为自己说谎辩护的理由是？",opts:["他不认为说谎有错","生命与谎言的轻重上，更高目标可以正当化说谎","他的律师建议","他记不得了"],a:1,exp:"诺斯认为为了保护尼加拉瓜反政府武装，欺骗国会是正当的。"},
+    {q:"以下哪种说谎在道德上最容易被接受？",opts:["为了升职而说谎","为了保护生命而说谎","为了面子而说谎","为了偷懒而说谎"],a:1,exp:"几乎所有人都同意：当有人问「你的朋友在哪」而他正被追杀时，应该说谎。"},
+    {q:"为什么公共领域的说谎特别危险？",opts:["因为政客太多","因为信任是社会运作的基础，领导人说谎会瓦解整个社会信任","因为媒体会报道","因为法律太严"],a:1,exp:"当所有人都不相信领导人时，社会协作和治理就崩溃了。"},
+    {q:"Ekman 对说谎道德性的立场是？",opts:["所有说谎都是恶的","有些说谎在道德上可辩护，但抓谎者的工作仍是发现真相","说谎无所谓对错","只反对政治说谎"],a:1,exp:"Ekman 承认至少有些谎言在道德上站得住脚，但他的研究重点是如何发现被隐瞒的真实情绪。"},
+    {q:"当「所有人都认为规则失效」时会怎样？",opts:["社会无法运作","经济繁荣","法治更严格","民主更完善"],a:0,exp:"没有信任，社会协作的基础就不存在了。"}
+  ]
+},
+{
+  id:11, title:"新进展与新想法", pages:"p293–314",
+  keyPoints:[
+    "新的区分：保密（secrecy）vs 隐瞒（concealment）——关键在于是否表明不愿透露",
+    "现代社会鼓励而非打压说谎，抓谎能力越来越重要",
+    "通过面部表情抓谎的能力比先前认为的更强",
+    "某些职业群体（如 Secret Service）的抓谎准确率接近专业水平"
+  ],
+  sections:[
+    {title:"保密 vs 隐瞒", body:"保密是对方知道你不愿透露（如「这是秘密」）；隐瞒是你不主动透露真实信息。区别在于：保密表明了不愿意，隐瞒则是默默隐藏。"},
+    {title:"现代环境", body:"人类进化没有准备好让我们在现代社会抓谎。商业、网络、远程沟通使说谎更容易。我们生活在一个鼓励说谎的环境中。"},
+    {title:"新发现", body:"①面部表情分析比之前认为的更有效；②特勤局（Secret Service）等职业群体在抓谎方面准确率极高；③训练可以有效提高抓谎能力。"}
+  ],
+  examTips:[
+    "保密 vs 隐瞒的区别——是否表明了不愿透露的态度",
+    "现代环境使说谎更容易，抓谎能力更重要"
+  ],
+  terms:[
+    {en:"Secrecy", cn:"保密", def:"表明了不愿透露信息的态度"},
+    {en:"Secret Service", cn:"特勤局", def:"保护总统的机构，研究发现其人员抓谎能力极强"}
+  ],
+  quiz:[
+    {q:"保密（secrecy）与隐瞒（concealment）的区别是？",opts:["保密比隐瞒更严重","保密表明了不愿透露，隐瞒是默默隐藏","两者完全相同","隐瞒只在工作中"],a:1,exp:"保密=「这是秘密」（对方知道）；隐瞒=你不主动说但对方不知道你在隐瞒。"},
+    {q:"Ekman 认为现代社会与进化环境的关系是？",opts:["现代社会更诚实","现代社会鼓励说谎，而进化没有准备好让我们抓谎","两者无关","进化使我们更会抓谎"],a:1,exp:"现代商业社会提供了更多说谎机会，但我们的抓谎能力仍停留在部落时代。"},
+    {q:"哪个职业群体的抓谎准确率被发现极高？",opts:["律师","特勤局（Secret Service）","教师","医生"],a:1,exp:"Ekman 的研究发现特勤局人员在识别谎言方面准确率极高。"},
+    {q:"训练对抓谎能力的影响是？",opts:["毫无影响","可以有效提高准确率","只有天才有效","训练反而降低准确率"],a:1,exp:"经过系统训练，普通人的抓谎准确率可以显著提高。"},
+    {q:"关于面部表情分析的新发现是？",opts:["完全无效","比先前认为的更有效","只有专家能用","只适用于女性"],a:1,exp:"新研究表明，通过面部表情抓谎的能力比早期估计更强。"}
+  ]
+},
+{
+  id:99, title:"结语与附录", pages:"p315–330",
+  keyPoints:[
+    "对说谎者的建议：充分准备说辞、预见所有问题、反复排练",
+    "大部分说谎者没被抓，不是因为技术高明，而是因为没人认真抓",
+    "附录表1-4：说谎线索总表——按行为和情绪两个维度检索",
+    "Ekman 的终极目标：发现被隐瞒的真实情绪，区分真表情和假表情"
+  ],
+  sections:[
+    {title:"对说谎者的两个建议", body:"①扩展虚假情节的细节并牢记，预见所有可能被问到的问题；②知道掩饰情绪非常困难，大部分谎言没被拆穿只是因为对方不在意。"},
+    {title:"附录表格", body:"表1：以行为线索为检索项，看每种行为泄露什么情绪。表2：以情绪为检索项，看每种情绪产生什么行为。表3：捏造相关线索。表4：完整的估谎要点清单。"}
+  ],
+  methods: [],
+  comparisons: [],
+  examTips:[
+    "附录表1和表2是复习核心——行为线索 vs 情绪的双向索引",
+    "「大部分谎言没被抓是因为没人认真抓」——这是全书总结性观点"
+  ],
+  terms:[
+    {en:"Appendix Tables", cn:"附录表1-4", def:"说谎线索的系统总表"}
+  ],
+  quiz:[
+    {q:"大部分说谎者没被抓的主要原因是？",opts:["他们技术太高明","对方并不十分在意去抓谎","测谎仪不灵敏","法律太宽松"],a:1,exp:"Ekman 的总结：不是说谎者多高明，而是听者不想花精力去验证。"},
+    {q:"附录表1按什么维度检索？",opts:["按情绪","按行为线索","按时间","按人物"],a:1,exp:"表1以行为为检索项：这个行为泄露了什么情绪？"},
+    {q:"附录表2按什么维度检索？",opts:["按行为","按情绪/状态","按地点","按严重程度"],a:1,exp:"表2以情绪为检索项：这种情绪会产生什么行为？"},
+    {q:"Ekman 的终极研究目标是什么？",opts:["教人说谎","发现被隐瞒的真实情绪，区分真表情与假表情","制造测谎仪","法庭作证"],a:1,exp:"他感兴趣的不是伪装本身，而是如何发现伪装之下的真实感受。"},
+    {q:"对说谎者最有用的建议是？",opts:["不要说谎","充分准备说辞细节，预见所有问题，反复排练","练习微表情","买测谎仪"],a:1,exp:"临场编造几乎必然穿帮，充分准备是唯一的策略。"}
+  ]
+}
+];
+
+// ===== STATE =====
+let state = {
+  view: 'home',
+  chapterId: null,
+  theme: localStorage.getItem('tell_lies_theme') || 'light',
+  marked: {},       // highlighted paragraphs
+  learnedCards: JSON.parse(localStorage.getItem('tell_lies_cards') || '{}'),
+  learnedTerms: JSON.parse(localStorage.getItem('tell_lies_terms') || '{}'),
+  quizResults: JSON.parse(localStorage.getItem('tell_lies_quiz') || '{}'),
+  wrongBook: JSON.parse(localStorage.getItem('tell_lies_wrong') || '[]'),
+  markedMode: false,
+  notes: JSON.parse(localStorage.getItem('tell_lies_notes') || '{}')
+};
+
+function saveState() {
+  localStorage.setItem('tell_lies_cards', JSON.stringify(state.learnedCards));
+  localStorage.setItem('tell_lies_terms', JSON.stringify(state.learnedTerms));
+  localStorage.setItem('tell_lies_quiz', JSON.stringify(state.quizResults));
+  localStorage.setItem('tell_lies_wrong', JSON.stringify(state.wrongBook));
+  localStorage.setItem('tell_lies_notes', JSON.stringify(state.notes));
+  localStorage.setItem('tell_lies_theme', state.theme);
+}
+
+// ===== ROUTING =====
+function showHome() {
+  state.view = 'home';
+  state.chapterId = null;
+  render();
+}
+function showChapter(id) {
+  state.view = 'chapter';
+  state.chapterId = id;
+  render();
+}
+function showWrongBook() { state.view = 'wrong'; render(); }
+function showTerms() { state.view = 'terms'; render(); }
+
+function toggleTheme() {
+  state.theme = state.theme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', state.theme);
+  saveState();
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+// ===== RENDERING =====
+function render() {
+  document.documentElement.setAttribute('data-theme', state.theme);
+  renderSidebar();
+  const main = document.getElementById('main');
+  if (state.view === 'home') main.innerHTML = renderHome();
+  else if (state.view === 'chapter') main.innerHTML = renderChapter(state.chapterId);
+  else if (state.view === 'wrong') main.innerHTML = renderWrongBook();
+  else if (state.view === 'terms') main.innerHTML = renderTerms();
+  window.scrollTo(0, 0);
+}
+
+function renderSidebar() {
+  const nav = document.getElementById('navList');
+  let html = '<li class="nav-section">章节</li>';
+  CHAPTERS.forEach(ch => {
+    const pct = getChapterProgress(ch.id);
+    html += `<li class="nav-item ${state.chapterId===ch.id&&state.view==='chapter'?'active':''}" onclick="showChapter(${ch.id})">
+      <span>${ch.id<90?'第'+ch.id+'章':''} ${ch.title}</span>
+      <span class="pct">${pct}%</span></li>`;
+  });
+  html += '<li class="nav-section">工具</li>';
+  html += `<li class="nav-item" onclick="showWrongBook()"><span>错题本</span><span class="pct">${state.wrongBook.length}</span></li>`;
+  html += `<li class="nav-item" onclick="showTerms()"><span>全书术语表</span></li>`;
+  html += `<li class="nav-item" onclick="toggleMarkMode()"><span id="markBtn">${state.markedMode?'关闭画记':'开启画记'}</span></li>`;
+  nav.innerHTML = html;
+  document.body.classList.toggle('mark-mode', state.markedMode);
+}
+
+function getChapterProgress(cid) {
+  const ch = CHAPTERS.find(c => c.id === cid);
+  if (!ch) return 0;
+  const quiz = ch.quiz || [], methods = ch.methods || [], terms = ch.terms || [];
+  let total = quiz.length + methods.length + terms.length;
+  let done = 0;
+  quiz.forEach((q, qi) => { if (state.quizResults[cid+'_'+qi]) done++; });
+  methods.forEach((m, mi) => { if (state.learnedCards[cid+'_'+mi]) done++; });
+  terms.forEach((t, ti) => { if (state.learnedTerms[cid+'_'+ti]) done++; });
+  return total > 0 ? Math.round(done/total*100) : 0;
+}
+
+function renderHome() {
+  let totalQuiz = 0, doneQuiz = 0;
+  CHAPTERS.forEach(ch => {
+    const quiz = ch.quiz || [];
+    totalQuiz += quiz.length;
+    quiz.forEach((q, qi) => { if (state.quizResults[ch.id+'_'+qi]) doneQuiz++; });
+  });
+  let totalTerms = 0, doneTerms = 0;
+  CHAPTERS.forEach(ch => {
+    const terms = ch.terms || [];
+    totalTerms += terms.length;
+    terms.forEach((t, ti) => { if (state.learnedTerms[ch.id+'_'+ti]) doneTerms++; });
+  });
+  let totalCards = 0, doneCards = 0;
+  CHAPTERS.forEach(ch => {
+    const methods = ch.methods || [];
+    totalCards += methods.length;
+    methods.forEach((m, mi) => { if (state.learnedCards[ch.id+'_'+mi]) doneCards++; });
+  });
+
+  let cards = CHAPTERS.map(ch => {
+    const pct = getChapterProgress(ch.id);
+    const qn = (ch.quiz||[]).length;
+    const tn = (ch.terms||[]).length;
+    return `<div class="ch-card" onclick="showChapter(${ch.id})">
+      <h3>${ch.id<90?'第'+ch.id+'章 · ':''}${ch.title}</h3>
+      <div class="meta">${ch.pages} · ${qn}题 · ${tn}术语</div>
+      <div class="bar"><div class="bar-fill" style="width:${pct}%"></div></div>
+      <div class="meta" style="margin-top:4px">${pct}% 完成</div>
+    </div>`;
+  }).join('');
+
+  return `<div class="home-hero">
+    <h1>${BOOK.title}</h1>
+    <div class="author">${BOOK.subtitle}<br>${BOOK.author} · ${BOOK.pub}</div>
+    <div class="home-stats">
+      <div class="stat-card"><div class="num">${CHAPTERS.length}</div><div class="label">章节</div></div>
+      <div class="stat-card"><div class="num">${doneQuiz}/${totalQuiz}</div><div class="label">例题已做</div></div>
+      <div class="stat-card"><div class="num">${doneCards}/${totalCards}</div><div class="label">方法卡已学</div></div>
+      <div class="stat-card"><div class="num">${doneTerms}/${totalTerms}</div><div class="label">术语已掌握</div></div>
+      <div class="stat-card"><div class="num">${state.wrongBook.length}</div><div class="label">错题本</div></div>
+    </div>
+  </div>
+  <h2 style="margin:24px 0 12px">章节列表</h2>
+  <div class="chapter-grid">${cards}</div>`;
+}
+
+function renderChapter(cid) {
+  const ch = CHAPTERS.find(c => c.id === cid);
+  if (!ch) return '<div class="empty-msg">章节不存在</div>';
+  const pct = getChapterProgress(cid);
+  const kp = ch.keyPoints || [], secs = ch.sections || [], exTips = ch.examTips || [];
+  const quiz = ch.quiz || [], terms = ch.terms || [];
+
+  let html = `<div class="chapter-head">
+    <h2>${ch.id<90?'第'+ch.id+'章 · ':''}${ch.title}</h2>
+    <div class="sub">${ch.pages}</div>
+    <div class="progress-row">
+      <div class="bar"><div class="bar-fill" style="width:${pct}%"></div></div>
+      <span class="pct-text">${pct}%</span>
+    </div>
+  </div>`;
+
+  // Key points
+  html += `<div class="section"><h3>本章重点</h3><ul class="key-points">`;
+  kp.forEach(kp => html += `<li>${highlight(kp)}</li>`);
+  html += `</ul></div>`;
+
+  // Subsections
+  html += `<div class="section"><h3>课文</h3>`;
+  secs.forEach((sec, si) => {
+    html += `<div class="subsection">
+      <div class="sub-head" onclick="this.nextElementSibling.classList.toggle('open')">
+        <span>${sec.title}</span><span>+</span>
+      </div>
+      <div class="sub-body markable">${highlight(sec.body)}</div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  // Method cards
+  const methods = ch.methods || [];
+  if (methods.length) {
+    html += `<div class="section"><h3>方法卡</h3>`;
+    methods.forEach((m, mi) => {
+      const key = cid+'_'+mi;
+      const learned = state.learnedCards[key];
+      html += `<div class="method-card ${learned?'done':''}">
+        <div class="method-head">
+          <input type="checkbox" ${learned?'checked':''} onchange="toggleCard('${key}')">
+          <span>${m.name}</span>
+        </div>
+        <div class="method-body">
+          <div class="formula">${m.formula.replace(/\n/g,'<br>')}</div>
+          <div class="example"><strong>例子：</strong>${m.example}</div>
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  // Comparison tables
+  const comps = ch.comparisons || [];
+  if (comps.length) {
+    html += `<div class="section"><h3>比较表</h3>`;
+    comps.forEach(tbl => {
+      html += `<table class="cmp-table"><colgroup>`;
+      const ncols = tbl.cols.length;
+      tbl.cols.forEach((c, i) => {
+        const w = i === 0 ? '25%' : (75/(ncols-1))+'%';
+        html += `<col style="width:${w}">`;
+      });
+      html += `</colgroup><thead><tr>`;
+      tbl.cols.forEach(c => html += `<th>${c}</th>`);
+      html += `</tr></thead><tbody>`;
+      tbl.rows.forEach(row => {
+        html += `<tr>`;
+        row.forEach(cell => html += `<td>${cell}</td>`);
+        html += `</tr>`;
+      });
+      html += `</tbody></table>`;
+    });
+    html += `</div>`;
+  }
+
+  // Exam tips
+  if (exTips.length) {
+    html += `<div class="section"><h3>考试重点</h3>`;
+    exTips.forEach(tip => {
+      html += `<div class="exam-tip"><h4>注意</h4><p>${tip}</p></div>`;
+    });
+    html += `</div>`;
+  }
+
+  // Quiz
+  html += `<div class="section"><h3>例题（${quiz.filter((q,qi)=>state.quizResults[cid+'_'+qi]).length}/${quiz.length} 已做）</h3>`;
+  quiz.forEach((q, qi) => {
+    const key = cid+'_'+qi;
+    const result = state.quizResults[key];
+    html += `<div class="quiz-item" id="q_${key}">
+      <div class="quiz-q">${qi+1}. ${q.q}</div>
+      <ul class="quiz-opts">`;
+    q.opts.forEach((opt, oi) => {
+      let cls = 'quiz-opt';
+      if (result) {
+        cls += ' disabled';
+        if (oi === q.a) cls += ' correct';
+        if (result.wrong && oi === result.picked) cls += ' wrong';
+      }
+      html += `<li class="${cls}" onclick="answerQuiz('${key}',${qi},${oi})">${opt}</li>`;
+    });
+    html += `</ul>
+      <div class="quiz-feedback ${result?'show':''} ${result?(result.wrong?'bad':'ok'):''}">
+        ${result ? (result.wrong ? '答错了。'+q.exp : '答对了！'+q.exp) : ''}
+      </div>
+      <div class="quiz-actions">
+        <button onclick="resetQuiz('${key}')">重做</button>
+        <button onclick="toggleStar('${key}')">${result&&result.starred?'★ 已收藏':'☆ 收藏'}</button>
+      </div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  // Term list
+  html += `<div class="section"><h3>本章术语</h3><ul class="term-list">`;
+  terms.forEach((t, ti) => {
+    const key = cid+'_'+ti;
+    const learned = state.learnedTerms[key];
+    const note = state.notes[key] || '';
+    html += `<li class="term-item ${learned?'learned':''}">
+      <input type="checkbox" ${learned?'checked':''} onchange="toggleTerm('${key}')">
+      <div>
+        <span class="term-en">${t.en}</span> <span class="term-cn">${t.cn}</span>
+        <div class="term-def">${t.def}</div>
+        <input class="note-input" placeholder="写笔记..." value="${note}" oninput="saveNote('${key}',this.value)">
+      </div>
+    </li>`;
+  });
+  html += `</ul></div>`;
+
+  return html;
+}
+
+function renderWrongBook() {
+  let html = `<div class="chapter-head"><h2>错题本</h2>
+    <div class="sub">共 ${state.wrongBook.length} 道错题</div></div>`;
+  if (!state.wrongBook.length) {
+    html += '<div class="empty-msg">太棒了！还没有错题记录。去做题吧。</div>';
+  } else {
+    state.wrongBook.forEach((item, idx) => {
+      const ch = CHAPTERS.find(c => c.id === item.chapterId);
+      const q = ch.quiz[item.qIndex];
+      html += `<div class="wrong-item">
+        <div class="q">${idx+1}. [${ch.title}] ${q.q}</div>
+        <div class="a">正确答案：${q.opts[q.a]}</div>
+        <div class="a" style="color:var(--text2)">你选了：${q.opts[item.picked]}</div>
+        <div class="actions">
+          <button onclick="markCorrected(${idx})">已订正</button>
+          <button onclick="goQuiz('${item.chapterId}_${item.qIndex}')">回去看题</button>
+        </div>
+      </div>`;
+    });
+  }
+  return html;
+}
+
+function renderTerms() {
+  let html = `<div class="chapter-head"><h2>全书术语表</h2>
+    <div class="sub">点击术语可查看详情，打勾表示已掌握</div></div>`;
+  CHAPTERS.forEach(ch => {
+    const chTerms = ch.terms || [];
+    const learned = chTerms.filter((t,ti)=>state.learnedTerms[ch.id+'_'+ti]).length;
+    html += `<h3 style="margin:16px 0 8px;color:var(--primary)">${ch.id<90?'第'+ch.id+'章':''} ${ch.title}（${learned}/${chTerms.length}）</h3><ul class="term-list">`;
+    chTerms.forEach((t, ti) => {
+      const key = ch.id+'_'+ti;
+      const learned = state.learnedTerms[key];
+      html += `<li class="term-item ${learned?'learned':''}">
+        <input type="checkbox" ${learned?'checked':''} onchange="toggleTerm('${key}')">
+        <div>
+          <span class="term-en">${t.en}</span> <span class="term-cn">${t.cn}</span>
+          <div class="term-def">${t.def}</div>
+        </div>
+      </li>`;
+    });
+    html += `</ul>`;
+  });
+  html += `<div style="margin-top:20px;display:flex;gap:8px">
+    <button onclick="exportJSON()" style="padding:8px 16px;border:1px solid var(--border);border-radius:8px">导出进度 JSON</button>
+    <button onclick="document.getElementById('importFile').click()" style="padding:8px 16px;border:1px solid var(--border);border-radius:8px">导入进度</button>
+    <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)">
+  </div>`;
+  return html;
+}
+
+// ===== INTERACTIONS =====
+function highlight(text) {
+  // Highlight terms (green) and proper nouns (purple)
+  let out = text;
+  CHAPTERS.flatMap(c=>c.terms).forEach(t => {
+    out = out.split(t.cn).join(`<span class="term" onclick="showTermCard('${t.en}','${t.cn}','${t.def}')">${t.cn}</span>`);
+  });
+  return out;
+}
+
+function showTermCard(en, cn, def) {
+  document.getElementById('modalContent').innerHTML = `
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h3>${en} <span style="color:var(--term)">${cn}</span></h3>
+    <p>${def}</p>`;
+  document.getElementById('modalOverlay').classList.add('show');
+}
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('modalOverlay')) {
+    document.getElementById('modalOverlay').classList.remove('show');
+  }
+}
+
+function toggleCard(key) {
+  state.learnedCards[key] = !state.learnedCards[key];
+  saveState(); render();
+}
+function toggleTerm(key) {
+  state.learnedTerms[key] = !state.learnedTerms[key];
+  saveState(); render();
+}
+function saveNote(key, val) {
+  state.notes[key] = val;
+  saveState();
+}
+
+function answerQuiz(key, qi, oi) {
+  const [cid, qidx] = key.split('_');
+  const ch = CHAPTERS.find(c => c.id == cid);
+  const q = ch.quiz[qi];
+  if (state.quizResults[key]) return; // already answered
+  const correct = oi === q.a;
+  state.quizResults[key] = { picked: oi, wrong: !correct, starred: false };
+  if (!correct) {
+    state.wrongBook.push({ chapterId: parseInt(cid), qIndex: qi, picked: oi });
+  }
+  saveState(); render();
+}
+function resetQuiz(key) {
+  delete state.quizResults[key];
+  // Remove from wrong book
+  state.wrongBook = state.wrongBook.filter(wb => wb.chapterId+'_'+wb.qIndex !== key);
+  saveState(); render();
+}
+function toggleStar(key) {
+  if (state.quizResults[key]) {
+    state.quizResults[key].starred = !state.quizResults[key].starred;
+    saveState(); render();
+  }
+}
+function markCorrected(idx) {
+  state.wrongBook.splice(idx, 1);
+  saveState(); render();
+}
+function goQuiz(key) {
+  const [cid, qidx] = key.split('_');
+  showChapter(parseInt(cid));
+  setTimeout(() => {
+    const el = document.getElementById('q_'+key);
+    if (el) el.scrollIntoView({behavior:'smooth', block:'center'});
+  }, 100);
+}
+
+function toggleMarkMode() {
+  state.markedMode = !state.markedMode;
+  render();
+}
+
+function doSearch(q) {
+  q = q.trim().toLowerCase();
+  if (!q) return;
+  const results = [];
+  CHAPTERS.forEach(ch => {
+    // Search in key points, sections, terms, quiz
+    kp.forEach(kp => { if (kp.toLowerCase().includes(q)) results.push({type:'重点', ch:ch.title, text:kp, id:ch.id}); });
+    terms.forEach(t => { if (t.cn.toLowerCase().includes(q) || t.en.toLowerCase().includes(q)) results.push({type:'术语', ch:ch.title, text:t.en+' '+t.cn, id:ch.id}); });
+    quiz.forEach((qz, qi) => { if (qz.q.toLowerCase().includes(q)) results.push({type:'例题', ch:ch.title, text:qz.q, id:ch.id}); });
+  });
+  if (!results.length) return;
+  let html = `<div class="modal-overlay show" onclick="closeModal(event)">
+    <div class="modal"><span class="close-btn" onclick="closeModal()">&times;</span>
+    <h3>搜索结果（${results.length}）</h3>`;
+  results.slice(0, 20).forEach(r => {
+    html += `<div style="padding:8px;border-bottom:1px solid var(--border);cursor:pointer" onclick="closeModal();showChapter(${r.id})">
+      <small style="color:var(--text2)">[${r.type}] ${r.ch}</small><br>${r.text.substring(0,80)}
+    </div>`;
+  });
+  html += `</div></div>`;
+  document.getElementById('modalOverlay').outerHTML = html;
+}
+
+function exportJSON() {
+  const data = { cards: state.learnedCards, terms: state.learnedTerms, quiz: state.quizResults, wrong: state.wrongBook, notes: state.notes };
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'tell_lies_progress.json';
+  a.click();
+}
+function importJSON(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function() {
+    try {
+      const data = JSON.parse(reader.result);
+      if (data.cards) state.learnedCards = data.cards;
+      if (data.terms) state.learnedTerms = data.terms;
+      if (data.quiz) state.quizResults = data.quiz;
+      if (data.wrong) state.wrongBook = data.wrong;
+      if (data.notes) state.notes = data.notes;
+      saveState(); render();
+      alert('导入成功');
+    } catch(err) { alert('导入失败：文件格式错误'); }
+  };
+  reader.readAsText(file);
+}
+
+// Back to top
+window.addEventListener('scroll', () => {
+  document.getElementById('backTop').classList.toggle('show', window.scrollY > 400);
+});
+
+// Mark mode click handler (delegated)
+document.addEventListener('click', (e) => {
+  if (state.markedMode && e.target.classList.contains('markable')) {
+    e.target.classList.toggle('highlight');
+  }
+});
+
+// Init
+render();
+</script>
+</body>
+</html>
