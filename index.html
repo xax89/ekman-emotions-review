@@ -159,6 +159,15 @@ table.cmp th{background:var(--accent-soft);width:33%}
 .tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:10px;background:var(--accent-soft);color:var(--accent);margin-left:6px}
 svg{width:100%;height:auto;display:block;background:var(--panel);
   border:1px solid var(--line);border-radius:10px;margin:8px 0}
+.author-row{display:flex;gap:18px;align-items:center;margin:14px 0;flex-wrap:wrap}
+.author-row img.portrait{width:90px;height:108px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+.author-row img.cover{width:72px;height:108px;object-fit:cover;border-radius:6px;box-shadow:var(--shadow)}
+.film-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin:12px 0}
+.film-grid img{width:100%;border-radius:8px;border:1px solid var(--line);display:block}
+.film-grid figcaption{font-size:12px;text-align:center;color:var(--muted);margin-top:4px}
+.booklink{display:block;border:2px dashed var(--accent);border-radius:12px;padding:16px;margin:14px 0;
+  text-decoration:none;color:var(--ink);background:var(--accent-soft)}
+.booklink h4{margin:0 0 4px;color:var(--accent)}
 .brand small{color:var(--muted);font-size:11px;line-height:1.5;display:block;margin-top:2px}
 @media(max-width:860px){
   .card-top{flex-direction:column}
@@ -172,7 +181,6 @@ svg{width:100%;height:auto;display:block;background:var(--panel);
   <button class="tb-btn ico" title="首頁（書目總覽）" onclick="go('home')">⌂</button>
   <div id="searchBox"><input id="searchInput" placeholder="搜尋章節／例題／術語…" oninput="doSearch(this.value)"><div id="searchResults"></div></div>
   <span class="spacer"></span>
-  <a href="./telling-lies.html" class="tb-btn" style="text-decoration:none;color:inherit" title="《说谎》互动复习">说谎 →</a>
   <button class="tb-btn ico" id="markBtn" title="畫記模式" onclick="toggleMark()">✎</button>
   <button class="tb-btn ico" id="darkBtn" title="深色模式" onclick="toggleDark()">◐</button>
 </div>
@@ -183,7 +191,7 @@ svg{width:100%;height:auto;display:block;background:var(--panel);
     <ul class="toc" id="tocList"></ul>
   </nav>
   <main id="main">
-    <div id="content"></div>
+    <div id="content" style="max-width:900px;margin:0 auto"></div>
   </main>
 </div>
 <div id="modal"><div id="modalBox"></div></div>
@@ -728,10 +736,20 @@ function renderHome(){
       <div class="meta">完成 ${pct}% ｜ 例題已做 ${qd}/${c.exam.length}</div></div>`;
   });
   return `<h2 class="chap">${BOOK.title}</h2>
-  <p class="lead">單檔互動複習。點任一章開始；左欄可搜尋、看錯題本、術語總表。進度自動存在本瀏覽器。</p>
+  <div class="author-row">
+    <img class="portrait" src="images/ekman.jpg" alt="Paul Ekman">
+    <img class="cover" src="images/cover-emotions.jpg" alt="Emotions Revealed 封面">
+    <div><b>Paul Ekman</b>（1934–2025），美國心理學家、UCSF 榮休教授，情緒與臉部表情研究先驅，以「基本情緒跨文化共通性」與 FACS 臉部動作編碼系統聞名。本頁為其著作《Emotions Revealed》（中譯《心理學家的面相術：解讀情緒的密碼》）之互動複習筆記。</div>
+  </div>
   <div class="exambox"><h4>考試／觀念總提醒</h4>
     <div>情緒表達<b>跨文化共通</b>但受<b>表露規則</b>調節；情緒由<b>自動評估</b>毫秒啟動；改變重點是調整誘因敏感度，而非壓抑情緒。</div></div>
-  <div class="chap-grid">${cards}</div>`;
+  <a class="booklink" href="telling-lies.html">
+    <h4>作者另一本書：《說謊：揭穿商業、政治與婚姻中的騙局》（Telling Lies）</h4>
+    <div>Paul Ekman 另一本著作的互動複習頁 → 點此進入</div></a>
+  <div class="chap-grid">${cards}</div>
+  <h3 class="sect">附錄：書中表情辨識測驗照</h3>
+  <p class="small">以下 14 張為本書附錄所用的臉部照片，請依記憶判斷各張傳達何種情緒，再對照書中答案。</p>
+  <div class="film-grid">${[179,180,181,182,183,184,185,186,187,188,189,190,191,192].map(f=>`<figure style="margin:0"><img src="images/face_${f}.jpg" alt="書中附錄表情照 p${f}" style="width:100%;border-radius:8px;border:1px solid var(--line)"><figcaption style="font-size:12px;text-align:center;color:var(--muted);margin-top:4px">p${f}</figcaption></figure>`).join('')}</div>`;
 }
 function bindHome(){}
 
