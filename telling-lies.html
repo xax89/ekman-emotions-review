@@ -44,7 +44,9 @@ input,select{font-family:inherit;font-size:inherit}
 .sidebar-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .sidebar-header h2{font-size:1rem;color:var(--primary)}
 .sidebar-controls{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.sidebar-controls button{padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius);font-size:.8rem;background:var(--bg)}
+.sidebar-controls{display:flex;gap:8px;margin-bottom:14px}
+.sidebar-controls button{width:44px;height:40px;border:1px solid var(--border);border-radius:8px;font-size:18px;background:var(--bg);display:flex;align-items:center;justify-content:center;color:var(--primary)}
+.sidebar-controls button:hover{background:var(--primary-light)}
 .sidebar-controls button:hover{background:var(--primary-light)}
 .search-box{width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;background:var(--bg);color:var(--text)}
 .nav-list{list-style:none}
@@ -190,14 +192,13 @@ body.mark-mode .markable:hover{outline:2px dashed var(--accent)}
   <!-- Sidebar -->
   <nav class="sidebar" id="sidebar">
     <div class="sidebar-header">
-      <h2>複習導航</h2>
+      <h2 onclick="showHome()" style="cursor:pointer" title="回到本書章節總覽">複習導航</h2>
       <button onclick="toggleTheme()" title="切換深色模式">&#9681;</button>
     </div>
-    <div style="margin-bottom:12px"><a href="./index.html" style="color:var(--primary);text-decoration:none;font-size:.85rem">&#8592; 所有書籍</a></div>
     <div class="sidebar-controls">
-      <button onclick="showHome()">首頁</button>
-      <button onclick="showWrongBook()">錯題本</button>
-      <button onclick="showTerms()">術語表</button>
+      <button onclick="location.href='index.html'" title="回書架首頁（識謊・讀心）">&#8962;</button>
+      <button onclick="showWrongBook()" title="錯題本">&#10007;</button>
+      <button onclick="showTerms()" title="術語表">Aa</button>
     </div>
     <input class="search-box" id="searchBox" placeholder="搜尋章節、術語、題目..." oninput="doSearch(this.value)">
     <ul class="nav-list" id="navList"></ul>
