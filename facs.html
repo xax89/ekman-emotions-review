@@ -194,6 +194,80 @@ a{color:var(--primary)}
   #searchBox{max-width:none}
   .au-body{padding:4px 12px 14px}
 }
+
+/* ===== 學習區塊（初學者筆記版） ===== */
+.guide-card{background:linear-gradient(160deg,var(--primary-light),var(--surface));border:1px solid var(--primary);border-radius:14px;padding:20px 24px;margin-bottom:16px;box-shadow:var(--shadow)}
+.guide-badge{display:inline-block;background:var(--primary);color:#fff;border-radius:6px;padding:3px 10px;font-size:12px;font-weight:700;margin-bottom:10px}
+.guide-intro{font-size:15px;line-height:1.75;color:var(--text);margin:0 0 14px}
+.guide-cols{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-bottom:14px}
+@media(max-width:720px){.guide-cols{grid-template-columns:1fr}}
+.guide-col{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px}
+.guide-col h4{font-size:12.5px;color:var(--primary);margin:0 0 8px;letter-spacing:.5px}
+.guide-col ul{list-style:none;margin:0}
+.guide-col li{font-size:13.5px;line-height:1.6;padding:3px 0 3px 16px;position:relative}
+.guide-col li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700}
+.guide-col p{font-size:13.5px;line-height:1.6;margin:0;color:var(--text2)}
+.guide-note{margin-top:8px;font-size:12.5px;color:var(--accent);background:var(--red-bg);border-radius:8px;padding:8px 12px}
+.guide-route h4{font-size:12.5px;color:var(--text2);margin:0 0 8px}
+.route-steps{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.route-step{background:var(--surface);border:1px solid var(--primary);color:var(--primary);border-radius:20px;padding:4px 12px;font-size:12.5px;font-weight:600}
+.route-arrow{color:var(--text2);font-size:12px}
+.stage-chip{display:inline-block;background:#5b7b95;color:#fff;border-radius:5px;padding:1px 8px;font-size:11px;font-weight:700;margin-right:6px;vertical-align:2px}
+.stage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.stage-card{display:flex;gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.stage-num{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+.stage-body{flex:1;min-width:0}
+.stage-body h3{margin:0 0 4px;font-size:14.5px}
+.stage-body p{margin:0 0 8px;font-size:12.5px;color:var(--text2);line-height:1.5}
+.stage-chs{display:flex;gap:5px;margin-bottom:8px;flex-wrap:wrap}
+.stage-ch{background:var(--primary-light);color:var(--primary);border-radius:5px;padding:1px 8px;font-size:11.5px;font-weight:700;cursor:pointer}
+.stage-ch:hover{background:var(--primary);color:#fff}
+.resume-bar{background:var(--surface);border:1px dashed var(--primary);border-radius:12px;padding:12px 18px;margin-bottom:16px;text-align:center}
+.resume-btn{background:var(--primary);color:#fff;border:none;border-radius:20px;padding:9px 22px;font-size:14px;font-weight:700;cursor:pointer}
+.resume-btn:hover{opacity:.9}
+.ch-card p.ch-oneline{font-size:12.5px;color:var(--text2);line-height:1.55;margin:6px 0 8px;min-height:38px}
+.ch-top{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.group-block{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:16px;box-shadow:var(--shadow)}
+.group-head{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--primary-light)}
+.g-num{flex-shrink:0;width:26px;height:26px;border-radius:8px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
+.group-head h3{margin:0;font-size:15.5px;color:var(--primary-dark)}
+.g-desc{display:block;font-size:12px;color:var(--text2);margin-top:2px;line-height:1.5}
+.one-liner{font-size:15px;font-weight:700;color:var(--primary-dark);background:var(--primary-light);border-radius:10px;padding:12px 16px;margin:14px 0 12px;line-height:1.6}
+.clue-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;list-style:none}
+@media(max-width:720px){.clue-grid{grid-template-columns:1fr}}
+.clue-grid li{font-size:13.5px;padding:4px 0 4px 16px;position:relative;line-height:1.55}
+.clue-grid li::before{content:"•";position:absolute;left:2px;color:var(--primary)}
+.intensity-box{background:var(--surface);border:1px dashed var(--primary);border-radius:8px;padding:9px 13px;font-size:13px;line-height:1.6;color:var(--text2);margin:0}
+.combo-chips{display:flex;flex-wrap:wrap;gap:6px}
+.combo-chip{background:var(--primary-light);color:var(--primary);border-radius:6px;padding:3px 10px;font-size:12.5px;font-weight:700}
+.mech-muscle{margin:0 0 6px;font-size:13.5px;color:var(--text);line-height:1.6}
+.mech-howto{margin:0;font-size:13px;color:var(--text2);line-height:1.6}
+.mech-howto b{color:var(--primary)}
+.src-note{margin-top:12px;font-size:12px;color:var(--text2);padding-top:8px;border-top:1px dashed var(--border)}
+.know-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden}
+.know-head{display:flex;align-items:center;gap:8px;padding:11px 16px;cursor:pointer}
+.know-head:hover{background:var(--primary-light)}
+.know-body{display:none;padding:4px 16px 14px;border-top:1px solid var(--border)}
+.know-card.open .know-body{display:block}
+.know-body .kp-list{list-style:none;margin:8px 0 0}
+.know-body .kp-list li{font-size:13.5px;line-height:1.65;padding:4px 0 4px 18px;position:relative}
+.know-body .kp-list li::before{content:"✎";position:absolute;left:0;color:var(--primary);font-size:11px}
+.sec-summary{font-size:13.5px;line-height:1.6;color:var(--text2)}
+.diff-block{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 22px;margin-bottom:16px;box-shadow:var(--shadow)}
+.diff-card{background:var(--red-bg);border:1px solid #e5b3ae;border-radius:10px;margin-bottom:10px;overflow:hidden}
+.diff-head{display:flex;align-items:center;gap:8px;padding:12px 16px;cursor:pointer;color:var(--accent)}
+.diff-head:hover{background:rgba(200,60,50,.08)}
+.diff-body{display:none;padding:4px 16px 14px;border-top:1px solid #e5b3ae}
+.diff-card.open .diff-body{display:block}
+.diff-body ul{list-style:none;margin:8px 0 0}
+.diff-body li{font-size:13.5px;line-height:1.65;padding:4px 0 4px 20px;position:relative}
+.diff-body li::before{content:"!";position:absolute;left:0;color:var(--accent);font-weight:800}
+.dark .guide-card{background:linear-gradient(160deg,#16233a,var(--surface))}
+.dark .guide-col{background:#141c27}
+.dark .know-card{background:#141c27}
+.dark .diff-card{background:rgba(200,60,50,.12);border-color:#5a2a26}
+.dark .stage-card{background:#141c27}
+.dark .one-liner{background:#1a2a45}
 </style>
 </head>
 <body>
@@ -226,6 +300,8 @@ const QUIZ=[{"ch":1,"q":"參考圖為 FACS Figure 1-1 臉部區域標示。圖�
 const ITEM_IMGS={"0":[],"1":["p015_0.webp"],"2":[],"3":[],"4":["p020_0.webp"],"5":[],"6":["p029_0.webp","p029_1.webp","p029_2.webp","p029_3.webp","p029_4.webp","p029_5.webp"],"7":["p032_0.webp","p032_1.webp"],"8":["p034_0.webp","p034_1.webp"],"9":["p037_0.webp","p037_1.webp","p037_2.webp","p037_3.webp","p037_4.webp"],"10":["p040_0.webp","p040_1.webp","p040_2.webp","p040_3.webp"],"11":["p044_0.webp","p044_1.webp","p044_2.webp","p044_3.webp","p044_4.webp","p044_5.webp"],"12":[],"13":["p048_0.webp","p048_1.webp","p048_2.webp"],"14":[],"15":["p052_0.webp"],"16":[],"17":[],"18":["p057_0.webp","p057_1.webp","p057_2.webp"],"19":["p060_0.webp","p060_1.webp"],"20":["p063_0.webp","p063_1.webp","p063_2.webp","p063_3.webp","p063_4.webp"],"21":["p066_0.webp","p066_1.webp"],"22":["p068_0.webp","p068_1.webp","p068_2.webp","p068_3.webp"],"23":["p072_0.webp","p072_1.webp","p072_2.webp"],"24":["p074_0.webp","p074_1.webp","p074_2.webp"],"25":["p078_0.webp"],"26":[],"27":[],"28":[],"29":[],"30":["p090_0.webp"],"31":[],"32":[],"33":[],"34":["p094_0.webp","p094_1.webp","p094_2.webp","p095_0.webp","p098_0.webp"],"35":[],"36":["p101_0.webp","p101_1.webp","p101_2.webp","p101_3.webp","p101_4.webp","p101_5.webp","p101_6.webp","p101_7.webp","p101_8.webp","p101_9.webp","p101_10.webp","p101_11.webp"],"37":["p105_0.webp","p105_1.webp","p105_2.webp"],"38":["p107_0.webp","p107_1.webp","p107_2.webp","p107_3.webp","p107_4.webp","p108_0.webp"],"39":["p110_0.webp","p110_1.webp","p110_2.webp"],"40":["p112_0.webp","p112_1.webp","p112_2.webp","p112_3.webp","p112_4.webp","p112_5.webp","p112_6.webp","p112_7.webp","p112_8.webp"],"41":["p116_0.webp","p116_1.webp","p116_2.webp","p120_0.webp","p120_1.webp","p120_2.webp","p120_3.webp","p120_4.webp","p121_0.webp","p121_1.webp","p121_2.webp","p121_3.webp"],"42":["p125_0.webp","p125_1.webp","p125_2.webp","p125_3.webp"],"43":[],"44":[],"45":["p133_0.webp","p133_1.webp"],"46":["p138_0.webp","p138_1.webp"],"47":["p142_0.webp","p142_1.webp"],"48":["p146_0.webp","p146_1.webp","p146_2.webp","p146_3.webp","p146_4.webp","p146_5.webp","p146_6.webp","p146_7.webp","p146_8.webp"],"49":[],"50":["p151_0.webp","p151_1.webp","p151_2.webp","p151_3.webp","p151_4.webp","p152_0.webp","p152_1.webp","p152_2.webp","p152_3.webp","p152_4.webp","p152_5.webp"],"51":[],"52":[],"53":["p158_0.webp","p158_1.webp","p158_2.webp","p158_3.webp"],"54":["p160_0.webp","p160_1.webp","p160_2.webp"],"55":[],"56":[],"57":["p167_0.webp","p167_1.webp","p167_2.webp","p167_3.webp","p167_4.webp","p167_5.webp","p167_6.webp"],"58":["p171_0.webp","p171_1.webp"],"59":["p174_0.webp","p174_1.webp"],"60":["p177_0.webp","p177_1.webp","p177_2.webp"],"61":["p181_0.webp","p181_1.webp","p181_2.webp","p181_3.webp","p181_4.webp","p181_5.webp","p181_6.webp","p181_7.webp","p182_0.webp","p182_1.webp"],"62":[],"63":["p188_0.webp","p188_1.webp","p188_2.webp"],"64":["p191_0.webp","p191_1.webp","p191_2.webp","p191_3.webp","p191_4.webp","p191_5.webp","p191_6.webp","p191_7.webp"],"65":["p195_0.webp","p195_1.webp","p195_2.webp","p195_3.webp","p195_4.webp","p195_5.webp"],"66":[],"67":[],"68":["p202_0.webp","p202_1.webp","p202_2.webp","p202_3.webp"],"69":["p207_0.webp","p207_1.webp","p207_2.webp","p207_3.webp","p207_4.webp","p207_5.webp","p207_6.webp","p207_7.webp"],"70":["p213_0.webp","p213_1.webp","p213_2.webp","p213_3.webp","p213_4.webp"],"71":["p217_0.webp","p217_1.webp"],"72":["p222_0.webp","p222_1.webp","p222_2.webp","p222_3.webp","p222_4.webp","p222_5.webp","p222_6.webp","p222_7.webp","p222_8.webp"],"73":["p234_0.webp","p234_1.webp","p234_2.webp","p234_3.webp","p234_4.webp","p234_5.webp","p234_6.webp","p234_7.webp","p234_8.webp","p234_9.webp","p234_10.webp","p235_0.webp"],"74":[],"75":["p245_0.webp","p245_1.webp","p245_2.webp","p245_3.webp"],"76":["p247_0.webp","p247_1.webp","p247_2.webp"],"77":["p249_0.webp","p249_1.webp","p249_2.webp"],"78":["p253_0.webp","p253_1.webp","p253_2.webp"],"79":["p255_0.webp","p255_1.webp"],"80":[],"81":[],"82":["p259_0.webp","p259_1.webp","p259_2.webp"],"83":["p264_0.webp","p264_1.webp","p264_2.webp","p264_3.webp","p264_4.webp","p264_5.webp","p264_6.webp","p264_7.webp"],"84":["p268_0.webp","p268_1.webp","p268_2.webp"],"85":["p272_0.webp","p272_1.webp","p272_2.webp","p272_3.webp"],"86":["p276_0.webp","p276_1.webp"],"87":["p281_0.webp","p281_1.webp"],"88":["p284_0.webp","p284_1.webp"],"89":["p286_0.webp","p286_1.webp","p286_2.webp"],"90":["p289_0.webp","p289_1.webp"],"91":["p293_0.webp","p293_1.webp"],"92":["p296_0.webp","p296_1.webp","p296_2.webp","p296_3.webp"],"93":["p300_0.webp","p300_1.webp","p300_2.webp","p300_3.webp","p300_4.webp","p300_5.webp","p300_6.webp","p300_7.webp","p300_8.webp","p300_9.webp","p301_0.webp","p301_1.webp"],"94":[],"95":["p308_0.webp"],"96":["p310_0.webp"],"97":["p312_0.webp","p312_1.webp"],"98":["p314_0.webp","p314_1.webp"],"99":["p316_0.webp"],"100":["p318_0.webp"],"101":["p320_0.webp"],"102":["p322_0.webp"],"103":["p323_0.webp"],"104":["p324_0.webp","p324_1.webp"],"105":["p326_0.webp"],"106":["p328_0.webp"],"107":["p329_0.webp"],"108":[],"109":["p333_0.webp","p333_1.webp"],"110":[],"111":["p335_0.webp"],"112":[],"113":["p337_0.webp","p337_1.webp","p337_2.webp","p337_3.webp","p337_4.webp","p337_5.webp"],"114":["p338_0.webp","p338_1.webp","p338_2.webp","p338_3.webp","p338_4.webp","p338_5.webp"],"115":["p344_0.webp","p344_1.webp","p344_2.webp"],"116":["p345_0.webp"],"117":["p347_0.webp","p347_1.webp","p347_2.webp","p347_3.webp"],"118":["p349_0.webp","p349_1.webp","p349_2.webp"],"119":["p350_0.webp"],"120":["p351_0.webp","p351_1.webp"],"121":["p352_0.webp","p352_1.webp","p352_2.webp"],"122":["p354_0.webp","p354_1.webp","p354_2.webp"],"123":["p355_0.webp"],"124":["p357_0.webp","p357_1.webp","p357_2.webp","p358_0.webp","p358_1.webp","p358_2.webp"],"125":[],"126":[],"127":[],"128":[],"129":[],"130":[],"131":[],"132":[]};
 const CHAPTERS=[{"num":1,"title_en":"Introduction to Facial Measurement","title_zh":"面部測量導論","print_start":1,"items":[0,1,2,3,4,5],"n_items":6,"n_quiz":10},{"num":2,"title_en":"Upper Face Action Units","title_zh":"上半臉動作單元","print_start":15,"items":[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27],"n_items":22,"n_quiz":10},{"num":3,"title_en":"Scoring Upper Face Action Units","title_zh":"上半臉計分","print_start":73,"items":[28,29,30,31,32,33,34,35,36],"n_items":9,"n_quiz":10},{"num":4,"title_en":"Lower Face Action Units – Up/Down Actions","title_zh":"下半臉動作單元：上下動作","print_start":91,"items":[37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52],"n_items":16,"n_quiz":10},{"num":5,"title_en":"Lower Face Action Units – Horizontal Actions","title_zh":"下半臉：水平動作","print_start":145,"items":[53,54,55,56,57,58,59,60,61,62],"n_items":10,"n_quiz":10},{"num":6,"title_en":"Lower Face Action Units – Oblique Actions","title_zh":"下半臉：斜向動作","print_start":175,"items":[63,64,65,66,67,68,69,70,71,72,73,74],"n_items":12,"n_quiz":10},{"num":7,"title_en":"Lower Face Action Units – Orbital Actions","title_zh":"下半臉：口周動作","print_start":231,"items":[75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94],"n_items":20,"n_quiz":10},{"num":8,"title_en":"Miscellaneous Actions and Supplementary Codes","title_zh":"其他動作與補充碼","print_start":295,"items":[95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114],"n_items":20,"n_quiz":10},{"num":9,"title_en":"Head and Eye Positions","title_zh":"頭與眼位置碼","print_start":329,"items":[115,116,117,118,119,120,121,122,123,124,125,126],"n_items":12,"n_quiz":10},{"num":10,"title_en":"Scoring Procedure","title_zh":"計分程序","print_start":349,"items":[127,128,129],"n_items":3,"n_quiz":10},{"num":11,"title_en":"Advanced Scoring Techniques","title_zh":"進階計分技巧","print_start":357,"items":[130,131,132],"n_items":3,"n_quiz":10}];
 const BOOK_META={title:'Facial Action Coding System', subtitle:'The Manual (2002 CD-ROM Edition)', authors:'Paul Ekman, Wallace V. Friesen, Joseph C. Hager', lang:'EN + 繁中摘要', total_items:133, total_quiz:110, total_imgs:591};
+
+const GUIDES={"1":{"stage":1,"intro_zh":"FACS 的起點：先學會「讀臉的語言」。這一章不教任何 AU，而是建立評分所需的基礎——AU 是什麼、臉部區域怎麼稱呼、嘴唇外觀變化的術語，以及本書建議的學習方法（對鏡做動作、先看單一 AU 再到組合）。","goals_zh":["知道 AU（Action Unit）是什麼：代表造成臉部瞬間外觀改變的肌肉活動","會用臉部區域與唇部變化的術語（如 sclera、elongate、protrude）","理解本書學習法：單一 AU 的三節結構（A 外觀 / B 如何做 / C 強度），先讀到組合再回頭補","知道圖例只是範例而非典型——同一 AU 在不同人臉上略有差異，抓共通元素"],"prereq_zh":"無。本書第 1 章，從零開始。","groups":[{"name":"概念：FACS 在做什麼","desc":"AU 的定義與手冊的整體架構","items":[0]},{"name":"術語：臉部區域與唇部變化","desc":"評分前必須會用的詞彙","items":[1]},{"name":"怎麼學：學習程序與圖例判讀","desc":"本書建議的閱讀與練習方法","items":[2,3,4]},{"name":"Reference 導論","desc":"組合強度與互動資訊要去哪裡查","items":[5]}]},"2":{"stage":2,"intro_zh":"上半臉是 FACS 的第一課：眉毛、眼皮與眼睛的動作。書先教你 AU 4（眉降），再依序學 AU 1、AU 2（眉毛上提的內外角），接著是眼部 AU 5、7、6，最後是眼瞼與眨眼系列 43、45、46。學完單一 AU 後有「細微差異表」幫你區分相似動作，之後進入組合（如 1+2+4）。","goals_zh":["認識上半臉 9 個單一 AU：4、1、2、5、7、6、43、45、46","用「眉降＋眉攏」判斷 AU4；內角上提看 AU1、外角上提看 AU2","區分 AU6（笑眼）與 AU7（眯眼）的眼下皮膚差異：6 抬高眶下三角、7 不會","看懂組合 4+5、1+4、1+2、1+2+4 如何改變單一 AU 的外觀","會用細微差異表分辨看似相似的上半臉動作"],"prereq_zh":"先完成 Ch1 術語（臉部區域名稱、唇部變化詞彙）。","groups":[{"name":"眉毛動作","desc":"AU4 眉降 → AU1 內角上提 → AU2 外角上提（書的學習順序）","items":[6,7,8]},{"name":"眼部動作","desc":"AU5 上瞼提（瞪眼）、AU7 瞼緊（眯眼）、AU6 眼輪匝肌（笑眼）","items":[9,10,11]},{"name":"眼瞼與眨眼（選學）","desc":"AU43 眼閉、AU45 眨眼、AU46 眨眼單側","items":[12,13,14,15]},{"name":"單一 AU 細微差異","desc":"相似動作的對照表","items":[16]},{"name":"組合與組合差異","desc":"4+5、5+7、1+4、1+2、1+2+4、1+2+5、6+43E/7+43E 等","items":[17,18,19,20,21,22,23,24,25,26,27]}]},"3":{"stage":2,"intro_zh":"學完上半臉 AU 後的第一次計分練習。這章教你「怎麼把看到的動作寫成分數」：記號規則（AU 依數字順序排列、括號表示不確定性）、Score Sheet 用法、不可見碼（70–73），以及完整的計分步驟與範例。它是 Ch10 正式程序的上半臉預演。","goals_zh":["會用數字順序寫計分（如 1+2+4，不是 2+1+4）","懂括號記號：(B or C) 表示強度不確定、(?) 表示無法指定原因的不確定","會用 70/71/72/73 標記臉部區域不可見，且「只要還能計任何 AU 就不寫不可見」","知道計分流程：先下臉 → 頭眼位置 → 上臉；中性臉計 AU 0"],"prereq_zh":"Ch2 上半臉 AU（9 個單一 AU 與主要組合）。","groups":[{"name":"記號與 Score Sheet","desc":"如何書寫計分結果","items":[28,29]},{"name":"計分程序","desc":"步驟總覽與步驟間的關係","items":[30,31,32]},{"name":"範例與練習","desc":"完整範例、最後忠告與練習","items":[33,34,35,36]}]},"4":{"stage":2,"intro_zh":"下半臉的第一群：上下動作。書先說明下半臉分五大群組（上下、水平、斜向、口周、雜項），再依序教：AU 9 皺鼻、AU 10 上唇提、AU 17 下巴上推、AU 15 嘴角下壓、AU 25/26/27 唇開與下巴開、AU 16 下唇下壓。","goals_zh":["認識下半臉五大群組的分類邏輯（上/下、水平、斜向、口周、雜項）","學會 9、10、17、15、25、26、27、16 八個單一 AU","區分 AU 25（唇分開）、26（下巴因放鬆垂下）、27（下巴用力張開）","記住：嘴唇閉合不給 AU 編號，以「無分數」推論閉合"],"prereq_zh":"Ch2–3（上半臉已熟）；唇部變化術語（elongate、protrude 等）是 Ch4 的關鍵。","groups":[{"name":"鼻與上唇","desc":"AU9 皺鼻、AU10 上唇提（都向上拉下半臉內側）","items":[37,38]},{"name":"下巴與嘴角","desc":"AU17 下巴上推、AU15 嘴角下壓","items":[39,40]},{"name":"唇與下巴開合","desc":"AU25 唇分開、AU26 下巴放鬆垂、AU27 下巴用力張開","items":[41]},{"name":"下唇","desc":"AU16 下唇下壓（及 16+25）","items":[42]},{"name":"細微差異與組合","desc":"9+16+25、10+16+25、9+17 等","items":[43,44,45,46,47,48,49,50,51,52]}]},"5":{"stage":2,"intro_zh":"下半臉第二群：水平動作。只有兩個單一 AU——AU 20 嘴角橫拉（把嘴角往耳朵方向拉）與 AU 14 嘴角內收（Dimpler，嘴角向內緊縮）——以及它們與上下動作的組合。兩個 AU 方向相反，是很好的對照學習。","goals_zh":["學會 20（橫拉）與 14（內收）兩個水平 AU","用「嘴拉長 vs 嘴縮短」快速區分 20 與 14","知道強 AU20 常伴隨頸部 platysma 收緊（AU21）","看懂 20/14 與 10/17/25/26/27 的組合"],"prereq_zh":"Ch4 上下動作（10、17、25、26、27）。","groups":[{"name":"水平動作","desc":"AU20 嘴角橫拉、AU14 嘴角內收","items":[53,54]},{"name":"細微差異","desc":"水平動作彼此與上下動作的區分","items":[55]},{"name":"組合","desc":"20+26/27、10+14、14+17、10+20+25 等","items":[56,57,58,59,60,61,62]}]},"6":{"stage":2,"intro_zh":"下半臉第三群：斜向動作。三個 AU 都斜斜地往上拉皮膚：AU 12 嘴角上拉（多數人稱之為「笑」）、AU 11 鼻唇溝加深、AU 13 銳利嘴角上拉。11、12、13 作用在同一區域，本書特別強調要能區分——尤其是 12 與 11、13。","goals_zh":["認識斜向動作三個 AU：11、12、13","掌握 AU 12＝笑容關鍵：嘴角上拉＋頰部皮膚上推（常伴 AU6）","區分 11（鼻唇溝加深）、12（嘴角上拉）、13（更銳利的上拉）","看懂 12 與 6/7 的組合——這是判斷「真笑」的核心"],"prereq_zh":"Ch4 的 9/10（鼻唇區）與 Ch2 的 6/7（眼周）。","groups":[{"name":"斜向動作","desc":"AU11 鼻唇溝加深、AU12 嘴角上拉、AU13 銳利上拉","items":[63,64,65]},{"name":"細微差異","desc":"三者與上下動作的區分","items":[66]},{"name":"組合","desc":"6+12、7+12、6+7+12、10+12+25、12+26/27、12+17、12+15 系列","items":[67,68,69,70,71,72,73,74]}]},"7":{"stage":2,"intro_zh":"下半臉第四群：口周動作。嘴唇四周的肌肉繞著口部，產生五種外觀：AU 18 噘嘴（如唸「喔」的嘴型）、AU 22 漏斗嘴、AU 23 抿緊、AU 24 壓唇、AU 28 吸唇。這群動作常與張口碼（25/26/27）及其他 AU 組合。","goals_zh":["認識口周五個 AU：18、22、23、24、28","用五個動作意象記住：噘 / 漏斗 / 緊 / 壓 / 吸","知道 23 抿緊與 24 壓唇的差異（壓唇把唇壓扁、抿緊是肌肉收緊）","看懂 23 與 10/12/14/17 等的大量組合（23 系列是組合之王）"],"prereq_zh":"Ch4 的 25/26/27（張口碼常與口周動作並存）。","groups":[{"name":"口周動作","desc":"AU18 噘嘴、22 漏斗嘴、23 抿緊、24 壓唇、28 吸唇","items":[75,76,77,78,79]},{"name":"細微差異","desc":"口周動作彼此的區分","items":[80]},{"name":"組合","desc":"10+23+25、12+23/24、14+23、17+23/24、18+23、15+23、23+25+26、22+23+25、20+23+25 等","items":[81,82,83,84,85,86,87,88,89,90,91,92,93,94]}]},"8":{"stage":3,"intro_zh":"下半臉第五群：雜項動作與補充碼。這章收錄無法歸入前四群的動作：舌頭（AD 19）、下巴推/移（AD 29/30）、咬牙（AU 31）、咬/吹/鼓/吸/鼓包（AD 32–36）、唇擦（AD 37）、鼻翼（AU 38/39），以及記錄情境的補充碼（眼動 M68/69、不可見 70–73、頭動 M83、粗行為碼）。AD 表示「動作描述符」——尚未確立肌肉基礎的動作。","goals_zh":["認識 AD（動作描述符）與 AU 的差別：AD 沒有指定肌肉基礎","學會雜項動作：8+25、19、21、29–39","會用補充碼：不可見 70–73、眼動 M68/69、頭動 M83、粗行為碼","知道：除 31/38/39 外，其餘雜項動作都應盡量計分，因為會干擾先前 AU 的判讀"],"prereq_zh":"Ch2–7 所有 AU（本章動作常與先前 AU 同時出現）。","groups":[{"name":"唇與頰動作","desc":"AU 8+25 唇相向、AU21 頸緊","items":[95,97]},{"name":"舌與下巴 AD","desc":"AD19 舌頭、AD29 下巴前推、AD30 下巴側移","items":[96,98,99]},{"name":"頜與鼻動作","desc":"AU31 咬牙、AU38 鼻翼擴張、AU39 鼻翼壓縮","items":[100,107,108]},{"name":"口部動作 AD","desc":"AD32 咬、33 吹、34 鼓、35 吸、36 鼓包、37 唇擦","items":[101,102,103,104,105,106]},{"name":"補充碼","desc":"眼動 M68/69、不可見 70–73、頭動 M83、粗行為碼","items":[109,110,111,112]},{"name":"練習與細微差異","desc":"","items":[113,114]}]},"9":{"stage":3,"intro_zh":"從「表情」進入「位置」：頭部與眼睛的朝向。系統提供頭轉（51/52）、頭上下（53/54）、頭傾（55/56）、頭進退（57/58）與眼轉（61/62）、眼上下（63/64）、外斜/鬥雞眼（65/66）的位置碼。位置碼會影響 AU 的判讀——例如頭下低時難以區分 AU43 的低強度。","goals_zh":["認識頭位置碼 51–58 與眼位置碼 61–66","會用「鼻指向鐘面」判斷頭轉 51/52 的可評分門檻（11 點/1 點鐘）","知道位置碼與 AU 的互動：頭下低難分 43、眼轉時難分 43A/B","知道 M 碼（M55/56、M61/62、M57/59/60）記錄頭眼的動態動作"],"prereq_zh":"Ch2 的 AU43（眼閉）與 45/46（眨眼）——位置碼常與之互動。","groups":[{"name":"頭位置","desc":"51/52 頭轉、53 頭上、54 頭下、55/56 頭傾、57/58 頭進退","items":[115,116,117,118,119,120,121]},{"name":"眼位置","desc":"61/62 眼轉、63/64 眼上下、65 外斜、66 鬥雞眼","items":[122,123,124,125,126]}]},"10":{"stage":4,"intro_zh":"正式計分程序。Ch3 只是上半臉預演，Ch10 才是全臉計分的正式流程：Score Sheet 用法、不可見碼規則、七步驟計分（先下臉、再頭眼、後上臉）、括號記號系統的完整應用。學完這章，你就有了一套可以照表操課的計分流程。","goals_zh":["會填 Score Sheet：姓名、日期、刺激來源、計分時間","牢記計分順序：先下臉 → 頭眼位置 → 再回上臉","完整掌握括號系統：(ref)、(or)、(L or Bi)、(A or B)、(or T/B)、(?)","用七步驟避免遺漏 AU 與組合互動——流程設計來減少粗心錯誤"],"prereq_zh":"Ch3 記號規則 + Ch2–9 全部 AU 與位置碼。","groups":[{"name":"記號","desc":"計分書寫規則總整理","items":[127]},{"name":"Score Sheet","desc":"正面計分欄與背面 Omission Check","items":[128]},{"name":"計分步驟","desc":"Steps I–VII 完整流程","items":[129]}]},"11":{"stage":4,"intro_zh":"進階計分技巧，面對真實研究情境：說話時的 AU 計分（AD 50）、把連續行為切分成「臉部事件」、單側動作與不對稱計分。這是把 FACS 從「教材」變成「研究工具」的最後一課。","goals_zh":["知道說話時的動作如何排除：AD 50 搭配「頂峰持續 >0.75 秒／跨一個音節」守則","理解「臉部事件」切分：把 AU 整合回事件再分析，比單獨統計 AU 更能區分情境","會用 L/R 記單側、用不對稱計分處理兩側肌肉差異","知道 1 單獨出現、1+2、1+2+4 是不同表情——不要只數 AU 出現次數"],"prereq_zh":"Ch10 計分程序 + 全部 AU（本章是收尾章）。","groups":[{"name":"說話時計分","desc":"AD 50 與語音動作的排除守則","items":[130]},{"name":"臉部事件切分","desc":"從連續行為中切出可分析的 AU 群","items":[131]},{"name":"單側與不對稱","desc":"L/R 記號與不對稱計分法","items":[132]}]}};
 </script>
 
 <script>
@@ -266,15 +342,41 @@ const CH_PAGE_END = {1:14,2:72,3:90,4:144,5:174,6:230,7:294,8:328,9:348,10:356,1
 function showHome(){
   state.lastView='home'; saveState(); setActiveToc(-1);
   const t = totalStats();
-  const cards = CHAPTERS.map(ch=>{
+  const STAGES=[
+    {n:1,name:'入門',desc:'認識 FACS 的語言：AU 是什麼、術語怎麼用、怎麼學',chs:[1]},
+    {n:2,name:'動作單元',desc:'上半臉 → 下半臉四群：學完所有 AU 與組合',chs:[2,3,4,5,6,7]},
+    {n:3,name:'補充碼',desc:'雜項動作、頭眼位置與情境碼',chs:[8,9]},
+    {n:4,name:'計分實務',desc:'正式計分程序與進階研究技巧',chs:[10,11]}
+  ];
+  const stageOf = chn => { const s=(GUIDES[chn]||{}).stage; return s||(chn<=1?1:chn<=7?2:chn<=9?3:4); };
+  const chCard = ch => {
+    const g = GUIDES[ch.num]||{};
     const pct = chProgress(ch.num);
+    const one = (g.intro_zh||'').split('。')[0]+'。';
     return `<div class="ch-card" onclick="showChapter(${ch.num})">
-      <h3>第 ${ch.num} 章 · ${esc(ch.title_zh)}</h3>
+      <div class="ch-top"><span class="stage-chip">${STAGES[stageOf(ch.num)-1].name}</span><h3>第 ${ch.num} 章 · ${esc(ch.title_zh)}</h3></div>
       <div class="en">${esc(ch.title_en)}</div>
+      <p class="ch-oneline">${esc(one)}</p>
       <div class="meta">${ch.n_items} 項目 · ${ch.n_quiz} 題 · 印刷頁 p.${ch.print_start} 起</div>
       <div class="bar"><i style="width:${pct}%"></i></div>
       <div class="pct">${pct}% 完成</div></div>`;
+  };
+  const stageCards = STAGES.map(s=>{
+    const sum = s.chs.map(c=>chProgress(c)).reduce((a,b)=>a+b,0);
+    const avg = Math.round(sum/s.chs.length);
+    return `<div class="stage-card">
+      <div class="stage-num">${s.n}</div>
+      <div class="stage-body">
+        <h3>${esc(s.name)}</h3><p>${esc(s.desc)}</p>
+        <div class="stage-chs">${s.chs.map(c=>`<span class="stage-ch" onclick="event.stopPropagation();showChapter(${c})">Ch${c}</span>`).join('')}</div>
+        <div class="bar"><i style="width:${avg}%"></i></div><div class="pct">${avg}% 完成</div>
+      </div></div>`;
   }).join('');
+  let resume='';
+  if(state.lastCh && CHAPTERS.find(c=>c.num===state.lastCh)){
+    const lc = CHAPTERS.find(c=>c.num===state.lastCh);
+    resume = `<div class="resume-bar"><button class="resume-btn" onclick="showChapter(${lc.num})">繼續上次：第 ${lc.num} 章 · ${esc(lc.title_zh)}</button></div>`;
+  }
   document.getElementById('main').innerHTML = `
   <div class="home-hero">
     <h1>${esc(BOOK_META.title)}</h1>
@@ -289,66 +391,117 @@ function showHome(){
       <div class="stat"><b>${t.fav}</b>收藏</div>
       <div class="stat"><b>${t.wrong}</b>待訂正</div>
     </div></div>
-  <div class="ch-grid">${cards}</div>`;
+  ${resume}
+  <div class="sec-block"><h3>怎麼讀這本書</h3><div class="stage-grid">${stageCards}</div></div>
+  <div class="sec-block"><h3>全部章節 <span class="cnt">依書的順序</span></h3><div class="ch-grid">${CHAPTERS.map(chCard).join('')}</div></div>`;
   window.scrollTo(0,0);
+}
+function guideCard(ch,g){
+  return `<div class="guide-card">
+    <div class="guide-badge">第 ${ch.num} 章 · 學習導讀</div>
+    <p class="guide-intro">${esc(g.intro_zh||'')}</p>
+    <div class="guide-cols">
+      <div class="guide-col"><h4>這章教你</h4><ul>${(g.goals_zh||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
+      <div class="guide-col"><h4>先備知識</h4><p>${esc(g.prereq_zh||'')}</p></div>
+    </div>
+    <div class="guide-route"><h4>本章路線（依書的順序）</h4>
+      <div class="route-steps">${(g.groups||[]).map(x=>`<span class="route-step">${esc(x.name)}</span>`).join('<span class="route-arrow">→</span>')}</div>
+    </div>
+  </div>`;
+}
+function secCard(it){
+  const kps = it.keypoints_zh||[];
+  const body = kps.length?`<ul class="kp-list">${kps.map(k=>`<li>${esc(k)}</li>`).join('')}</ul>`
+    :(it.summary_zh?`<p class="sec-summary">${esc(it.summary_zh)}</p>`:'');
+  return `<div class="know-card" id="item-${it.idx}">
+    <div class="know-head" onclick="toggleItem(${it.idx})">
+      <span class="arrow">&#9654;</span><span class="tag sec">${getTypeLabel(it.type)}</span>
+      <span class="nm">${esc(it.name_en)}</span><span class="pg">p.${it.print_page}</span>
+    </div>
+    <div class="know-body">${body}</div></div>`;
+}
+function diffCard(it){
+  const kps = it.keypoints_zh||[];
+  return `<div class="diff-card" id="item-${it.idx}">
+    <div class="diff-head" onclick="toggleItem(${it.idx})">
+      <span class="arrow">&#9654;</span>
+      <span class="nm">${esc(it.name_en)}</span><span class="pg">p.${it.print_page}</span>
+    </div>
+    <div class="diff-body"><ul>${kps.map(k=>`<li>${esc(k)}</li>`).join('')}</ul></div></div>`;
+}
+function auCard(it){
+  const imgs = itemImgs(it.idx);
+  let h = `<div class="au-card" id="item-${it.idx}">
+    <div class="au-head" onclick="toggleItem(${it.idx})">
+      <span class="arrow">&#9654;</span>
+      <span class="tag ${it.type}">${getTypeLabel(it.type)}</span>
+      <span class="nm">${esc(it.name_en)}</span><span class="nm-zh">${esc(it.name_zh||'')}</span>
+      <span class="pg">p.${it.print_page}</span>
+    </div>
+    <div class="au-body">
+      <div class="one-liner">${esc(it.summary_zh||'')}</div>`;
+  if(it.appearance_zh && it.appearance_zh.length){
+    h += `<div class="au-sec"><h4>判讀線索</h4><ul class="clue-grid">${it.appearance_zh.map(a=>`<li>${esc(a)}</li>`).join('')}</ul></div>`;
+  }
+  const mech=[];
+  if(it.muscle_zh) mech.push(`<p class="mech-muscle">${esc(it.muscle_zh)}</p>`);
+  if(it.howto_zh) mech.push(`<p class="mech-howto"><b>自己試試：</b>${esc(it.howto_zh)}</p>`);
+  if(mech.length) h += `<div class="au-sec"><h4>肌肉與機制</h4>${mech.join('')}</div>`;
+  if(it.intensity_zh) h += `<div class="au-sec"><h4>強度分級（A → E）</h4><p class="intensity-box">${esc(it.intensity_zh)}</p></div>`;
+  if(it.distinctions_zh && it.distinctions_zh.length){
+    h += `<div class="distinct"><h4>容易混淆</h4><ul>${it.distinctions_zh.map(d=>`<li>${esc(d)}</li>`).join('')}</ul></div>`;
+  }
+  if(it.combos_zh) h += `<div class="au-sec"><h4>相關組合</h4><div class="combo-chips">${esc(it.combos_zh).split(',').map(c=>`<span class="combo-chip">${esc(c.trim())}</span>`).join('')}</div></div>`;
+  if(it.quotes_en && it.quotes_en.length){
+    h += `<div class="au-sec"><h4>原文引用</h4>${it.quotes_en.map(q=>`<div class="quote-box">${esc(q)}</div>`).join('')}</div>`;
+  }
+  if(imgs) h += `<div class="imgs">${imgs}</div>`;
+  h += `<div class="src-note">詳細見 (p.${it.print_page})</div></div></div>`;
+  return h;
 }
 function showChapter(chNum){
   state.lastView='chapter'; state.lastCh=chNum; saveState();
   const ch = CHAPTERS.find(c=>c.num===chNum);
   if(!ch){ showHome(); return; }
   setActiveToc(chNum);
+  const g = GUIDES[chNum]||{};
   const pct = chProgress(chNum);
   const items = ch.items.map(idx=>CONTENT[idx]);
   const qs = QUIZ.filter(q=>q.ch===chNum);
-  const pend = CH_PAGE_END[chNum] || ch.print_start;
+  const pend = CH_PAGE_END[chNum]||ch.print_start;
+  const STAGE_NAMES=['','入門','動作單元','補充碼','計分實務'];
   let html = `<div class="ch-head">
-    <div class="crumb">FACS · 第 ${chNum} 章</div>
+    <div class="crumb">FACS · 第 ${chNum} 章 <span class="stage-chip">${STAGE_NAMES[g.stage]||''}</span></div>
     <h2>${esc(ch.title_zh)}</h2>
     <div class="en">${esc(ch.title_en)}</div>
-    <div class="meta">${ch.items.length} 個項目 · ${qs.length} 題測驗 · 詳細見 (p.${ch.print_start}-${pend})</div>
-    <div class="progress-row"><div class="bar"><i style="width:${pct}%"></i></div>
-      <span class="pct-text">${pct}%</span></div></div>`;
-  const secs = items.filter(i=>i.type==='sec' && i.keypoints_zh);
-  if(secs.length){
-    html += `<div class="sec-block"><h3>本章重點 <span class="cnt">${secs.length} 節</span></h3><ul class="keypoint-list">`;
-    secs.forEach(s=>{
-      (s.keypoints_zh||[]).forEach(k=>{ html += `<li>${esc(k)} <span style="color:var(--text2);font-size:11.5px">(p.${s.print_page})</span></li>`; });
+    <div class="meta">${ch.items.length} 個項目 · ${qs.length} 題測驗 · 詳細見 (p.${ch.print_start}–${pend})</div>
+    <div class="progress-row"><div class="bar"><i style="width:${pct}%"></i></div><span class="pct-text">${pct}%</span></div>
+  </div>`;
+  if(g.intro_zh) html += guideCard(ch,g);
+  const secs = items.filter(i=>i.type==='sec');
+  const diffs = secs.filter(s=>/subtle differences/i.test(s.name_en||''));
+  const groups = g.groups||[];
+  if(groups.length){
+    groups.forEach((grp,gi)=>{
+      const grpItems = (grp.items||[]).map(idx=>CONTENT[idx]).filter(Boolean).filter(it=>!diffs.includes(it));
+      if(!grpItems.length) return;
+      html += `<div class="group-block">
+        <div class="group-head"><span class="g-num">${gi+1}</span>
+        <div><h3>${esc(grp.name)}</h3>${grp.desc?`<span class="g-desc">${esc(grp.desc)}</span>`:''}</div></div>`;
+      grpItems.forEach(it=>{ html += it.type==='sec'?secCard(it):auCard(it); });
+      html += `</div>`;
     });
-    html += `</ul></div>`;
+  } else {
+    const rest = items.filter(i=>i.type!=='sec');
+    if(rest.length){
+      html += `<div class="group-block"><div class="group-head"><div><h3>本章項目</h3></div></div>${rest.map(auCard).join('')}</div>`;
+    }
   }
-  html += `<div class="sec-block"><h3>項目全覽 <span class="cnt">${items.length} 項（點擊展開）</span></h3>`;
-  items.forEach(it=>{
-    const imgs = itemImgs(it.idx);
-    html += `<div class="au-card" id="item-${it.idx}">
-      <div class="au-head" onclick="toggleItem(${it.idx})">
-        <span class="arrow">&#9654;</span>
-        <span class="tag ${it.type}">${getTypeLabel(it.type)}</span>
-        <span class="nm">${esc(it.name_en)}</span>
-        <span class="nm-zh">${esc(it.name_zh||'')}</span>
-        <span class="pg">p.${it.print_page}</span></div>
-      <div class="au-body">
-        <div class="summary">${esc(it.summary_zh||'')}</div>`;
-    if(it.muscle_en || it.muscle_zh){
-      html += `<div class="au-sec"><h4>肌肉基礎</h4><div><span class="muscle-chip">${esc(it.muscle_zh||it.muscle_en)}</span>`;
-      if(it.muscle_en && it.muscle_zh && it.muscle_en!==it.muscle_zh) html += `<span class="muscle-chip" style="opacity:.75">${esc(it.muscle_en)}</span>`;
-      html += `</div></div>`;
-    }
-    if(it.appearance_zh && it.appearance_zh.length){
-      html += `<div class="au-sec"><h4>外觀變化</h4><ul>${it.appearance_zh.map(a=>`<li>${esc(a)}</li>`).join('')}</ul></div>`;
-    }
-    if(it.howto_zh) html += `<div class="au-sec"><h4>如何做出此動作</h4><p style="font-size:13.5px">${esc(it.howto_zh)}</p></div>`;
-    if(it.intensity_zh) html += `<div class="au-sec"><h4>強度分級</h4><p style="font-size:13.5px">${esc(it.intensity_zh)}</p></div>`;
-    if(it.distinctions_zh && it.distinctions_zh.length){
-      html += `<div class="distinct"><h4>容易混淆</h4><ul>${it.distinctions_zh.map(d=>`<li>${esc(d)}</li>`).join('')}</ul></div>`;
-    }
-    if(it.combos_zh) html += `<div class="au-sec"><h4>相關組合</h4><p style="font-size:13.5px">${esc(it.combos_zh)}</p></div>`;
-    if(it.quotes_en && it.quotes_en.length){
-      html += `<div class="au-sec"><h4>原文引用</h4>${it.quotes_en.map(q=>`<div class="quote-box">${esc(q)}</div>`).join('')}</div>`;
-    }
-    if(imgs) html += `<div class="imgs">${imgs}</div>`;
-    html += `<div style="margin-top:10px;font-size:12px;color:var(--text2)">詳細見 (p.${it.print_page})</div></div></div>`;
-  });
-  html += `</div>`;
+  if(diffs.length){
+    html += `<div class="diff-block"><h3>易混淆對照 <span class="cnt">${diffs.length} 張表（點擊展開）</span></h3>`;
+    html += diffs.map(diffCard).join('');
+    html += `</div>`;
+  }
   html += `<div class="sec-block"><h3>本章測驗 <span class="cnt">${qs.length} 題</span></h3>`;
   qs.forEach((q,qi)=>{
     const key = qkey(q.ch,qi);
@@ -375,7 +528,7 @@ function showChapter(chNum){
   });
   html += `</div>`;
   document.getElementById('main').innerHTML = html;
-  window.scrollTo(0,0); applyMarks();
+  window.scrollTo(0,0);
 }
 function toggleItem(idx){
   const el = document.getElementById('item-'+idx);
