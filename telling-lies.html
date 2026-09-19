@@ -244,7 +244,7 @@ const CHAPTERS = [
     {name:"臨床困境模型", formula:"病人自述「無自殺傾向」 vs 醫生觀察到的危險訊號\n→ 必須判斷：哪些非口語行為可靠？", example:"護士學生實驗：觀看血腥影片卻偽裝平靜，聲調變高、手勢變少、出現聳肩失誤。"}
   ],
   comparisons:[
-    {cols:["維度","臨床情境","政治/商業情境"],rows:[
+    {cols:["維度","臨床情境","政治/商業情境","比較"],rows:[
       [" stakes（代價）","病人自殺→生命危險","戰爭/商業損失","高風險"],
       ["說謊者","精神患者","老練政客","長期練習"],
       ["觀察者","醫生","談判者","資訊不對稱"]
@@ -1030,12 +1030,19 @@ function renderTerms() {
 
 // ===== INTERACTIONS =====
 function highlight(text) {
-  // Highlight terms (green) and proper nouns (purple)
-  let out = text;
-  CHAPTERS.flatMap(c=>c.terms).forEach(t => {
-    out = out.split(t.cn).join(`<span class="term" onclick="showTermCard('${t.en}','${t.cn}','${t.def}')">${t.cn}</span>`);
+  const terms = [];
+  const seen = new Set();
+  CHAPTERS.flatMap(c=>c.terms).forEach(t=>{
+    if(t && t.cn && !seen.has(t.cn)){ seen.add(t.cn); terms.push(t); }
   });
-  return out;
+  if(!terms.length) return text;
+  const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  const escAttr = s => String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;');
+  const re = new RegExp('(' + terms.map(t=>esc(t.cn)).join('|') + ')', 'g');
+  return text.replace(re, m => {
+    const t = terms.find(x=>x.cn===m);
+    return `<span class="term" onclick="showTermCard('${escAttr(t.en)}','${escAttr(t.cn)}','${escAttr(t.def)}')">${t.cn}</span>`;
+  });
 }
 
 function showTermCard(en, cn, def) {
