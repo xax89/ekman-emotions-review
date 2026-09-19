@@ -352,7 +352,7 @@ function showChapter(chNum){
   html += `<div class="sec-block"><h3>本章測驗 <span class="cnt">${qs.length} 題</span></h3>`;
   qs.forEach((q,qi)=>{
     const key = qkey(q.ch,qi);
-    const answered = state.quiz[key];
+    const answered = state.quiz[key] ?? null;
     const done = state.done[key], fav = state.fav[key];
     html += `<div class="quiz-card" id="quiz-${key}">
       <div class="qhead"><span class="quiz-num">${qi+1}</span><span class="q">${esc(q.q)}</span></div>`;
@@ -360,11 +360,11 @@ function showChapter(chNum){
     html += `<ul class="quiz-opts">`;
     q.options.forEach((o,oi)=>{
       let cls='';
-      if(answered){ if(oi===q.answer) cls='correct'; else if(oi===answered) cls='wrong'; else cls='dim'; }
-      html += `<li class="${cls}" onclick="${answered?'':'answerQuiz('+q.ch+','+qi+','+oi+')'}">${String.fromCharCode(65+oi)}. ${esc(o)}</li>`;
+      if(answered!=null){ if(oi===q.answer) cls='correct'; else if(oi===answered) cls='wrong'; else cls='dim'; }
+      html += `<li class="${cls}" onclick="${answered!=null?'':'answerQuiz('+q.ch+','+qi+','+oi+')'}">${String.fromCharCode(65+oi)}. ${esc(o)}</li>`;
     });
     html += `</ul>`;
-    if(answered){
+    if(answered!=null){
       const ok = answered===q.answer;
       html += `<div class="quiz-feedback show ${ok?'ok':'no'}">${ok?'<b>正確！</b>':'<b>答錯</b> 正確答案：'+esc(q.options[q.answer])+'<br>'}${esc(q.explain||'')}</div>`;
     }
