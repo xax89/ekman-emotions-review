@@ -286,11 +286,13 @@ a{color:var(--primary)}
 .img-thumbs img{width:100%;border:1px solid var(--border);border-radius:6px;background:#eee}
 .img-thumbs figcaption{font-size:9.5px;color:var(--text2);margin-top:2px}
 .dark .img-main img,.dark .img-thumbs img{background:#0d1319}
-.view-tools{margin-left:auto;display:flex;gap:8px}
-.vt-btn{background:var(--primary);color:#fff;border:none;border-radius:16px;padding:5px 15px;font-size:12.5px;font-weight:600;cursor:pointer}
+.view-tools{display:flex;gap:6px;align-items:center;flex-shrink:0}
+.vt-btn{background:var(--primary);color:#fff;border:none;border-radius:16px;padding:5px 14px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap}
 .vt-btn:hover{opacity:.88}
 .vt-btn.ghost{background:transparent;border:1px solid var(--primary);color:var(--primary)}
 .dark .vt-btn.ghost{color:var(--primary-light);border-color:var(--primary-light)}
+@media(max-width:768px){.vt-btn{padding:3px 9px;font-size:11px}}
+@media(max-width:480px){.vt-btn span.t{display:none}}
 </style>
 </head>
 <body>
@@ -299,6 +301,10 @@ a{color:var(--primary)}
   <button class="tb-btn ico" onclick="showHome()" title="首頁">&#8962;</button>
   <div id="searchBox"><input id="searchInput" placeholder="搜尋 AU／術語／測驗…" oninput="doSearch(this.value)">
     <div id="searchResults"></div></div>
+  <span class="view-tools" id="topViewTools" style="display:none">
+    <button class="vt-btn" onclick="expandAll()">全部展開</button>
+    <button class="vt-btn ghost" onclick="collapseAll()">全部收合</button>
+  </span>
   <span class="spacer"></span>
   <a href="./index.html" class="tb-btn" style="text-decoration:none">&#8592; 所有書籍</a>
   <button class="tb-btn ico" id="markBtn" onclick="toggleMark()" title="畫記模式">&#9998;</button>
@@ -371,7 +377,7 @@ function totalStats(){
   return {dq,fav,wrong};
 }
 const CH_PAGE_END = {1:14,2:72,3:90,4:144,5:174,6:230,7:294,8:328,9:348,10:356,11:376};
-function showHome(){
+function showHome(){document.getElementById('topViewTools').style.display='none';
   state.lastView='home'; saveState(); setActiveToc(-1);
   const t = totalStats();
   const STAGES=[
@@ -493,7 +499,7 @@ function auCard(it){
   h += `</div></div>`;
   return h;
 }
-function showChapter(chNum){
+function showChapter(chNum){document.getElementById('topViewTools').style.display='flex';
   state.lastView='chapter'; state.lastCh=chNum; saveState();
   const ch = CHAPTERS.find(c=>c.num===chNum);
   if(!ch){ showHome(); return; }
@@ -509,11 +515,7 @@ function showChapter(chNum){
     <h2>${esc(ch.title_zh)}</h2>
     <div class="en">${esc(ch.title_en)}</div>
     <div class="meta">${ch.items.length} 個項目 · ${qs.length} 題測驗 · 詳細見 (p.${ch.print_start}–${pend})</div>
-    <div class="progress-row"><div class="bar"><i style="width:${pct}%"></i></div><span class="pct-text">${pct}%</span>
-      <span class="view-tools">
-        <button class="vt-btn" onclick="expandAll()">全部展開</button>
-        <button class="vt-btn ghost" onclick="collapseAll()">全部收合</button>
-      </span></div>
+    <div class="progress-row"><div class="bar"><i style="width:${pct}%"></i></div><span class="pct-text">${pct}%</span></div>
   </div>`;
   if(g.intro_zh) html += guideCard(ch,g);
   const secs = items.filter(i=>i.type==='sec');
