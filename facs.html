@@ -268,6 +268,27 @@ a{color:var(--primary)}
 .dark .diff-card{background:rgba(200,60,50,.12);border-color:#5a2a26}
 .dark .stage-card{background:#141c27}
 .dark .one-liner{background:#1a2a45}
+
+/* ===== 圖文並排 + 全部展開/收合 ===== */
+.au-body{display:none;padding:4px 18px 16px;border-top:1px solid var(--border)}
+.au-card.open .au-body{display:grid;grid-template-columns:1fr 300px;gap:0 22px}
+@media(max-width:980px){.au-card.open .au-body{grid-template-columns:1fr}}
+.au-main{min-width:0}
+.au-figcol{min-width:0;border-left:1px solid var(--border);padding-left:20px;padding-top:14px}
+@media(max-width:980px){.au-figcol{border-left:none;padding-left:0;padding-top:4px}}
+.img-main{margin:0;text-align:center}
+.img-main img{width:100%;border:1px solid var(--border);border-radius:10px;background:#eee}
+.img-main figcaption{font-size:11px;color:var(--text2);margin-top:4px}
+.img-thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}
+.img-thumbs figure{margin:0;text-align:center}
+.img-thumbs img{width:100%;border:1px solid var(--border);border-radius:6px;background:#eee}
+.img-thumbs figcaption{font-size:9.5px;color:var(--text2);margin-top:2px}
+.dark .img-main img,.dark .img-thumbs img{background:#0d1319}
+.view-tools{margin-left:auto;display:flex;gap:8px}
+.vt-btn{background:var(--primary);color:#fff;border:none;border-radius:16px;padding:5px 15px;font-size:12.5px;font-weight:600;cursor:pointer}
+.vt-btn:hover{opacity:.88}
+.vt-btn.ghost{background:transparent;border:1px solid var(--primary);color:var(--primary)}
+.dark .vt-btn.ghost{color:var(--primary-light);border-color:var(--primary-light)}
 </style>
 </head>
 <body>
@@ -322,7 +343,16 @@ function imgPath(ref){
 }
 function itemImgs(idx){
   const list = ITEM_IMGS[idx] || [];
-  return list.map(f => '<figure><img src="assets/'+f+'" loading="lazy" alt="'+esc(f)+'"><figcaption>'+esc(f.replace('.webp',''))+'</figcaption></figure>').join('');
+  if(!list.length) return '';
+  const ppOf = f => Math.max(1, parseInt(f.slice(1)) - 12);
+  const main = list[0];
+  let h = `<figure class="img-main"><img src="assets/${main}" loading="lazy" alt="${esc(main)}"><figcaption>圖 p.${ppOf(main)}（示範圖）</figcaption></figure>`;
+  if(list.length > 1){
+    h += `<div class="img-thumbs">`;
+    list.slice(1).forEach(f=>{ h += `<figure><img src="assets/${f}" loading="lazy" alt="${esc(f)}"><figcaption>圖 p.${ppOf(f)}</figcaption></figure>`; });
+    h += `</div>`;
+  }
+  return h;
 }
 function getTypeLabel(t){ return {au:'AU',comb:'組合',ad:'AD',pos:'碼',sec:'節'}[t] || t; }
 function chProgress(chNum){
@@ -439,6 +469,7 @@ function auCard(it){
       <span class="pg">p.${it.print_page}</span>
     </div>
     <div class="au-body">
+      <div class="au-main">
       <div class="one-liner">${esc(it.summary_zh||'')}</div>`;
   if(it.appearance_zh && it.appearance_zh.length){
     h += `<div class="au-sec"><h4>判讀線索</h4><ul class="clue-grid">${it.appearance_zh.map(a=>`<li>${esc(a)}</li>`).join('')}</ul></div>`;
@@ -455,8 +486,9 @@ function auCard(it){
   if(it.quotes_en && it.quotes_en.length){
     h += `<div class="au-sec"><h4>原文引用</h4>${it.quotes_en.map(q=>`<div class="quote-box">${esc(q)}</div>`).join('')}</div>`;
   }
-  if(imgs) h += `<div class="imgs">${imgs}</div>`;
-  h += `<div class="src-note">詳細見 (p.${it.print_page})</div></div></div>`;
+  h += `<div class="src-note">詳細見 (p.${it.print_page})</div></div>`;
+  if(imgs) h += `<div class="au-figcol">${imgs}</div>`;
+  h += `</div></div>`;
   return h;
 }
 function showChapter(chNum){
@@ -475,7 +507,11 @@ function showChapter(chNum){
     <h2>${esc(ch.title_zh)}</h2>
     <div class="en">${esc(ch.title_en)}</div>
     <div class="meta">${ch.items.length} 個項目 · ${qs.length} 題測驗 · 詳細見 (p.${ch.print_start}–${pend})</div>
-    <div class="progress-row"><div class="bar"><i style="width:${pct}%"></i></div><span class="pct-text">${pct}%</span></div>
+    <div class="progress-row"><div class="bar"><i style="width:${pct}%"></i></div><span class="pct-text">${pct}%</span>
+      <span class="view-tools">
+        <button class="vt-btn" onclick="expandAll()">全部展開</button>
+        <button class="vt-btn ghost" onclick="collapseAll()">全部收合</button>
+      </span></div>
   </div>`;
   if(g.intro_zh) html += guideCard(ch,g);
   const secs = items.filter(i=>i.type==='sec');
@@ -546,6 +582,8 @@ function answerQuiz(ch,qi,oi){
 }
 function toggleDone(ch,qi){ const k=qkey(ch,qi); state.done[k]=!state.done[k]; saveState(); showChapter(ch); }
 function toggleFav(ch,qi){ const k=qkey(ch,qi); state.fav[k]=!state.fav[k]; saveState(); showChapter(ch); }
+function expandAll(){ document.querySelectorAll('.au-card,.know-card,.diff-card').forEach(el=>el.classList.add('open')); }
+function collapseAll(){ document.querySelectorAll('.au-card,.know-card,.diff-card').forEach(el=>el.classList.remove('open')); }
 function resetQuiz(ch,qi){
   const k=qkey(ch,qi);
   delete state.quiz[k]; delete state.done[k]; delete state.wrong[k]; delete state.corrected[k]; delete state.fav[k];
